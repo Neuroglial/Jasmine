@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33529.622
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Jasmine", "Jasmine\Jasmine.vcxproj", "{41958EFA-E4DA-4194-9672-638D2BD426D3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SanBox", "SanBox\SanBox.vcxproj", "{2A8BCCAE-2946-4C7F-8E2D-4FAEC86A7DBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41958EFA-E4DA-4194-9672-638D2BD426D3}.Debug|x64.ActiveCfg = Debug|x64
+		{41958EFA-E4DA-4194-9672-638D2BD426D3}.Debug|x64.Build.0 = Debug|x64
+		{41958EFA-E4DA-4194-9672-638D2BD426D3}.Release|x64.ActiveCfg = Release|x64
+		{41958EFA-E4DA-4194-9672-638D2BD426D3}.Release|x64.Build.0 = Release|x64
+		{2A8BCCAE-2946-4C7F-8E2D-4FAEC86A7DBC}.Debug|x64.ActiveCfg = Debug|x64
+		{2A8BCCAE-2946-4C7F-8E2D-4FAEC86A7DBC}.Debug|x64.Build.0 = Debug|x64
+		{2A8BCCAE-2946-4C7F-8E2D-4FAEC86A7DBC}.Release|x64.ActiveCfg = Release|x64
+		{2A8BCCAE-2946-4C7F-8E2D-4FAEC86A7DBC}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EA3D9FFA-2FCF-4B21-9E43-C132E7986461}
+	EndGlobalSection
+EndGlobal
