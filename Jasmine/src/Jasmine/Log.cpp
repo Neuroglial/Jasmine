@@ -2,6 +2,7 @@
 
 #include "spdlog/sinks/stdout_color_sinks.h"
 
+
 namespace Jasmine {
 	void Jasmine::Log::init()
 	{

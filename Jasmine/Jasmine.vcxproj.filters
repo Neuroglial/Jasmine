@@ -4,6 +4,9 @@
     <Filter Include="Jasmine">
       <UniqueIdentifier>{AC26B82E-1806-37CA-211E-C2A08D7C9D2B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Jasmine\Events">
+      <UniqueIdentifier>{101902BD-FCE6-F5C2-E57A-66E9D1E7D127}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Jasmine.h" />
@@ -16,9 +19,15 @@
     <ClInclude Include="src\Jasmine\EntryPoint.h">
       <Filter>Jasmine</Filter>
     </ClInclude>
+    <ClInclude Include="src\Jasmine\Events\Event.h">
+      <Filter>Jasmine\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\Jasmine\Log.h">
       <Filter>Jasmine</Filter>
     </ClInclude>
+    <ClInclude Include="src\Jasmine\Events\KeyEvent.h" />
+    <ClInclude Include="src\Jasmine\Events\MouseEvent.h" />
+    <ClInclude Include="src\Jasmine\Events\ApplicationEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Jasmine\Application.cpp">

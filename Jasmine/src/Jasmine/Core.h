@@ -10,3 +10,5 @@
 #else
 #error JASMINE_ONLY_SUPPORT_WINDOWS
 #endif // JASMINE_WINDOW
+
+#define BIT(x) (1<<x)

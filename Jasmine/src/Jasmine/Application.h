@@ -1,5 +1,7 @@
 #pragma once
+
 #include "Core.h"
+#include "Events/Event.h"
 
 namespace Jasmine {
 	class JASMINE_API Application
