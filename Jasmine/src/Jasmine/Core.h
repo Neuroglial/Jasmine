@@ -1,7 +1,7 @@
 #pragma once
 
-#ifdef JASMINE_WINDOWS
-#ifdef JASMINE_BUILD_DLL
+#ifdef JM_PLATFORM_WINDOWS
+#ifdef JM_BUILD_DLL
 	#define JASMINE_API _declspec(dllexport)
 #else
 	#define JASMINE_API _declspec(dllimport)

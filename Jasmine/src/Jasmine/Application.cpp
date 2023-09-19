@@ -11,7 +11,6 @@ namespace Jasmine {
 	{
 		while (true)
 		{
-
 		}
 	}
 }

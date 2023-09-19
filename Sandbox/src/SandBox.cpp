@@ -1,14 +1,14 @@
 #include <Jasmine.h>
 
-class SanBox : public Jasmine::Application
+class SandBox : public Jasmine::Application
 {
 public:
-	SanBox() 
+	SandBox()
 	{
 
 	}
 
-	~SanBox() 
+	~SandBox()
 	{
 
 	}
@@ -16,5 +16,5 @@ public:
 
 Jasmine::Application* Jasmine::CreateApplication()
 {
-	return new SanBox();
+	return new SandBox();
 }
