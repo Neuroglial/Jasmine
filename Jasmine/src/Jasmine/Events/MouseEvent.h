@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Jasmine {
 
 	class JASMINE_API MouseMovedEvent : public Event

@@ -4,11 +4,13 @@
 #include "Events/Event.h"
 
 namespace Jasmine {
+
 	class JASMINE_API Application
 	{
 	public:
 		Application();
 		virtual ~Application();
+
 		void Run();
 	};
 

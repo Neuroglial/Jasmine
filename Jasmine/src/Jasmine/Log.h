@@ -1,12 +1,11 @@
 #pragma once
 
-#include <memory>
-
 #include "Core.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"
 
 namespace Jasmine {
+
 	class JASMINE_API Log
 	{
 	private:
@@ -19,6 +18,7 @@ namespace Jasmine {
 		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
 		inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 	};
+
 }
 
 // Core log macros

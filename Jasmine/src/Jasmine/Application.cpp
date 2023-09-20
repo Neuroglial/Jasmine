@@ -1,9 +1,8 @@
+#include "JM_PCH.h"
 #include "Application.h"
 
 #include "Jasmine/Events/ApplicationEvent.h"
 #include "Jasmine/Log.h"
-
-#include <iostream>
 
 namespace Jasmine {
 	Application::Application()
@@ -18,16 +17,14 @@ namespace Jasmine {
 
 		if (e.IsInCategory(EventCategoryApplication))
 		{
-			std::cout << e << std::endl;
+			JM_INFO(e);
 		}
 
 		if (e.IsInCategory(EventCategoryInput))
 		{
-			JM_TRACE(e);
+			JM_INFO(e);
 		}
 
-		while (true)
-		{
-		}
+		while (true);
 	}
 }

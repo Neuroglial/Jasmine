@@ -9,6 +9,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\JM_PCH.h" />
     <ClInclude Include="src\Jasmine.h" />
     <ClInclude Include="src\Jasmine\Application.h">
       <Filter>Jasmine</Filter>
@@ -19,17 +20,24 @@
     <ClInclude Include="src\Jasmine\EntryPoint.h">
       <Filter>Jasmine</Filter>
     </ClInclude>
+    <ClInclude Include="src\Jasmine\Events\ApplicationEvent.h">
+      <Filter>Jasmine\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\Jasmine\Events\Event.h">
+      <Filter>Jasmine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Events\KeyEvent.h">
+      <Filter>Jasmine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Events\MouseEvent.h">
       <Filter>Jasmine\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Log.h">
       <Filter>Jasmine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\Events\KeyEvent.h" />
-    <ClInclude Include="src\Jasmine\Events\MouseEvent.h" />
-    <ClInclude Include="src\Jasmine\Events\ApplicationEvent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\JM_PCH.cpp" />
     <ClCompile Include="src\Jasmine\Application.cpp">
       <Filter>Jasmine</Filter>
     </ClCompile>

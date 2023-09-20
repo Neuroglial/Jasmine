@@ -1,9 +1,7 @@
 #pragma once
 
+#include "JM_PCH.h"
 #include "Jasmine/Core.h"
-
-#include <string>
-#include <functional>
 
 namespace Jasmine {
 

@@ -10,6 +10,8 @@ workspace "Jasmine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+
 project "Jasmine"
 	location "Jasmine"
 	kind "SharedLib"
@@ -17,6 +19,9 @@ project "Jasmine"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "JM_PCH.h"
+	pchsource "Jasmine/src/JM_PCH.cpp"
 
 	files
 	{
@@ -27,11 +32,11 @@ project "Jasmine"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
 	}
 
 	filter "system:windows"
-		cppdialect "C++20"
+		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
 
@@ -43,7 +48,7 @@ project "Jasmine"
 
 		postbuildcommands
 		{
-			{"{COPY} ../bin/" .. outputdir .. "/Jasmine/*.dll ../bin/" .. outputdir .. "/Sandbox"}
+			("{COPY} ../bin/" .. outputdir .. "/Jasmine/**.dll ../bin/" .. outputdir .. "/Sandbox")
 		}
 
 	filter "configurations:Debug"
@@ -84,7 +89,7 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++20"
+		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
 
