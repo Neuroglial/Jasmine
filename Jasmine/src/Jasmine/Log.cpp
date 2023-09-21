@@ -1,6 +1,6 @@
-#include "Log.h"
-
 #include "JM_PCH.h"
+
+#include "Log.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 
 

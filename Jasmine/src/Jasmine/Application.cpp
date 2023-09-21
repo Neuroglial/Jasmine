@@ -1,6 +1,6 @@
 #include "JM_PCH.h"
-#include "Application.h"
 
+#include "Application.h"
 #include "Jasmine/Events/ApplicationEvent.h"
 #include "Jasmine/Log.h"
 
