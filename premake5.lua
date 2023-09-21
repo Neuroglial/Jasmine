@@ -11,6 +11,10 @@ workspace "Jasmine"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Jasmine/vendor/GLFW/include"
+
+include "Jasmine/vendor/GLFW"
 
 project "Jasmine"
 	location "Jasmine"
@@ -33,10 +37,17 @@ project "Jasmine"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
 	}
-
+	
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
+	}
+	
 	filter "system:windows"
-		cppdialect "C++20"
+		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
 
@@ -48,7 +59,7 @@ project "Jasmine"
 
 		postbuildcommands
 		{
-			("{COPY} ../bin/" .. outputdir .. "/Jasmine/**.dll ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
 
 	filter "configurations:Debug"
@@ -89,7 +100,7 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++20"
+		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
 

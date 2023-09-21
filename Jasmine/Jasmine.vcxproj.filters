@@ -35,6 +35,8 @@
     <ClInclude Include="src\Jasmine\Log.h">
       <Filter>Jasmine</Filter>
     </ClInclude>
+    <ClInclude Include="src\Jasmine\Window\Window.h" />
+    <ClInclude Include="src\Jasmine\Window\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JM_PCH.cpp" />
@@ -44,5 +46,6 @@
     <ClCompile Include="src\Jasmine\Log.cpp">
       <Filter>Jasmine</Filter>
     </ClCompile>
+    <ClCompile Include="src\Jasmine\Window\WindowsWindow.cpp" />
   </ItemGroup>
 </Project>

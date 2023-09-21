@@ -1,3 +1,6 @@
 [submodule "Jasmine/vendor/spdlog"]
 	path = Jasmine/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "Jasmine/vendor/GLFW"]
+	path = Jasmine/vendor/GLFW
+	url = https://github.com/TheCherno/glfw

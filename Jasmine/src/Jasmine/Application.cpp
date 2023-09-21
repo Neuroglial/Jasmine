@@ -3,10 +3,13 @@
 #include "Application.h"
 #include "Jasmine/Events/ApplicationEvent.h"
 #include "Jasmine/Log.h"
+#include <GLFW/glfw3.h>
+#include "Window/WindowsWindow.h"
 
 namespace Jasmine {
 	Application::Application()
 	{
+		m_Window = std::unique_ptr<Window>(Window::Create());
 	}
 	Application::~Application()
 	{
@@ -15,16 +18,11 @@ namespace Jasmine {
 	{
 		WindowResizeEvent e(1280, 720);
 
-		if (e.IsInCategory(EventCategoryApplication))
-		{
-			JM_INFO(e);
-		}
+		glClearColor(0.75f, 0.8f, 0.95f, 1.0f);
 
-		if (e.IsInCategory(EventCategoryInput))
-		{
-			JM_INFO(e);
+		while (m_Running) {
+			glClear(GL_COLOR_BUFFER_BIT);
+			m_Window->OnUpdate();
 		}
-
-		while (true);
 	}
 }
