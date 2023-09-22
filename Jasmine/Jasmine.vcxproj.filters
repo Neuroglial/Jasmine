@@ -7,6 +7,12 @@
     <Filter Include="Jasmine\Events">
       <UniqueIdentifier>{101902BD-FCE6-F5C2-E57A-66E9D1E7D127}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\JM_PCH.h" />
@@ -32,20 +38,38 @@
     <ClInclude Include="src\Jasmine\Events\MouseEvent.h">
       <Filter>Jasmine\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Jasmine\LayerStack.h">
+      <Filter>Jasmine</Filter>
+    </ClInclude>
     <ClInclude Include="src\Jasmine\Log.h">
       <Filter>Jasmine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\Window\Window.h" />
-    <ClInclude Include="src\Jasmine\Window\WindowsWindow.h" />
+    <ClInclude Include="src\Jasmine\Window.h">
+      <Filter>Jasmine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\layer.h">
+      <Filter>Jasmine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JM_PCH.cpp" />
     <ClCompile Include="src\Jasmine\Application.cpp">
       <Filter>Jasmine</Filter>
     </ClCompile>
+    <ClCompile Include="src\Jasmine\Layer.cpp">
+      <Filter>Jasmine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Jasmine\LayerStack.cpp">
+      <Filter>Jasmine</Filter>
+    </ClCompile>
     <ClCompile Include="src\Jasmine\Log.cpp">
       <Filter>Jasmine</Filter>
     </ClCompile>
-    <ClCompile Include="src\Jasmine\Window\WindowsWindow.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

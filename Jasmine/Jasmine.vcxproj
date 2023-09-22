@@ -84,6 +84,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -109,7 +110,8 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -135,7 +137,8 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -149,7 +152,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Jasmine\Window\Window.h" />
     <ClInclude Include="src\JM_PCH.h" />
     <ClInclude Include="src\Jasmine.h" />
     <ClInclude Include="src\Jasmine\Application.h" />
@@ -159,16 +161,21 @@
     <ClInclude Include="src\Jasmine\Events\Event.h" />
     <ClInclude Include="src\Jasmine\Events\KeyEvent.h" />
     <ClInclude Include="src\Jasmine\Events\MouseEvent.h" />
+    <ClInclude Include="src\Jasmine\LayerStack.h" />
     <ClInclude Include="src\Jasmine\Log.h" />
-    <ClInclude Include="src\Jasmine\Window\WindowsWindow.h" />
+    <ClInclude Include="src\Jasmine\Window.h" />
+    <ClInclude Include="src\Jasmine\layer.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JM_PCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Jasmine\Application.cpp" />
+    <ClCompile Include="src\Jasmine\Layer.cpp" />
+    <ClCompile Include="src\Jasmine\LayerStack.cpp" />
     <ClCompile Include="src\Jasmine\Log.cpp" />
-    <ClCompile Include="src\Jasmine\Window\WindowsWindow.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

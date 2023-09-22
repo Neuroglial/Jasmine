@@ -47,7 +47,7 @@ project "Jasmine"
 	}
 	
 	filter "system:windows"
-		cppdialect "C++17"
+		cppdialect "C++20"
 		staticruntime "On"
 		systemversion "latest"
 
@@ -64,14 +64,17 @@ project "Jasmine"
 
 	filter "configurations:Debug"
 		defines "JM_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "JM_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "JM_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 project "Sandbox"
@@ -100,7 +103,7 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
+		cppdialect "C++20"
 		staticruntime "On"
 		systemversion "latest"
 
@@ -111,12 +114,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "JM_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "JM_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "JM_DIST"
+		buildoptions "/MD"
 		optimize "On"
