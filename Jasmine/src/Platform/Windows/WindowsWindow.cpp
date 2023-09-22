@@ -6,6 +6,8 @@
 #include "Jasmine/Events/KeyEvent.h"
 #include "Jasmine/Events/MouseEvent.h"
 
+#include <glad/glad.h>
+
 namespace Jasmine {
 	static bool GLFWIsInited = false;
 
@@ -45,9 +47,11 @@ namespace Jasmine {
 		m_Data.Width = props.Width;
 		m_Data.VSync = false;
 
+		int a;
+
 		if (!GLFWIsInited) {
-			int a = glfwInit();
-			JM_CORE_ASSERT(a, "GLFW INIT ERROR!");
+			a = glfwInit();
+			JM_CORE_ASSERT(a, "ERROR Failed to init GLFW");
 		}
 
 		m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height,  m_Data.Title.c_str(), NULL, NULL);
@@ -55,6 +59,9 @@ namespace Jasmine {
 		glfwMakeContextCurrent(m_Window);
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
+
+		a = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		JM_CORE_ASSERT(a, "ERROR Failed to init GLAD");
 
 
 		// Set GLFW callbacks

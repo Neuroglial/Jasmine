@@ -5,6 +5,7 @@
 #include "Jasmine/Layer.h"
 #include "Jasmine/Log.h"
 
+#include "Jasmine/ImGui/ImGuiLayer.h"
 #include "Jasmine/Events/Event.h"
 #include "Jasmine/Events/ApplicationEvent.h"
 #include "Jasmine/Events/KeyEvent.h"

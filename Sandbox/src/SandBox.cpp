@@ -10,12 +10,12 @@ public:
 
 	void OnUpdate() override
 	{
-		JM_INFO("ExampleLayer::Update");
+		//JM_INFO("ExampleLayer::Update");
 	}
 
 	void OnEvent(Jasmine::Event& e) override
 	{
-		JM_INFO(e);
+		//JM_INFO(e);
 	}
 
 };
@@ -27,6 +27,7 @@ public:
 	SandBox()
 	{
 		PushLayer(new ExampleLayer());
+		PushOverlay(new Jasmine::ImGuiLayer());
 	}
 
 	~SandBox()

@@ -4,6 +4,7 @@
 #include "Jasmine/Events/ApplicationEvent.h"
 #include "Events/KeyEvent.h"
 #include "Jasmine/Log.h"
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace Jasmine {
@@ -12,6 +13,9 @@ namespace Jasmine {
 
 	Application::Application()
 	{
+		JM_CORE_ASSERT(!s_Instance, "Application already exists!");
+		s_Instance = this;
+
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent, this, std::placeholders::_1));
 	}
@@ -22,6 +26,7 @@ namespace Jasmine {
 
 	void Application::Run()
 	{
+
 		glClearColor(0.75f, 0.8f, 0.95f, 1.0f);
 
 		while (m_Running) {
@@ -49,11 +54,13 @@ namespace Jasmine {
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
 		m_LayerStack.PushOverlay(layer);
+		layer->OnAttach();
 	}
 
 	bool Application::OnWinodwClose(WindowCloseEvent& e)

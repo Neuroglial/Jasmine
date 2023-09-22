@@ -13,8 +13,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Jasmine/vendor/GLFW/include"
+IncludeDir["Glad"] = "Jasmine/vendor/Glad/include"
+IncludeDir["ImGui"] = "Jasmine/vendor/imgui"
 
 include "Jasmine/vendor/GLFW"
+include "Jasmine/vendor/Glad"
+include "Jasmine/vendor/imgui"
 
 project "Jasmine"
 	location "Jasmine"
@@ -37,24 +41,29 @@ project "Jasmine"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
-	
-	links
-	{
+
+	links 
+	{ 
 		"GLFW",
+		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
-	
+
 	filter "system:windows"
-		cppdialect "C++20"
+		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
 
 		defines
 		{
 			"JM_PLATFORM_WINDOWS",
-			"JM_BUILD_DLL"
+			"JM_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
@@ -103,7 +112,7 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++20"
+		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
 
