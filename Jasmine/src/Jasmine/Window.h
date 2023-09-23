@@ -33,6 +33,7 @@ namespace Jasmine {
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 		virtual void SetVSync(bool Enable) = 0;
 		virtual bool IsVSync() const = 0;
+		virtual void* GetNativeWindow() const = 0;
 
 
 		static Window* Create(WindowProps& props = WindowProps());

@@ -11,6 +11,10 @@
 #include "Jasmine/Events/KeyEvent.h"
 #include "Jasmine/Events/MouseEvent.h"
 
+#include "Jasmine/Input.h"
+#include "Jasmine/KeyCodes.h"
+#include "Jasmine/MouseButtonCodes.h"
+
 //----------Entry Point-------------
 #include "Jasmine/EntryPoint.h"
 //----------------------------------

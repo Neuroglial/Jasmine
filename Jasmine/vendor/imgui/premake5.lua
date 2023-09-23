@@ -1,9 +1,11 @@
 project "ImGui"
-    kind "StaticLib"
-    language "C++"
+    	kind "StaticLib"
+    	language "C++"
     
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    	
+    	defines "IMGUI_DISABLE_OBSOLETE_KEYIO"
 
 	files
 	{

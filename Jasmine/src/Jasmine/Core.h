@@ -1,6 +1,8 @@
 #pragma once
 
-#define JM_ENABLE_ASSERTS
+#ifdef JM_DEBUG
+	#define JM_ENABLE_ASSERTS
+#endif
 
 #ifdef JM_PLATFORM_WINDOWS
 	#ifdef JM_BUILD_DLL
@@ -22,3 +24,6 @@
 #endif
 
 #define BIT(x) (1<<x)
+
+#define JM_BIND_EVENT_FN(x) std::bind(&x,this,std::placeholders::_1)
+#define JM_CONVERT(Type,x) (*(Type*)&x)
