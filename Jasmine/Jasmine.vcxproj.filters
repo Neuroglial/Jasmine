@@ -10,8 +10,8 @@
     <Filter Include="src\Jasmine\Events">
       <UniqueIdentifier>{4739E61A-331D-A770-9C7D-A1C3888091F2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Jasmine\ImGui">
-      <UniqueIdentifier>{2D621B20-9978-19B6-E2EF-A4D74E45EA3D}</UniqueIdentifier>
+    <Filter Include="src\Jasmine\ImGUI">
+      <UniqueIdentifier>{ED5D1B20-5974-19B6-A2EB-A4D70E41EA3D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Jasmine\Renderer">
       <UniqueIdentifier>{C9B55464-B544-DE2D-5E63-F2284AD1EED3}</UniqueIdentifier>
@@ -21,6 +21,9 @@
     </Filter>
     <Filter Include="src\Platform\OpenGL">
       <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\OpenGL\OpenGLImGui">
+      <UniqueIdentifier>{0425B8F8-7008-C738-790B-F574E56D8D89}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Platform\Windows">
       <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
@@ -75,8 +78,8 @@
     <ClInclude Include="src\Jasmine\Events\MouseEvent.h">
       <Filter>src\Jasmine\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\ImGui\ImGuiLayer.h">
-      <Filter>src\Jasmine\ImGui</Filter>
+    <ClInclude Include="src\Jasmine\ImGUI\ImGuiLayer.h">
+      <Filter>src\Jasmine\ImGUI</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Input.h">
       <Filter>src\Jasmine</Filter>
@@ -93,7 +96,19 @@
     <ClInclude Include="src\Jasmine\MouseButtonCodes.h">
       <Filter>src\Jasmine</Filter>
     </ClInclude>
+    <ClInclude Include="src\Jasmine\Renderer\Buffer.h">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\GraphicsContext.h">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Renderer\Renderer.h">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Renderer\Shader.h">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Renderer\VertexArray.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Window.h">
@@ -103,6 +118,24 @@
       <Filter>src\Jasmine</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_glfw.h">
+      <Filter>src\Platform\OpenGL\OpenGLImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3.h">
+      <Filter>src\Platform\OpenGL\OpenGLImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3_loader.h">
+      <Filter>src\Platform\OpenGL\OpenGLImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_glfw.h">
@@ -1368,8 +1401,6 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
-    <ClInclude Include="src\Jasmine\Renderer\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JM_PCH.cpp">
@@ -1378,8 +1409,8 @@
     <ClCompile Include="src\Jasmine\Application.cpp">
       <Filter>src\Jasmine</Filter>
     </ClCompile>
-    <ClCompile Include="src\Jasmine\ImGui\ImGuiLayer.cpp">
-      <Filter>src\Jasmine\ImGui</Filter>
+    <ClCompile Include="src\Jasmine\ImGUI\ImGuiLayer.cpp">
+      <Filter>src\Jasmine\ImGUI</Filter>
     </ClCompile>
     <ClCompile Include="src\Jasmine\Layer.cpp">
       <Filter>src\Jasmine</Filter>
@@ -1389,6 +1420,33 @@
     </ClCompile>
     <ClCompile Include="src\Jasmine\Log.cpp">
       <Filter>src\Jasmine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Jasmine\Renderer\Buffer.cpp">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Jasmine\Renderer\Renderer.cpp">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Jasmine\Renderer\Shader.cpp">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Jasmine\Renderer\VertexArray.cpp">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_glfw.cpp">
+      <Filter>src\Platform\OpenGL\OpenGLImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3.cpp">
+      <Filter>src\Platform\OpenGL\OpenGLImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\imgui_impl_glfw.cpp">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1402,7 +1460,5 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
-    <ClCompile Include="src\Jasmine\Renderer\Shader.cpp" />
   </ItemGroup>
 </Project>

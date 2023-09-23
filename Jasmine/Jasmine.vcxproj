@@ -140,8 +140,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Jasmine\Renderer\Shader.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\JM_PCH.h" />
     <ClInclude Include="src\Jasmine.h" />
     <ClInclude Include="src\Jasmine\Application.h" />
@@ -151,16 +149,26 @@
     <ClInclude Include="src\Jasmine\Events\Event.h" />
     <ClInclude Include="src\Jasmine\Events\KeyEvent.h" />
     <ClInclude Include="src\Jasmine\Events\MouseEvent.h" />
-    <ClInclude Include="src\Jasmine\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Jasmine\ImGUI\ImGuiLayer.h" />
     <ClInclude Include="src\Jasmine\Input.h" />
     <ClInclude Include="src\Jasmine\KeyCodes.h" />
     <ClInclude Include="src\Jasmine\LayerStack.h" />
     <ClInclude Include="src\Jasmine\Log.h" />
     <ClInclude Include="src\Jasmine\MouseButtonCodes.h" />
+    <ClInclude Include="src\Jasmine\Renderer\Buffer.h" />
     <ClInclude Include="src\Jasmine\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Jasmine\Renderer\Renderer.h" />
+    <ClInclude Include="src\Jasmine\Renderer\Shader.h" />
+    <ClInclude Include="src\Jasmine\Renderer\VertexArray.h" />
     <ClInclude Include="src\Jasmine\Window.h" />
     <ClInclude Include="src\Jasmine\layer.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_glfw.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_glfw.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3_loader.h" />
@@ -584,18 +592,29 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Jasmine\Renderer\Shader.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\JM_PCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Jasmine\Application.cpp" />
-    <ClCompile Include="src\Jasmine\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Jasmine\ImGUI\ImGuiLayer.cpp" />
     <ClCompile Include="src\Jasmine\Layer.cpp" />
     <ClCompile Include="src\Jasmine\LayerStack.cpp" />
     <ClCompile Include="src\Jasmine\Log.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\imgui_impl_glfw.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\Jasmine\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Jasmine\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\Jasmine\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Jasmine\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\imgui_impl_glfw.cpp">
+      <ObjectFileName>$(IntDir)\imgui_impl_glfw1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp">
+      <ObjectFileName>$(IntDir)\imgui_impl_opengl31.obj</ObjectFileName>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
