@@ -22,7 +22,7 @@ namespace Jasmine {
 		std::vector<Layer*>::iterator end() { return m_Layers.end(); }
 		std::vector<Layer*> m_Layers;
 	private:
-		std::vector<Layer*>::iterator m_LayerInsert;
+		unsigned int m_LayerInsertIndex = 0;
 	};
 
 }

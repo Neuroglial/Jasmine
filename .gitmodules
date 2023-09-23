@@ -4,3 +4,6 @@
 [submodule "Jasmine/vendor/GLFW"]
 	path = Jasmine/vendor/GLFW
 	url = https://github.com/TheCherno/glfw
+[submodule "Jasmine/vendor/glm"]
+	path = Jasmine/vendor/glm
+	url = https://github.com/g-truc/glm.git

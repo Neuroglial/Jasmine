@@ -34,7 +34,6 @@ public:
 	SandBox()
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Jasmine::ImGuiLayer());
 	}
 
 	~SandBox()

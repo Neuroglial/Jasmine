@@ -4,6 +4,7 @@
 #include "Events/Event.h"
 #include "LayerStack.h"
 #include "Events/ApplicationEvent.h"
+#include "Jasmine/ImGui/ImGuiLayer.h"
 #include "Window.h"
 
 
@@ -30,6 +31,7 @@ namespace Jasmine {
 
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
+		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
 
 	private:
