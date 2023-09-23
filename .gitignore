@@ -1,7 +1,8 @@
 # Directories
 .vs/
-bin/
+/bin/
 bin-int/
 
 # Files
 *.user
+!*.exe

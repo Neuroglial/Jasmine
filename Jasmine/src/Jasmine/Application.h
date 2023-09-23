@@ -4,6 +4,7 @@
 #include "Events/Event.h"
 #include "LayerStack.h"
 #include "Events/ApplicationEvent.h"
+#include "Jasmine/Renderer/Shader.h"
 #include "Jasmine/ImGui/ImGuiLayer.h"
 #include "Window.h"
 
@@ -33,6 +34,7 @@ namespace Jasmine {
 		bool m_Running = true;
 		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
+		std::unique_ptr<Shader> m_Shader;
 
 		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
 
