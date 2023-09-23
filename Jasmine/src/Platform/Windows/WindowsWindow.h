@@ -2,6 +2,7 @@
 
 #include "Jasmine/Window.h"
 #include <GLFW/glfw3.h>
+#include "Jasmine/Renderer/GraphicsContext.h"
 
 namespace Jasmine {
 
@@ -29,6 +30,7 @@ namespace Jasmine {
 
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{

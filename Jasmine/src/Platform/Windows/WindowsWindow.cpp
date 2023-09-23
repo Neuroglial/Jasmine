@@ -5,6 +5,7 @@
 #include "Jasmine/Events/ApplicationEvent.h"
 #include "Jasmine/Events/KeyEvent.h"
 #include "Jasmine/Events/MouseEvent.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 #include <glad/glad.h>
 
@@ -55,13 +56,11 @@ namespace Jasmine {
 		}
 
 		m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height,  m_Data.Title.c_str(), NULL, NULL);
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
 
-		glfwMakeContextCurrent(m_Window);
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
-
-		a = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		JM_CORE_ASSERT(a, "ERROR Failed to init GLAD");
 
 
 		// Set GLFW callbacks

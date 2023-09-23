@@ -13,6 +13,9 @@
     <Filter Include="src\Jasmine\ImGui">
       <UniqueIdentifier>{2D621B20-9978-19B6-E2EF-A4D74E45EA3D}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Jasmine\Renderer">
+      <UniqueIdentifier>{C9B55464-B544-DE2D-5E63-F2284AD1EED3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
     </Filter>
@@ -89,6 +92,9 @@
     </ClInclude>
     <ClInclude Include="src\Jasmine\MouseButtonCodes.h">
       <Filter>src\Jasmine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Renderer\GraphicsContext.h">
+      <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Window.h">
       <Filter>src\Jasmine</Filter>
@@ -1362,7 +1368,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JM_PCH.cpp">
@@ -1395,5 +1401,6 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
   </ItemGroup>
 </Project>
