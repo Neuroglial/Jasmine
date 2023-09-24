@@ -2,6 +2,7 @@
 
 #include "Jasmine/Core.h"
 #include "Jasmine/Events/Event.h"
+#include "Jasmine/Core/Timestep.h"
 
 namespace Jasmine {
 
@@ -13,7 +14,7 @@ namespace Jasmine {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnEvent(Event& e) {}
 		virtual void OnImGuiRender() {}
 

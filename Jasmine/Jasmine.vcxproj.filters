@@ -102,7 +102,7 @@
     <ClInclude Include="src\Jasmine\Renderer\GraphicsContext.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\Renderer\OrthgraphicCamera.h">
+    <ClInclude Include="src\Jasmine\Renderer\OrthographicCamera.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\RenderCommand.h">
@@ -1413,6 +1413,8 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="src\Jasmine\Core\Timestep.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JM_PCH.cpp">
@@ -1436,7 +1438,7 @@
     <ClCompile Include="src\Jasmine\Renderer\Buffer.cpp">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Jasmine\Renderer\OrthgraphicCamera.cpp">
+    <ClCompile Include="src\Jasmine\Renderer\OrthographicCamera.cpp">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Jasmine\Renderer\RenderCommand.cpp">
@@ -1484,5 +1486,6 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
   </ItemGroup>
 </Project>

@@ -140,6 +140,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Jasmine\Core\Timestep.h" />
     <ClInclude Include="src\JM_PCH.h" />
     <ClInclude Include="src\Jasmine.h" />
     <ClInclude Include="src\Jasmine\Application.h" />
@@ -157,7 +159,7 @@
     <ClInclude Include="src\Jasmine\MouseButtonCodes.h" />
     <ClInclude Include="src\Jasmine\Renderer\Buffer.h" />
     <ClInclude Include="src\Jasmine\Renderer\GraphicsContext.h" />
-    <ClInclude Include="src\Jasmine\Renderer\OrthgraphicCamera.h" />
+    <ClInclude Include="src\Jasmine\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Jasmine\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Jasmine\Renderer\Renderer.h" />
     <ClInclude Include="src\Jasmine\Renderer\RendererAPI.h" />
@@ -596,6 +598,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\JM_PCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
@@ -605,7 +608,7 @@
     <ClCompile Include="src\Jasmine\LayerStack.cpp" />
     <ClCompile Include="src\Jasmine\Log.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\Jasmine\Renderer\OrthgraphicCamera.cpp" />
+    <ClCompile Include="src\Jasmine\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\RendererAPI.cpp" />

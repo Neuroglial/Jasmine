@@ -20,10 +20,11 @@ namespace Jasmine {
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		JM_CORE_ASSERT(status, "Failed to initialize Glad!");
 
-		JM_CORE_INFO("OpenGL Info:");
-		JM_CORE_INFO("  Vendor: {0}", (char*)glGetString(GL_VENDOR));
-		JM_CORE_INFO("  Renderer: {0}", (char*)glGetString(GL_RENDERER));
-		JM_CORE_INFO("  Version: {0}", (char*)glGetString(GL_VERSION));
+		JM_CORE_INFO("---------------OpenGL Info------------------------------------");
+		JM_CORE_INFO(" Vendor:   {0}", (char*)glGetString(GL_VENDOR));
+		JM_CORE_INFO(" Renderer: {0}", (char*)glGetString(GL_RENDERER));
+		JM_CORE_INFO(" Version:  {0}", (char*)glGetString(GL_VERSION));
+		JM_CORE_INFO("--------------------------------------------------------------");
 	}
 
 	void OpenGLContext::SwapBuffers()

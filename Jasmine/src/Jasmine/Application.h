@@ -5,11 +5,12 @@
 #include "LayerStack.h"
 #include "Events/ApplicationEvent.h"
 #include "Jasmine/Renderer/Shader.h"
-#include "Jasmine/ImGui/ImGuiLayer.h"
 #include "Jasmine/Renderer/VertexArray.h"
-#include "Renderer/OrthgraphicCamera.h"
+#include "Renderer/OrthographicCamera.h"
 #include "Window.h"
 
+#include "Jasmine/Core/Timestep.h"
+#include "Jasmine/ImGui/ImGuiLayer.h"
 
 namespace Jasmine {
 
@@ -29,21 +30,17 @@ namespace Jasmine {
 		inline Window& GetWindow() { return *m_Window; }
 
 		inline static Application& Get() { return *s_Instance; }
+
 	private:
 		bool OnWinodwClose(WindowCloseEvent& e);
 
+	private:
 		std::unique_ptr<Window> m_Window;
-		bool m_Running = true;
 		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
+		bool m_Running = true;
 
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
-
-		OrthographicCamera m_Camera = OrthographicCamera(-1.6f, 1.6f, -0.9f, 0.9f);
+		float m_LastFrameTime = 0.0f;
 
 	private:
 		inline static Application* s_Instance = nullptr;
