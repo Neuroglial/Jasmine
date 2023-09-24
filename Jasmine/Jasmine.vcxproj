@@ -157,7 +157,10 @@
     <ClInclude Include="src\Jasmine\MouseButtonCodes.h" />
     <ClInclude Include="src\Jasmine\Renderer\Buffer.h" />
     <ClInclude Include="src\Jasmine\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Jasmine\Renderer\OrthgraphicCamera.h" />
+    <ClInclude Include="src\Jasmine\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Jasmine\Renderer\Renderer.h" />
+    <ClInclude Include="src\Jasmine\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Jasmine\Renderer\Shader.h" />
     <ClInclude Include="src\Jasmine\Renderer\VertexArray.h" />
     <ClInclude Include="src\Jasmine\Window.h" />
@@ -168,6 +171,7 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_glfw.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_glfw.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h" />
@@ -601,13 +605,17 @@
     <ClCompile Include="src\Jasmine\LayerStack.cpp" />
     <ClCompile Include="src\Jasmine\Log.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Jasmine\Renderer\OrthgraphicCamera.cpp" />
+    <ClCompile Include="src\Jasmine\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\Jasmine\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\Shader.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\imgui_impl_glfw.cpp">
       <ObjectFileName>$(IntDir)\imgui_impl_glfw1.obj</ObjectFileName>

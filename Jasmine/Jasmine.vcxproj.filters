@@ -102,7 +102,16 @@
     <ClInclude Include="src\Jasmine\Renderer\GraphicsContext.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Jasmine\Renderer\OrthgraphicCamera.h">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Renderer\RenderCommand.h">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\Renderer.h">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Renderer\RendererAPI.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\Shader.h">
@@ -134,6 +143,9 @@
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3_loader.h">
       <Filter>src\Platform\OpenGL\OpenGLImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1424,7 +1436,16 @@
     <ClCompile Include="src\Jasmine\Renderer\Buffer.cpp">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Jasmine\Renderer\OrthgraphicCamera.cpp">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Jasmine\Renderer\RenderCommand.cpp">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Jasmine\Renderer\Renderer.cpp">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Jasmine\Renderer\RendererAPI.cpp">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Jasmine\Renderer\Shader.cpp">
@@ -1444,6 +1465,9 @@
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3.cpp">
       <Filter>src\Platform\OpenGL\OpenGLImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>src\Platform\OpenGL</Filter>

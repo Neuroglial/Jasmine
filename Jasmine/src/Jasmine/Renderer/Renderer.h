@@ -1,18 +1,28 @@
 #pragma once
 
-namespace Jasmine {
+#include "RenderCommand.h"
+#include "OrthgraphicCamera.h"
+#include "Shader.h"
 
-	enum class RendererAPI
-	{
-		None = 0, OpenGL = 1
-	};
+namespace Jasmine {
 
 	class Renderer
 	{
 	public:
-		inline static RendererAPI GetAPI() { return s_RendererAPI; }
+		static void BeginScene(OrthographicCamera& camera);
+		static void EndScene();
+
+		static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray);
+
+		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	private:
-		inline static RendererAPI s_RendererAPI = RendererAPI::OpenGL;
+		struct SceneData
+		{
+			glm::mat4 ViewProjectionMatrix;
+		};
+
+		inline static SceneData* m_SceneData = new SceneData;
 	};
 
 

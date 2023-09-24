@@ -7,6 +7,7 @@
 #include "Jasmine/Renderer/Shader.h"
 #include "Jasmine/ImGui/ImGuiLayer.h"
 #include "Jasmine/Renderer/VertexArray.h"
+#include "Renderer/OrthgraphicCamera.h"
 #include "Window.h"
 
 
@@ -41,6 +42,8 @@ namespace Jasmine {
 
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera = OrthographicCamera(-1.6f, 1.6f, -0.9f, 0.9f);
 
 	private:
 		inline static Application* s_Instance = nullptr;

@@ -119,7 +119,8 @@ project "Sandbox"
 	includedirs
 	{
 		"Jasmine/vendor/spdlog/include",
-		"Jasmine/src"
+		"Jasmine/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links
