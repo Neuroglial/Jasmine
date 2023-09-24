@@ -6,6 +6,7 @@
 #include "Jasmine/Events/KeyEvent.h"
 #include "Jasmine/Events/MouseEvent.h"
 #include "Platform/OpenGL/OpenGLContext.h"
+#include "stb_image.h"
 
 #include <glad/glad.h>
 
@@ -61,6 +62,11 @@ namespace Jasmine {
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
+
+		GLFWimage icon;
+		icon.pixels = stbi_load("assets/textures/JM_logo_4.png", &icon.width, &icon.height, 0, 4);
+		glfwSetWindowIcon(m_Window, 1, &icon);
+		stbi_image_free(icon.pixels);
 
 
 		// Set GLFW callbacks

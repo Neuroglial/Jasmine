@@ -119,6 +119,8 @@ public:
 		m_TextureShader.reset(Jasmine::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 
 		m_Texture = Jasmine::Texture2D::Create("assets/textures/Checkerboard.png");
+		m_AwesomefaceTexture = Jasmine::Texture2D::Create("assets/textures/awesomeface.png");
+		m_JM_logo = Jasmine::Texture2D::Create("assets/textures/JM_logo.png");
 
 		std::dynamic_pointer_cast<Jasmine::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<Jasmine::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
@@ -152,6 +154,10 @@ public:
 
 		m_Texture->Bind(0);
 		Jasmine::Renderer::Submit(m_TextureShader, m_SquareVA);
+
+		m_AwesomefaceTexture->Bind(0);
+		Jasmine::Renderer::Submit(m_TextureShader, m_SquareVA);
+
 		Jasmine::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Jasmine::Renderer::EndScene();
@@ -175,7 +181,7 @@ public:
 		std::shared_ptr<Jasmine::Shader> m_TextureShader;
 		std::shared_ptr<Jasmine::VertexArray> m_SquareVA;
 
-		JM_SP(Jasmine::Texture2D) m_Texture;
+		JM_SP(Jasmine::Texture2D) m_Texture, m_AwesomefaceTexture, m_JM_logo;
 
 		Jasmine::OrthographicCamera m_Camera;
 		glm::vec3 m_CameraPosition;
