@@ -13,6 +13,7 @@
 #include "Jasmine/MouseButtonCodes.h"
 //--------------------------------------------
 
+#include "Jasmine/Renderer/Texture.h"
 
 
 //============================================

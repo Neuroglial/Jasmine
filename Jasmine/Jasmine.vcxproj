@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>JM_PCH.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;JM_PLATFORM_WINDOWS;JM_BUILD_DLL;GLFW_INCLUDE_NONE;JM_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -97,7 +97,7 @@
       <PrecompiledHeaderFile>JM_PCH.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;JM_PLATFORM_WINDOWS;JM_BUILD_DLL;GLFW_INCLUDE_NONE;JM_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -121,7 +121,7 @@
       <PrecompiledHeaderFile>JM_PCH.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;JM_PLATFORM_WINDOWS;JM_BUILD_DLL;GLFW_INCLUDE_NONE;JM_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -140,12 +140,12 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
-    <ClInclude Include="src\Jasmine\Core\Timestep.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\JM_PCH.h" />
     <ClInclude Include="src\Jasmine.h" />
     <ClInclude Include="src\Jasmine\Application.h" />
     <ClInclude Include="src\Jasmine\Core.h" />
+    <ClInclude Include="src\Jasmine\Core\Timestep.h" />
     <ClInclude Include="src\Jasmine\EntryPoint.h" />
     <ClInclude Include="src\Jasmine\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Jasmine\Events\Event.h" />
@@ -164,6 +164,7 @@
     <ClInclude Include="src\Jasmine\Renderer\Renderer.h" />
     <ClInclude Include="src\Jasmine\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Jasmine\Renderer\Shader.h" />
+    <ClInclude Include="src\Jasmine\Renderer\Texture.h" />
     <ClInclude Include="src\Jasmine\Renderer\VertexArray.h" />
     <ClInclude Include="src\Jasmine\Window.h" />
     <ClInclude Include="src\Jasmine\layer.h" />
@@ -174,10 +175,8 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_glfw.h" />
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h" />
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
@@ -596,9 +595,10 @@
     <ClInclude Include="vendor\glm\glm\vec3.hpp" />
     <ClInclude Include="vendor\glm\glm\vec4.hpp" />
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
+    <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\JM_PCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
@@ -613,21 +613,18 @@
     <ClCompile Include="src\Jasmine\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Jasmine\Renderer\Texture.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\imgui_impl_glfw.cpp">
-      <ObjectFileName>$(IntDir)\imgui_impl_glfw1.obj</ObjectFileName>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp">
-      <ObjectFileName>$(IntDir)\imgui_impl_opengl31.obj</ObjectFileName>
-    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="vendor\stb_image\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

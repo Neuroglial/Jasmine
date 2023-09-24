@@ -21,7 +21,7 @@ public:
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 
-		std::shared_ptr<Jasmine::VertexBuffer> vertexBuffer;
+		JM_SP(Jasmine::VertexBuffer) vertexBuffer;
 		vertexBuffer.reset(Jasmine::VertexBuffer::Create(vertices, sizeof(vertices)));
 		Jasmine::BufferLayout layout = {
 			{ Jasmine::ShaderDataType::Float3, "a_Position" },
@@ -31,24 +31,25 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<Jasmine::IndexBuffer> indexBuffer;
+		JM_SP(Jasmine::IndexBuffer) indexBuffer;
 		indexBuffer.reset(Jasmine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		m_SquareVA.reset(Jasmine::VertexArray::Create());
 
-		float squareVertices[3 * 4] = {
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f
+		float squareVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
-		std::shared_ptr<Jasmine::VertexBuffer> squareVB;
+		JM_SP(Jasmine::VertexBuffer) squareVB;
 		squareVB.reset(Jasmine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
-			{ Jasmine::ShaderDataType::Float3, "a_Position" }
-			});
+			{ Jasmine::ShaderDataType::Float3, "a_Position" },
+			{ Jasmine::ShaderDataType::Float2, "a_TexCoord" }
+		});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
@@ -87,31 +88,40 @@ public:
 
 		m_Shader.reset(Jasmine::Shader::Create(vertexSrc, fragmentSrc));
 
-		std::string blueShaderVertexSrc = R"(
+		std::string textureShaderVertexSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
 			uniform mat4 u_ViewProjection;
-			out vec3 v_Position;
+			uniform mat4 u_Transform;
+			out vec2 v_TexCoord;
 			void main()
 			{
-				v_Position = a_Position;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);	
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
-		std::string blueShaderFragmentSrc = R"(
+		std::string textureShaderFragmentSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) out vec4 color;
-			in vec3 v_Position;
+			in vec2 v_TexCoord;
+			
+			uniform sampler2D u_Texture;
 			void main()
 			{
-				color = vec4(0.2, 0.3, 0.8, 1.0);
+				color = texture(u_Texture, v_TexCoord);
 			}
 		)";
 
-		m_BlueShader.reset(Jasmine::Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc));
+		m_TextureShader.reset(Jasmine::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+		m_Texture = Jasmine::Texture2D::Create("assets/textures/Checkerboard.png");
+
+		std::dynamic_pointer_cast<Jasmine::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Jasmine::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Jasmine::Timestep ts) override
@@ -131,15 +141,17 @@ public:
 		if (Jasmine::Input::IsKeyPressed(JM_KEY_D))
 			m_CameraRotation -= m_CameraRotationSpeed * ts;
 
-		Jasmine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-		Jasmine::RenderCommand::Clear();
-
 		m_Camera.SetPosition(m_CameraPosition);
 		m_Camera.SetRotation(m_CameraRotation);
 
+		Jasmine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+		Jasmine::RenderCommand::Clear();
+
+
 		Jasmine::Renderer::BeginScene(m_Camera);
 
-		Jasmine::Renderer::Submit(m_BlueShader, m_SquareVA);
+		m_Texture->Bind(0);
+		Jasmine::Renderer::Submit(m_TextureShader, m_SquareVA);
 		Jasmine::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Jasmine::Renderer::EndScene();
@@ -160,8 +172,10 @@ public:
 		std::shared_ptr<Jasmine::Shader> m_Shader;
 		std::shared_ptr<Jasmine::VertexArray> m_VertexArray;
 
-		std::shared_ptr<Jasmine::Shader> m_BlueShader;
+		std::shared_ptr<Jasmine::Shader> m_TextureShader;
 		std::shared_ptr<Jasmine::VertexArray> m_SquareVA;
+
+		JM_SP(Jasmine::Texture2D) m_Texture;
 
 		Jasmine::OrthographicCamera m_Camera;
 		glm::vec3 m_CameraPosition;

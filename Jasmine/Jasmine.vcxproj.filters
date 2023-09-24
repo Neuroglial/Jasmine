@@ -7,6 +7,9 @@
     <Filter Include="src\Jasmine">
       <UniqueIdentifier>{C326F237-2FDC-6A2D-B8D0-640424856131}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Jasmine\Core">
+      <UniqueIdentifier>{FBFC906D-E7F5-AFBF-1028-9544FC7F8FCB}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Jasmine\Events">
       <UniqueIdentifier>{4739E61A-331D-A770-9C7D-A1C3888091F2}</UniqueIdentifier>
     </Filter>
@@ -49,6 +52,9 @@
     <Filter Include="vendor\glm\glm\gtx">
       <UniqueIdentifier>{B3A6A76B-9F8A-68C1-08EB-6214F4ED5243}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vendor\stb_image">
+      <UniqueIdentifier>{0DA0BA59-F998-D9AB-22CB-BE300E23B9B7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\JM_PCH.h">
@@ -62,6 +68,9 @@
     </ClInclude>
     <ClInclude Include="src\Jasmine\Core.h">
       <Filter>src\Jasmine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Core\Timestep.h">
+      <Filter>src\Jasmine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\EntryPoint.h">
       <Filter>src\Jasmine</Filter>
@@ -117,6 +126,9 @@
     <ClInclude Include="src\Jasmine\Renderer\Shader.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Jasmine\Renderer\Texture.h">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\VertexArray.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
@@ -147,16 +159,10 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_glfw.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3_loader.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
@@ -1413,8 +1419,10 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\Core\Timestep.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="vendor\stb_image\stb_image.h">
+      <Filter>vendor\stb_image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JM_PCH.cpp">
@@ -1453,6 +1461,9 @@
     <ClCompile Include="src\Jasmine\Renderer\Shader.cpp">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Jasmine\Renderer\Texture.cpp">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Jasmine\Renderer\VertexArray.cpp">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClCompile>
@@ -1471,13 +1482,10 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\imgui_impl_glfw.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
@@ -1486,6 +1494,9 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="vendor\stb_image\stb_image.cpp">
+      <Filter>vendor\stb_image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
   </ItemGroup>
 </Project>

@@ -14,10 +14,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
-IncludeDir["GLFW"] 	= 	"Jasmine/vendor/GLFW/include"
-IncludeDir["Glad"] 	= 	"Jasmine/vendor/Glad/include"
-IncludeDir["ImGui"] 	= 	"Jasmine/vendor/imgui"
-IncludeDir["glm"] 	=	"Jasmine/vendor/glm"
+IncludeDir["GLFW"] 		= 	"Jasmine/vendor/GLFW/include"
+IncludeDir["Glad"] 		= 	"Jasmine/vendor/Glad/include"
+IncludeDir["ImGui"] 		= 	"Jasmine/vendor/imgui"
+IncludeDir["glm"] 		=	"Jasmine/vendor/glm"
+IncludeDir["stb_image"] 	= 	"Jasmine/vendor/stb_image"
 
 
 group "Dependencies"
@@ -47,6 +48,8 @@ project "Jasmine"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
@@ -63,7 +66,8 @@ project "Jasmine"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links 

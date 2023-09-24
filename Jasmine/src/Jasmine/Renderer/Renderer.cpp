@@ -1,6 +1,7 @@
 #include "JM_PCH.h"
 #include "Renderer.h"
 
+#include "Platform/OpenGL/OpenGLRendererAPI.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Jasmine {

@@ -111,13 +111,13 @@ namespace Jasmine {
 
 	void OpenGLShader::CheckOpenGLShader(uint32_t shaderID)
 	{
-		//Check is compiled or not
+		// Check is compiled or not
 		GLint isCompiled = 0;
 		glGetShaderiv(shaderID, GL_COMPILE_STATUS, &isCompiled);
 		if (isCompiled == GL_TRUE)
 			return;
 
-		//Not compiled print the error information
+		// Not compiled print the error information
 		GLint maxLength = 0;
 		glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &maxLength);
 

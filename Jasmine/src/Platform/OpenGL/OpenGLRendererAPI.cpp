@@ -6,13 +6,6 @@
 
 namespace Jasmine {
 
-	RendererAPI::API RendererAPI::s_API = RendererAPI::API::OpenGL;
-
-	RendererAPI* RendererAPI::Create()
-	{
-		return new OpenGLRendererAPI();
-	}
-
 	void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
 	{
 		glClearColor(color.r, color.g, color.b, color.a);
