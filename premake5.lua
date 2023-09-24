@@ -1,5 +1,7 @@
 workspace "Jasmine"
 	architecture "x64"
+	startproject "Sandbox"
+
 
 	configurations
 	{
@@ -17,7 +19,6 @@ IncludeDir["Glad"] 	= 	"Jasmine/vendor/Glad/include"
 IncludeDir["ImGui"] 	= 	"Jasmine/vendor/imgui"
 IncludeDir["glm"] 	=	"Jasmine/vendor/glm"
 
-startproject "Sandbox"
 
 group "Dependencies"
 	include "Jasmine/vendor/GLFW"
@@ -31,7 +32,6 @@ group ""
 	
 project "Jasmine"
 	location "Jasmine"
-	--kind "SharedLib"
 	kind "StaticLib"
 	language "C++"
 	cppdialect "C++17"
@@ -62,7 +62,6 @@ project "Jasmine"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}"
 	}
@@ -120,6 +119,7 @@ project "Sandbox"
 	{
 		"Jasmine/vendor/spdlog/include",
 		"Jasmine/src",
+		"Jasmine/vendor",
 		"%{IncludeDir.glm}"
 	}
 
@@ -129,7 +129,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 
 		defines
