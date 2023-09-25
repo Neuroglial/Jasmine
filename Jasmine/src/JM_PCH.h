@@ -14,6 +14,8 @@
 
 #include "Jasmine/Log.h"
 
+char* ReadFile(const char* path);
+
 #ifdef JM_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif

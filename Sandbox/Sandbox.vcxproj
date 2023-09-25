@@ -138,6 +138,12 @@
       <Project>{AC26B82E-1806-37CA-211E-C2A08D7C9D2B}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\texture.glsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
+    </None>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

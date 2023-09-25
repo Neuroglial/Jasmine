@@ -63,10 +63,14 @@ namespace Jasmine {
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
-		GLFWimage icon;
-		icon.pixels = stbi_load("assets/textures/JM_logo_4.png", &icon.width, &icon.height, 0, 4);
-		glfwSetWindowIcon(m_Window, 1, &icon);
-		stbi_image_free(icon.pixels);
+		GLFWimage icon[3];
+		icon[0].pixels = stbi_load("../Jasmine/assets/textures/logo/JM_logo_16.png", &icon[0].width, &icon[0].height, 0, 4);
+		icon[1].pixels = stbi_load("../Jasmine/assets/textures/logo/JM_logo_32.png", &icon[1].width, &icon[1].height, 0, 4);
+		icon[2].pixels = stbi_load("../Jasmine/assets/textures/logo/JM_logo_48.png", &icon[2].width, &icon[2].height, 0, 4);
+		glfwSetWindowIcon(m_Window, 3, icon);
+		stbi_image_free(icon[0].pixels);
+		stbi_image_free(icon[1].pixels);
+		stbi_image_free(icon[2].pixels);
 
 
 		// Set GLFW callbacks
