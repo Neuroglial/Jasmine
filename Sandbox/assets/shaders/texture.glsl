@@ -1,5 +1,7 @@
 // Basic Texture Shader
 
+#ShaderName TextureShader
+
 #type vertex
 #version 330 core
 

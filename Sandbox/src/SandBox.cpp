@@ -86,16 +86,14 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Jasmine::Shader::Create(vertexSrc, fragmentSrc));
-
-		m_TextureShader.reset(Jasmine::Shader::Create("assets/shaders/texture.glsl"));
+		SL.Load("assets/shaders/texture.glsl");
+		SL.Load("m_Shader", vertexSrc, fragmentSrc);
 
 		m_Texture = Jasmine::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_AwesomefaceTexture = Jasmine::Texture2D::Create("assets/textures/awesomeface.png");
 		m_JM_logo = Jasmine::Texture2D::Create("assets/textures/JM_logo.png");
 
-		std::dynamic_pointer_cast<Jasmine::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<Jasmine::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		SL.GetCast<Jasmine::OpenGLShader>("TextureShader")->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Jasmine::Timestep ts) override
@@ -125,12 +123,12 @@ public:
 		Jasmine::Renderer::BeginScene(m_Camera);
 
 		m_Texture->Bind(0);
-		Jasmine::Renderer::Submit(m_TextureShader, m_SquareVA);
+		Jasmine::Renderer::Submit(SL.Get("TextureShader"), m_SquareVA);
 
 		m_AwesomefaceTexture->Bind(0);
-		Jasmine::Renderer::Submit(m_TextureShader, m_SquareVA);
+		Jasmine::Renderer::Submit(SL.Get("TextureShader"), m_SquareVA);
 
-		Jasmine::Renderer::Submit(m_Shader, m_VertexArray);
+		Jasmine::Renderer::Submit(SL.Get("m_Shader"), m_VertexArray);
 
 		Jasmine::Renderer::EndScene();
 	}
@@ -154,6 +152,7 @@ public:
 		std::shared_ptr<Jasmine::VertexArray> m_SquareVA;
 
 		JM_SP(Jasmine::Texture2D) m_Texture, m_AwesomefaceTexture, m_JM_logo;
+		Jasmine::ShaderLibrary SL;
 
 		Jasmine::OrthographicCamera m_Camera;
 		glm::vec3 m_CameraPosition;

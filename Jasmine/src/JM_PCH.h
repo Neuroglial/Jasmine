@@ -14,7 +14,11 @@
 
 #include "Jasmine/Log.h"
 
-char* ReadFile(const char* path);
+void ReadFile(std::string& dr, const char* path);
+std::string ReadFile(const char* path);
+
+void GetValue(std::string& value, const char* key, const char* src);
+std::string GetValue(const char* key, const char* src);
 
 #ifdef JM_PLATFORM_WINDOWS
 #include <Windows.h>
