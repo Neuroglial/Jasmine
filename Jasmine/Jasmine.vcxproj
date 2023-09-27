@@ -82,6 +82,7 @@
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -105,6 +106,7 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -129,6 +131,7 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,34 +143,34 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\JM_PCH.h" />
     <ClInclude Include="src\Jasmine.h" />
-    <ClInclude Include="src\Jasmine\Application.h" />
-    <ClInclude Include="src\Jasmine\Core.h" />
+    <ClInclude Include="src\Jasmine\Core\Application.h" />
+    <ClInclude Include="src\Jasmine\Core\Core.h" />
+    <ClInclude Include="src\Jasmine\Core\EntryPoint.h" />
+    <ClInclude Include="src\Jasmine\Core\Input.h" />
+    <ClInclude Include="src\Jasmine\Core\KeyCodes.h" />
+    <ClInclude Include="src\Jasmine\Core\LayerStack.h" />
+    <ClInclude Include="src\Jasmine\Core\Log.h" />
+    <ClInclude Include="src\Jasmine\Core\MouseButtonCodes.h" />
     <ClInclude Include="src\Jasmine\Core\Timestep.h" />
-    <ClInclude Include="src\Jasmine\EntryPoint.h" />
+    <ClInclude Include="src\Jasmine\Core\Window.h" />
+    <ClInclude Include="src\Jasmine\Core\layer.h" />
     <ClInclude Include="src\Jasmine\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Jasmine\Events\Event.h" />
     <ClInclude Include="src\Jasmine\Events\KeyEvent.h" />
     <ClInclude Include="src\Jasmine\Events\MouseEvent.h" />
     <ClInclude Include="src\Jasmine\ImGUI\ImGuiLayer.h" />
-    <ClInclude Include="src\Jasmine\Input.h" />
-    <ClInclude Include="src\Jasmine\KeyCodes.h" />
-    <ClInclude Include="src\Jasmine\LayerStack.h" />
-    <ClInclude Include="src\Jasmine\Log.h" />
-    <ClInclude Include="src\Jasmine\MouseButtonCodes.h" />
     <ClInclude Include="src\Jasmine\Renderer\Buffer.h" />
     <ClInclude Include="src\Jasmine\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Jasmine\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\Jasmine\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\Jasmine\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Jasmine\Renderer\Renderer.h" />
     <ClInclude Include="src\Jasmine\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Jasmine\Renderer\Shader.h" />
     <ClInclude Include="src\Jasmine\Renderer\Texture.h" />
     <ClInclude Include="src\Jasmine\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Jasmine\Window.h" />
-    <ClInclude Include="src\Jasmine\layer.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
@@ -176,6 +179,7 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
@@ -598,17 +602,17 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\JM_PCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Jasmine\Application.cpp" />
+    <ClCompile Include="src\Jasmine\Core\Application.cpp" />
+    <ClCompile Include="src\Jasmine\Core\Layer.cpp" />
+    <ClCompile Include="src\Jasmine\Core\LayerStack.cpp" />
+    <ClCompile Include="src\Jasmine\Core\Log.cpp" />
     <ClCompile Include="src\Jasmine\ImGUI\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Jasmine\Layer.cpp" />
-    <ClCompile Include="src\Jasmine\LayerStack.cpp" />
-    <ClCompile Include="src\Jasmine\Log.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Jasmine\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Jasmine\Renderer\RendererAPI.cpp" />
@@ -621,6 +625,7 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />

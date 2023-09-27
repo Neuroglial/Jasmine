@@ -63,17 +63,38 @@
     <ClInclude Include="src\Jasmine.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\Application.h">
-      <Filter>src\Jasmine</Filter>
+    <ClInclude Include="src\Jasmine\Core\Application.h">
+      <Filter>src\Jasmine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\Core.h">
-      <Filter>src\Jasmine</Filter>
+    <ClInclude Include="src\Jasmine\Core\Core.h">
+      <Filter>src\Jasmine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Core\EntryPoint.h">
+      <Filter>src\Jasmine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Core\Input.h">
+      <Filter>src\Jasmine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Core\KeyCodes.h">
+      <Filter>src\Jasmine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Core\LayerStack.h">
+      <Filter>src\Jasmine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Core\Log.h">
+      <Filter>src\Jasmine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Core\MouseButtonCodes.h">
+      <Filter>src\Jasmine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Core\Timestep.h">
       <Filter>src\Jasmine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\EntryPoint.h">
-      <Filter>src\Jasmine</Filter>
+    <ClInclude Include="src\Jasmine\Core\Window.h">
+      <Filter>src\Jasmine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Core\layer.h">
+      <Filter>src\Jasmine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Events\ApplicationEvent.h">
       <Filter>src\Jasmine\Events</Filter>
@@ -90,21 +111,6 @@
     <ClInclude Include="src\Jasmine\ImGUI\ImGuiLayer.h">
       <Filter>src\Jasmine\ImGUI</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\Input.h">
-      <Filter>src\Jasmine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Jasmine\KeyCodes.h">
-      <Filter>src\Jasmine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Jasmine\LayerStack.h">
-      <Filter>src\Jasmine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Jasmine\Log.h">
-      <Filter>src\Jasmine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Jasmine\MouseButtonCodes.h">
-      <Filter>src\Jasmine</Filter>
-    </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\Buffer.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
@@ -112,6 +118,9 @@
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\OrthographicCamera.h">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Renderer\OrthographicCameraController.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\RenderCommand.h">
@@ -131,12 +140,6 @@
     </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\VertexArray.h">
       <Filter>src\Jasmine\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Jasmine\Window.h">
-      <Filter>src\Jasmine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Jasmine\layer.h">
-      <Filter>src\Jasmine</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -160,6 +163,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
@@ -1422,31 +1428,33 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JM_PCH.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Jasmine\Application.cpp">
-      <Filter>src\Jasmine</Filter>
+    <ClCompile Include="src\Jasmine\Core\Application.cpp">
+      <Filter>src\Jasmine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Jasmine\Core\Layer.cpp">
+      <Filter>src\Jasmine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Jasmine\Core\LayerStack.cpp">
+      <Filter>src\Jasmine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Jasmine\Core\Log.cpp">
+      <Filter>src\Jasmine\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Jasmine\ImGUI\ImGuiLayer.cpp">
       <Filter>src\Jasmine\ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Jasmine\Layer.cpp">
-      <Filter>src\Jasmine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Jasmine\LayerStack.cpp">
-      <Filter>src\Jasmine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Jasmine\Log.cpp">
-      <Filter>src\Jasmine</Filter>
     </ClCompile>
     <ClCompile Include="src\Jasmine\Renderer\Buffer.cpp">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Jasmine\Renderer\OrthographicCamera.cpp">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Jasmine\Renderer\OrthographicCameraController.cpp">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Jasmine\Renderer\RenderCommand.cpp">
@@ -1485,6 +1493,9 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
@@ -1497,6 +1508,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
   </ItemGroup>
 </Project>

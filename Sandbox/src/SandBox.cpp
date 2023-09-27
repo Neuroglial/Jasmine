@@ -2,8 +2,6 @@
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
-#include "imgui/imgui.h"
-
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -11,7 +9,7 @@ class ExampleLayer : public Jasmine::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
+		: Layer("Example"), m_CameraController(1280.0f / 720.0f)
 	{
 		m_VertexArray.reset(Jasmine::VertexArray::Create());
 
@@ -69,29 +67,12 @@ public:
 
 	void OnUpdate(Jasmine::Timestep ts) override
 	{
-		if (Jasmine::Input::IsKeyPressed(JM_KEY_LEFT))
-			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-		else if (Jasmine::Input::IsKeyPressed(JM_KEY_RIGHT))
-			m_CameraPosition.x += m_CameraMoveSpeed * ts;
-
-		if (Jasmine::Input::IsKeyPressed(JM_KEY_UP))
-			m_CameraPosition.y += m_CameraMoveSpeed * ts;
-		else if (Jasmine::Input::IsKeyPressed(JM_KEY_DOWN))
-			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-
-		if (Jasmine::Input::IsKeyPressed(JM_KEY_A))
-			m_CameraRotation += m_CameraRotationSpeed * ts;
-		if (Jasmine::Input::IsKeyPressed(JM_KEY_D))
-			m_CameraRotation -= m_CameraRotationSpeed * ts;
-
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.SetRotation(m_CameraRotation);
+		m_CameraController.OnUpdate(ts);
 
 		Jasmine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Jasmine::RenderCommand::Clear();
 
-
-		Jasmine::Renderer::BeginScene(m_Camera);
+		Jasmine::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		m_Texture->Bind(0);
 		Jasmine::Renderer::Submit(SL.Get("TextureShader"), m_SquareVA);
@@ -106,13 +87,7 @@ public:
 
 	void OnEvent(Jasmine::Event& e) override
 	{
-		if (e.GetEventType() == Jasmine::EventType::KeyPressed)
-		{
-			auto& ev = JM_CONVERT(Jasmine::KeyPressedEvent, e);
-			if (ev.GetKeyCode() == JM_KEY_TAB)
-				JM_TRACE("Tab key is pressed (event)!");
-			//JM_TRACE("{0}", (char)ev.GetKeyCode());
-		}
+		m_CameraController.OnEvent(e);
 	}
 
 	private:
@@ -125,7 +100,8 @@ public:
 		JM_SP(Jasmine::Texture2D) m_Texture, m_AwesomefaceTexture, m_JM_logo;
 		Jasmine::ShaderLibrary SL;
 
-		Jasmine::OrthographicCamera m_Camera;
+		//Jasmine::OrthographicCamera m_Camera;
+		Jasmine::OrthographicCameraController m_CameraController;
 		glm::vec3 m_CameraPosition;
 		float m_CameraMoveSpeed = 5.0f;
 
