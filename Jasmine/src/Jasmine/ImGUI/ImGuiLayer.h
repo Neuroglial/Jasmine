@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Jasmine/Layer.h"
+#include "Jasmine/Core/Layer.h"
 
 #include "Jasmine/Events/KeyEvent.h"
 #include "Jasmine/Events/MouseEvent.h"

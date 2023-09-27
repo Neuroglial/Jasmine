@@ -1,7 +1,7 @@
 #include "JM_PCH.h"
-#include "Buffer.h"
 
-#include "Renderer.h"
+#include "Buffer.h"
+#include "Jasmine/Renderer/Renderer.h"
 
 #include "Platform/OpenGL/OpenGLBuffer.h"
 

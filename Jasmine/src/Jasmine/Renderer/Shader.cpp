@@ -1,11 +1,12 @@
 #include "JM_PCH.h"
+
 #include "Shader.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glad/glad.h>
 
-#include "Renderer.h"
+#include "Jasmine/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Jasmine {

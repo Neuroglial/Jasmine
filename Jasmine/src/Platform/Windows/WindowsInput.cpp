@@ -1,7 +1,7 @@
 #include "JM_PCH.h"
 #include "WindowsInput.h"
 
-#include "Jasmine/Application.h"
+#include "Jasmine/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Jasmine {

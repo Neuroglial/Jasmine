@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Jasmine/Core/Core.h"
+
 namespace Jasmine {
 
 	enum class ShaderDataType

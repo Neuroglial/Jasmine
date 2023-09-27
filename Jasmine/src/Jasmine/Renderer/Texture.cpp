@@ -1,7 +1,7 @@
 #include "JM_PCH.h"
-#include "Texture.h"
 
-#include "Renderer.h"
+#include "Texture.h"
+#include "Jasmine/Renderer/Renderer.h"
 
 #include "Platform/OpenGL/OpenGLTexture.h"
 

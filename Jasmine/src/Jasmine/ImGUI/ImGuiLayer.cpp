@@ -4,7 +4,7 @@
 #include "imgui.h"
 #include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
 
-#include "Jasmine/Application.h"
+#include "Jasmine/Core/Application.h"
 
 
 // TEMPORARY

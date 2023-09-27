@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Jasmine/Core/Core.h"
 #include <glm/glm.hpp>
 
 namespace Jasmine {

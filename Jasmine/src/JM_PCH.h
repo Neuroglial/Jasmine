@@ -12,7 +12,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Jasmine/Log.h"
+#include "Jasmine/Core/Log.h"
 
 void ReadFile(std::string& dr, const char* path);
 std::string ReadFile(const char* path);

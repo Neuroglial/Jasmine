@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Jasmine/Input.h"
+#include "Jasmine/Core/Input.h"
 
 namespace Jasmine {
 

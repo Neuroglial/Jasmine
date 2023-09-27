@@ -1,6 +1,7 @@
 #pragma once
 
 #include "JM_PCH.h"
+#include "Jasmine/Core/Core.h"
 #include "Jasmine/Renderer/Buffer.h"
 
 namespace Jasmine {

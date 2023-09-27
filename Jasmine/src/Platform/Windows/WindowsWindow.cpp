@@ -8,8 +8,6 @@
 #include "Platform/OpenGL/OpenGLContext.h"
 #include "stb_image.h"
 
-#include <glad/glad.h>
-
 namespace Jasmine {
 	static bool GLFWIsInited = false;
 

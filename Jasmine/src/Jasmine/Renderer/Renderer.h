@@ -1,8 +1,8 @@
 #pragma once
 
-#include "RenderCommand.h"
-#include "OrthographicCamera.h"
-#include "Shader.h"
+#include "Jasmine/Renderer/RenderCommand.h"
+#include "Jasmine/Renderer/OrthographicCamera.h"
+#include "Jasmine/Renderer/Shader.h"
 
 namespace Jasmine {
 
@@ -10,6 +10,8 @@ namespace Jasmine {
 	{
 	public:
 		static void Init();
+		static void OnWindowResize(uint32_t width, uint32_t height);
+
 		static void BeginScene(OrthographicCamera& camera);
 		static void EndScene();
 

@@ -1,8 +1,8 @@
 #pragma once
 
-#include <string>
+#include "JM_PCH.h"
 
-#include "Jasmine/Core.h"
+#include "Jasmine/Core/Core.h"
 
 namespace Jasmine {
 

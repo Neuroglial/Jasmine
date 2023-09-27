@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Jasmine/Window.h"
+#include "Jasmine/Core/Window.h"
 #include <GLFW/glfw3.h>
 #include "Jasmine/Renderer/GraphicsContext.h"
 
