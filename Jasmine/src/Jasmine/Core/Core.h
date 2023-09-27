@@ -41,4 +41,6 @@
 #define JM_CONVERT(Type,x) (*(Type*)&x)
 
 #define JM_SP(T) std::shared_ptr<T>
+#define JM_CSP(T) std::make_shared<T>
 #define JM_UP(T) std::unique_ptr<T>
+#define JM_CUP(T) std::make_unique<T>
