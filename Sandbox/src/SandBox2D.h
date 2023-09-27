@@ -20,6 +20,8 @@ private:
 	// Temp
 	JM_SP(Jasmine::VertexArray) m_SquareVA;
 	JM_SP(Jasmine::Shader) m_FlatColorShader;
+	JM_SP(Jasmine::Texture) m_CheckerboardTexture;
+	JM_SP(Jasmine::Texture) m_JM_Logo;
 
 	glm::vec2 m_Position = { 0.0f,0.0f };
 	glm::vec2 m_Scale = { 1.0f,1.0f };
