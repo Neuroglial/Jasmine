@@ -1,5 +1,7 @@
 #include "JM_PCH.h"
+
 #include "Renderer.h"
+#include "Jasmine/Renderer/Renderer2D.h"
 
 #include "Platform/OpenGL/OpenGLRendererAPI.h"
 #include "Platform/OpenGL/OpenGLShader.h"
@@ -9,6 +11,7 @@ namespace Jasmine {
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
+		Renderer2D::Init();
 	}
 
 	void Renderer::OnWindowResize(uint32_t width, uint32_t height)

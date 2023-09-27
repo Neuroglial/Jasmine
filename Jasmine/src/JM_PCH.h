@@ -12,6 +12,10 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
+
 #include "Jasmine/Core/Log.h"
 
 void ReadFile(std::string& dr, const char* path);
@@ -19,6 +23,8 @@ std::string ReadFile(const char* path);
 
 void GetValue(std::string& value, const char* key, const char* src);
 std::string GetValue(const char* key, const char* src);
+
+void PrintError(uint32_t error);
 
 #ifdef JM_PLATFORM_WINDOWS
 #include <Windows.h>

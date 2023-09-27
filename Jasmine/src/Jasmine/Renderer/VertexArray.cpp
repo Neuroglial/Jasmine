@@ -6,12 +6,12 @@
 
 namespace Jasmine {
 
-	VertexArray* VertexArray::Create()
+	JM_SP(VertexArray) VertexArray::Create()
 	{
 		switch (Renderer::GetAPI())
 		{
 			case RendererAPI::API::None:    JM_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-			case RendererAPI::API::OpenGL:  return new OpenGLVertexArray();
+			case RendererAPI::API::OpenGL:  return JM_SP(VertexArray)(new OpenGLVertexArray());
 		}
 
 		JM_CORE_ASSERT(false, "Unknown RendererAPI!");

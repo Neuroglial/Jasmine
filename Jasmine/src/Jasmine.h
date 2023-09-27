@@ -28,6 +28,7 @@
 //============================================
 // --------------Renderer---------------------
 #include "Jasmine/Renderer/Renderer.h"
+#include "Jasmine/Renderer/Renderer2D.h"
 #include "Jasmine/Renderer/RenderCommand.h"
 
 #include "Jasmine/Renderer/Buffer.h"
@@ -38,10 +39,3 @@
 #include "Jasmine/Renderer/OrthographicCamera.h"
 #include "Jasmine/Renderer/OrthographicCameraController.h"
 // -------------------------------------------
-
-
-
-//============================================
-//---------------Entry Point------------------
-#include "Jasmine/Core/EntryPoint.h"
-//--------------------------------------------

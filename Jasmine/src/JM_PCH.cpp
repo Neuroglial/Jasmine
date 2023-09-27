@@ -47,3 +47,15 @@ std::string GetValue(const char* key, const char* src)
     GetValue(value, key, src);
     return value;
 }
+
+void PrintError(uint32_t error)
+{
+    if (error >= 0x1000)
+        printf("GL ERROR : 0x%x", error);
+    else if (error >= 0x0100)
+        printf("GL ERROR : 0x0%x", error);
+    else if (error >= 0x0010)
+        printf("GL ERROR : 0x00%x", error);
+    else
+        printf("GL ERROR : 0x000%x", error);
+}

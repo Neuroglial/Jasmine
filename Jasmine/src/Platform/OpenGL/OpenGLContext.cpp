@@ -26,6 +26,8 @@ namespace Jasmine {
 		JM_CORE_INFO(" Version:  {0}", (char*)glGetString(GL_VERSION));
 		JM_CORE_INFO("--------------------------------------------------------------");
 
+		
+
 		int w, h;
 		glfwGetWindowSize(m_WindowHandle, &w, &h);
 		glViewport(0, 0, w, h);
