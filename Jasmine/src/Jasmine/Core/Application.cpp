@@ -62,9 +62,10 @@ namespace Jasmine {
 		dispatcher.Dispatch<WindowCloseEvent>(JM_BIND_EVENT_FN(Application::OnWinodwClose));
 		dispatcher.Dispatch<WindowResizeEvent>(JM_BIND_EVENT_FN(Application::OnWindowResize));
 
-		for (auto i = m_LayerStack.end(); i != m_LayerStack.begin();) {
-			(*--i)->OnEvent(e);
-			if (e.m_Handled)
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
+		{
+			(*it)->OnEvent(e);
+			if (e.Handled)
 				break;
 		}
 	}
