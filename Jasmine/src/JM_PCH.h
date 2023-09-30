@@ -17,6 +17,7 @@
 #include "glm/gtc/type_ptr.hpp"
 
 #include "Jasmine/Core/Log.h"
+#include "Jasmine/Debug/Instrumentor.h"
 
 void ReadFile(std::string& dr, const char* path);
 std::string ReadFile(const char* path);

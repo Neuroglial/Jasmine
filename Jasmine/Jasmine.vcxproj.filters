@@ -1429,6 +1429,7 @@
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\Renderer2D.h" />
+    <ClInclude Include="src\Jasmine\Debug\Instrumentor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JM_PCH.cpp">

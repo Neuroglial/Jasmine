@@ -23,15 +23,6 @@ private:
 	JM_SP(Jasmine::Texture) m_CheckerboardTexture;
 	JM_SP(Jasmine::Texture) m_JM_Logo;
 
-
-	struct ProfileResult
-	{
-		const char* Name;
-		float Time;
-	};
-
-	std::vector<ProfileResult> m_ProfileResults;
-
 	glm::vec2 m_Position = { 0.0f,0.0f };
 	glm::vec2 m_Scale = { 1.0f,1.0f };
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };

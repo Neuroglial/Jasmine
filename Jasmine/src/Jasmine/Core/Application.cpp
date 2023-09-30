@@ -15,6 +15,8 @@ namespace Jasmine {
 
 	Application::Application()
 	{
+		JM_PROFILE_FUNCTION();
+
 		JM_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
@@ -25,18 +27,23 @@ namespace Jasmine {
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
-
 	}
 
 	Application::~Application()
 	{
+		JM_PROFILE_FUNCTION();
+
+		Renderer::Shutdown();
 	}
 
 	void Application::Run()
 	{
+		JM_PROFILE_FUNCTION();
+
 		RenderCommand::SetClearColor({ 0.75f, 0.8f, 0.95f, 1.0f });
 
 		while (m_Running) {
+			JM_PROFILE_SCOPE("RunLoop");
 
 			RenderCommand::Clear();
 
@@ -44,13 +51,22 @@ namespace Jasmine {
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
-			for (Layer* layer : m_LayerStack)
-				layer->OnUpdate(timestep);
+			if (!m_Minimized) {
+				for (Layer* layer : m_LayerStack) {
+					JM_PROFILE_SCOPE("LayerStack OnUpdate");
 
-			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
-				layer->OnImGuiRender();
-			m_ImGuiLayer->End();
+					layer->OnUpdate(timestep);
+				}
+
+				m_ImGuiLayer->Begin();
+				for (Layer* layer : m_LayerStack) {
+					JM_PROFILE_SCOPE("LayerStack OnImGuiRender");
+					layer->OnImGuiRender();
+				}
+				m_ImGuiLayer->End();
+			}
+
+
 
 			m_Window->OnUpdate();
 		}
@@ -58,6 +74,8 @@ namespace Jasmine {
 
 	void Application::OnEvent(Event& e)
 	{
+		JM_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(JM_BIND_EVENT_FN(Application::OnWinodwClose));
 		dispatcher.Dispatch<WindowResizeEvent>(JM_BIND_EVENT_FN(Application::OnWindowResize));
@@ -72,6 +90,8 @@ namespace Jasmine {
 
 	void Application::PushLayer(Layer* layer)
 	{
+		JM_PROFILE_FUNCTION();
+
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
@@ -89,6 +109,8 @@ namespace Jasmine {
 	}
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		JM_PROFILE_FUNCTION();
+
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimized = true;

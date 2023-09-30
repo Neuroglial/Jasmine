@@ -1,0 +1,4 @@
+{"otherData": {},"traceEvents":[
+{"cat":"function","dur":369963,"name":"__cdecl Jasmine::Application::Application(void)","ph":"X","pid":0,"tid":2304231316,"ts":46488129530},
+{"cat":"function","dur":56064,"name":"void __cdecl Jasmine::Application::PushLayer(class Jasmine::Layer *)","ph":"X","pid":0,"tid":2304231316,"ts":46488499679}
+]}

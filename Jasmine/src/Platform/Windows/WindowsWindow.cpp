@@ -66,7 +66,7 @@ namespace Jasmine {
 		m_Context->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
-		SetVSync(true);
+		glfwSwapInterval(m_Data.VSync);
 
 		GLFWimage icon[3];
 		icon[0].pixels = stbi_load("../Jasmine/assets/textures/logo/JM_logo_16.png", &icon[0].width, &icon[0].height, 0, 4);

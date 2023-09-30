@@ -1,0 +1,3 @@
+{"otherData": {},"traceEvents":[
+{"cat":"function","dur":25,"name":"__cdecl Jasmine::Application::~Application(void)","ph":"X","pid":0,"tid":2304231316,"ts":46494725693}
+]}
