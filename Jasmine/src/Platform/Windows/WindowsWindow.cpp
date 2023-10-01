@@ -18,16 +18,22 @@ namespace Jasmine {
 
 	WindowsWindow::WindowsWindow(const WindowProps& props)
 	{
+		JM_PROFILE_FUNCTION();
+
 		Init(props);
 	}
 
 	WindowsWindow::~WindowsWindow()
 	{
+		JM_PROFILE_FUNCTION();
+
 		Shutdown();
 	}
 
 	void WindowsWindow::OnUpdate()
 	{
+		JM_PROFILE_FUNCTION();
+
 		glfwSwapBuffers(m_Window);
 		glfwPollEvents();
 	}
@@ -42,6 +48,8 @@ namespace Jasmine {
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+		JM_PROFILE_FUNCTION();
+
 		m_Data.Title = props.Title;
 		m_Data.Height = props.Height;
 		m_Data.Width = props.Width;
@@ -171,6 +179,8 @@ namespace Jasmine {
 
 	void WindowsWindow::Shutdown()
 	{
+		JM_PROFILE_FUNCTION();
+
 		glfwDestroyWindow(m_Window);
 	}
 }

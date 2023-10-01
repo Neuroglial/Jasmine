@@ -24,6 +24,8 @@ namespace Jasmine {
 
 	void ImGuiLayer::OnAttach()
 	{
+		JM_PROFILE_FUNCTION();
+
 		// Setup Dear ImGui context
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -55,6 +57,8 @@ namespace Jasmine {
 
 	void ImGuiLayer::OnDetach()
 	{
+		JM_PROFILE_FUNCTION();
+
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
@@ -62,6 +66,8 @@ namespace Jasmine {
 
 	void ImGuiLayer::Begin()
 	{
+		JM_PROFILE_FUNCTION();
+
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -69,6 +75,8 @@ namespace Jasmine {
 
 	void ImGuiLayer::End()
 	{
+		JM_PROFILE_FUNCTION();
+
 		ImGuiIO& io = ImGui::GetIO();
 		Application& app = Application::Get();
 		io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());

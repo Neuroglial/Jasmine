@@ -47,9 +47,7 @@ namespace Jasmine {
 
 			RenderCommand::Clear();
 
-			float time = (float)glfwGetTime();
-			Timestep timestep = time - m_LastFrameTime;
-			m_LastFrameTime = time;
+			Timestep timestep = Timestep::UpdateLifeTime(glfwGetTime());
 
 			if (!m_Minimized) {
 				for (Layer* layer : m_LayerStack) {

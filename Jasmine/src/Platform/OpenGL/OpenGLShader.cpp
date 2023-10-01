@@ -23,6 +23,8 @@ namespace Jasmine {
 
 	OpenGLShader::OpenGLShader(const char* filepath)
 	{
+		JM_PROFILE_FUNCTION();
+
 		std::string src;
 		ReadFile(src, filepath);
 		m_Name = GetValue("#ShaderName", src.c_str());
@@ -33,6 +35,8 @@ namespace Jasmine {
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
 		:m_Name(name)
 	{
+		JM_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSrc;
 		sources[GL_FRAGMENT_SHADER] = fragmentSrc;
@@ -41,11 +45,15 @@ namespace Jasmine {
 
 	OpenGLShader::~OpenGLShader()
 	{
+		JM_PROFILE_FUNCTION();
+
 		glDeleteProgram(m_RendererID);
 	}
 
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source)
 	{
+		JM_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> shaderSources;
 
 		const char* typeToken = "#type";
@@ -70,6 +78,8 @@ namespace Jasmine {
 
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
+		JM_PROFILE_FUNCTION();
+
 		GLuint program = glCreateProgram();
 		std::vector<GLenum> glShaderIDs(shaderSources.size());
 		for (auto& kv : shaderSources)
@@ -102,12 +112,46 @@ namespace Jasmine {
 
 	void OpenGLShader::Bind() const
 	{
+		JM_PROFILE_FUNCTION();
+
 		glUseProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Unbind() const
 	{
+		JM_PROFILE_FUNCTION();
+
 		glUseProgram(0);
+	}
+
+	void OpenGLShader::SetInt(const std::string& name, int value)
+	{
+		JM_PROFILE_FUNCTION();
+		UploadUniformInt(name, value);
+	}
+
+	void OpenGLShader::SetFloat(const std::string& name, float value)
+	{
+		JM_PROFILE_FUNCTION();
+		UploadUniformFloat(name, value);
+	}
+
+	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
+	{
+		JM_PROFILE_FUNCTION();
+		UploadUniformFloat3(name, value);
+	}
+
+	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value)
+	{
+		JM_PROFILE_FUNCTION();
+		UploadUniformFloat4(name, value);
+	}
+
+	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
+	{
+		JM_PROFILE_FUNCTION();
+		UploadUniformMat4(name, value);
 	}
 
 	void OpenGLShader::UploadUniformInt(const std::string& name, int value)

@@ -16,6 +16,8 @@ namespace Jasmine {
 
 	void OpenGLContext::Init()
 	{
+		JM_PROFILE_FUNCTION();
+
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		JM_CORE_ASSERT(status, "Failed to initialize Glad!");
@@ -35,6 +37,8 @@ namespace Jasmine {
 
 	void OpenGLContext::SwapBuffers()
 	{
+		JM_PROFILE_FUNCTION();
+
 		glfwSwapBuffers(m_WindowHandle);
 	}
 
