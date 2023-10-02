@@ -21,7 +21,7 @@ namespace Jasmine {
 		s_Instance = this;
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
-		m_Window->SetEventCallback(JM_BIND_EVENT_FN(Application::OnEvent));
+		m_Window->SetEventCallback(JM_BIND_FN(Application::OnEvent));
 
 		Renderer::Init();
 
@@ -75,8 +75,8 @@ namespace Jasmine {
 		JM_PROFILE_FUNCTION();
 
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowCloseEvent>(JM_BIND_EVENT_FN(Application::OnWinodwClose));
-		dispatcher.Dispatch<WindowResizeEvent>(JM_BIND_EVENT_FN(Application::OnWindowResize));
+		dispatcher.Dispatch<WindowCloseEvent>(JM_BIND_FN(Application::OnWinodwClose));
+		dispatcher.Dispatch<WindowResizeEvent>(JM_BIND_FN(Application::OnWindowResize));
 
 		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
 		{

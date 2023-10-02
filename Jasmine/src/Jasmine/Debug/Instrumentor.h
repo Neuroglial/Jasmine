@@ -4,9 +4,16 @@
 #include <chrono>
 #include <algorithm>
 #include <fstream>
+#include <stdarg.h>
 
 #include <thread>
+#include <future>
 
+
+#define JM_DEBUG_FSTREAM 0
+#define INSTRUMENTOR_MUTITHRESD 0
+
+#if JM_DEBUG_FSTREAM
 namespace Jasmine {
 	struct ProfileResult
 	{
@@ -133,6 +140,260 @@ namespace Jasmine {
 		bool m_Stopped;
 	};
 }
+#else
+namespace Jasmine {
+
+	struct ProfileResult
+	{
+		const char* Name;
+		long long Start, End;
+		uint32_t ThreadID;
+	};
+
+	struct InstrumentationSession
+	{
+		std::string Name;
+	};
+
+
+#if INSTRUMENTOR_MUTITHRESD
+
+	class Instrumentor
+	{
+	private:
+		InstrumentationSession* m_CurrentSession = nullptr;
+		//std::ofstream m_OutputStream;
+		int m_ProfileCount = 0;
+		inline static const unsigned MAXSWAPESIZE = 5;
+		ProfileResult Results[MAXSWAPESIZE];
+		ProfileResult* SWAP[MAXSWAPESIZE];
+
+		std::promise<bool>* P1[MAXSWAPESIZE];
+		std::future<bool>* F1[MAXSWAPESIZE];
+
+		std::promise<bool>* P2[MAXSWAPESIZE];
+		std::future<bool>* F2[MAXSWAPESIZE];
+
+		FILE* fptr;
+		
+		std::thread* theThread;
+		bool ThreadContinue;
+	public:
+		Instrumentor()
+		{
+		}
+
+		void BeginSession(const std::string& name, const char* filepath = "results.json")
+		{
+			fopen_s(&fptr, filepath, "w");
+			WriteHeader();
+			m_CurrentSession = new InstrumentationSession{ name };
+			BeginThread();
+		}
+
+		void EndSession()
+		{
+			EndThread();
+			WriteFooter();
+			fclose(fptr);
+			delete m_CurrentSession;
+			m_CurrentSession = nullptr;
+			m_ProfileCount = 0;
+		}
+
+		void WriteProfile(const ProfileResult& result)
+		{
+			static int Current = 0;
+			F1[Current]->get();
+
+
+
+
+			delete P1[Current];
+			delete F1[Current];
+
+			P1[Current] = new std::promise<bool>();
+			F1[Current] = new std::future<bool>(P1[Current]->get_future());
+
+			P1[Current]->set_value(true);
+			Current++;
+			Current %= MAXSWAPESIZE;
+		}
+
+		void WriteHeader()
+		{
+		}
+
+		void WriteFooter()
+		{
+		}
+
+		static Instrumentor& Get()
+		{
+			static Instrumentor instance;
+			return instance;
+		}
+
+	private:
+		void BeginThread() {
+			ThreadContinue = true;
+			theThread = new std::thread(&Instrumentor::BufferThread);
+		}
+
+		void EndThread() {
+			ThreadContinue = false;
+			theThread->join();
+			delete theThread;
+		}
+
+		void BufferThread() {
+			int Current = 0;
+			while (ThreadContinue) {
+				F2[Current]->get();
+
+
+				
+				delete P1[Current];
+				delete F2[Current];
+
+				P1[Current] = new std::promise<bool>();
+				F2[Current] = new std::future<bool>(P1[Current]->get_future());
+
+				P2[Current]->set_value(true);
+				Current++;
+				Current %= MAXSWAPESIZE;
+			}
+		}
+	};
+
+#else
+	class Instrumentor
+	{
+	private:
+		InstrumentationSession* m_CurrentSession = nullptr;
+		//std::ofstream m_OutputStream;
+		inline static const unsigned MAXBUFFER = 2048;
+		int m_ProfileCount = 0;
+		FILE* fptr;
+		char Buffer[MAXBUFFER];
+		unsigned BufferPointer = 0;
+
+	public:
+		Instrumentor()
+		{
+		}
+
+		void BeginSession(const std::string& name, const char* filepath = "results.json")
+		{
+			fopen_s(&fptr, filepath, "w");
+			WriteHeader();
+			m_CurrentSession = new InstrumentationSession{ name };
+		}
+
+		void EndSession()
+		{
+			WriteFooter();
+			FlushBuffer();
+			fclose(fptr);
+			delete m_CurrentSession;
+			m_CurrentSession = nullptr;
+			m_ProfileCount = 0;
+			BufferPointer = 0;
+		}
+
+		void WriteProfile(const ProfileResult& result)
+		{
+			const char* name = result.Name;
+			//std::replace(name.begin(), name.end(), '"', '\'');
+
+			if (m_ProfileCount++ > 0)
+				bufferPrintf(",\n");
+
+			bufferPrintf("{\"cat\":\"function\",\"dur\":%lld,\"name\":\"%s\",\"ph\":\"X\",\"pid\":0,\"tid\":%u,\"ts\":%lld}",
+				(result.End - result.Start), name, result.ThreadID, result.Start);
+		}
+
+		void WriteHeader()
+		{
+			bufferPrintf("{\"otherData\": {},\"traceEvents\":[\n");
+		}
+
+		void WriteFooter()
+		{
+			bufferPrintf("\n]}");
+		}
+
+		static Instrumentor& Get()
+		{
+			static Instrumentor instance;
+			return instance;
+		}
+
+	private:
+		inline void FlushBuffer() {
+			fputs(Buffer, fptr);
+			BufferPointer = 0;
+		}
+
+		void bufferPrintf(const char* _Format, ...) {
+			va_list args;
+			va_start(args, _Format);
+			BufferPointer += vsprintf_s(&Buffer[BufferPointer], MAXBUFFER - BufferPointer, _Format, args);
+			va_end(args);
+			if (BufferPointer >= MAXBUFFER * 0.75)
+				FlushBuffer();
+		}
+
+	};
+#endif
+
+
+	class InstrumentationTimer
+	{
+	public:
+		InstrumentationTimer(const char* name)
+			: m_Name(name), m_Stopped(false)
+		{
+			auto now = std::chrono::high_resolution_clock::now();
+			start = std::chrono::time_point_cast<std::chrono::microseconds>(now).time_since_epoch().count();
+			threadID = std::hash<std::thread::id>()(std::this_thread::get_id());
+
+
+			auto Last = m_LastTime.find(threadID);
+
+			if (Last != m_LastTime.end()) {
+				if (Last->second >= start)
+					start = Last->second + 1;
+				Last->second = start;
+			}
+			else m_LastTime[threadID] = start;
+		}
+
+		~InstrumentationTimer()
+		{
+			if (!m_Stopped)
+				Stop();
+		}
+
+		void Stop()
+		{
+			auto endTimepoint = std::chrono::high_resolution_clock::now();
+			long long end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
+
+			Instrumentor::Get().WriteProfile({ m_Name, start, end, threadID });
+			m_Stopped = true;
+		}
+	private:
+		const char* m_Name;
+		long long start;
+		inline static std::unordered_map<uint32_t, long long> m_LastTime = std::unordered_map<uint32_t, long long>();
+		uint32_t threadID;
+		bool m_Stopped;
+	};
+
+}
+#endif
+
 
 #define JM_PROFILE 1
 #if JM_PROFILE

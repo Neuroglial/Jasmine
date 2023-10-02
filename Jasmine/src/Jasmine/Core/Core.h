@@ -37,7 +37,7 @@
 
 #define BIT(x) (1<<x)
 
-#define JM_BIND_EVENT_FN(x) std::bind(&x,this,std::placeholders::_1)
+#define JM_BIND_FN(x) std::bind(&x,this,std::placeholders::_1)
 #define JM_CONVERT(Type,x) (*(Type*)&x)
 
 #define JM_SP(T) std::shared_ptr<T>
