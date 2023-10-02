@@ -10,6 +10,9 @@
     <Filter Include="src\Jasmine\Core">
       <UniqueIdentifier>{FBFC906D-E7F5-AFBF-1028-9544FC7F8FCB}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Jasmine\Debug">
+      <UniqueIdentifier>{79F7BC1F-E50D-BBB5-2E85-46D79ADA8B3D}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Jasmine\Events">
       <UniqueIdentifier>{4739E61A-331D-A770-9C7D-A1C3888091F2}</UniqueIdentifier>
     </Filter>
@@ -96,6 +99,9 @@
     <ClInclude Include="src\Jasmine\Core\layer.h">
       <Filter>src\Jasmine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Jasmine\Debug\Instrumentor.h">
+      <Filter>src\Jasmine\Debug</Filter>
+    </ClInclude>
     <ClInclude Include="src\Jasmine\Events\ApplicationEvent.h">
       <Filter>src\Jasmine\Events</Filter>
     </ClInclude>
@@ -127,6 +133,9 @@
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\Renderer.h">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Renderer\Renderer2D.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\RendererAPI.h">
@@ -1428,8 +1437,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\Renderer\Renderer2D.h" />
-    <ClInclude Include="src\Jasmine\Debug\Instrumentor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JM_PCH.cpp">
@@ -1463,6 +1470,9 @@
       <Filter>src\Jasmine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Jasmine\Renderer\Renderer.cpp">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Jasmine\Renderer\Renderer2D.cpp">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Jasmine\Renderer\RendererAPI.cpp">
@@ -1510,6 +1520,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Jasmine\Renderer\Renderer2D.cpp" />
   </ItemGroup>
 </Project>

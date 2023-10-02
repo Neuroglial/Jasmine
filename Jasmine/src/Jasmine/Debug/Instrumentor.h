@@ -5,13 +5,13 @@
 #include <algorithm>
 #include <fstream>
 #include <stdarg.h>
+#include <atomic>
 
 #include <thread>
-#include <future>
 
 
 #define JM_DEBUG_FSTREAM 0
-#define INSTRUMENTOR_MUTITHRESD 0
+#define INSTRUMENTOR_MUTITHRESD 1
 
 #if JM_DEBUG_FSTREAM
 namespace Jasmine {
@@ -160,24 +160,6 @@ namespace Jasmine {
 
 	class Instrumentor
 	{
-	private:
-		InstrumentationSession* m_CurrentSession = nullptr;
-		//std::ofstream m_OutputStream;
-		int m_ProfileCount = 0;
-		inline static const unsigned MAXSWAPESIZE = 5;
-		ProfileResult Results[MAXSWAPESIZE];
-		ProfileResult* SWAP[MAXSWAPESIZE];
-
-		std::promise<bool>* P1[MAXSWAPESIZE];
-		std::future<bool>* F1[MAXSWAPESIZE];
-
-		std::promise<bool>* P2[MAXSWAPESIZE];
-		std::future<bool>* F2[MAXSWAPESIZE];
-
-		FILE* fptr;
-		
-		std::thread* theThread;
-		bool ThreadContinue;
 	public:
 		Instrumentor()
 		{
@@ -195,37 +177,31 @@ namespace Jasmine {
 		{
 			EndThread();
 			WriteFooter();
+			FlushBuffer();
 			fclose(fptr);
 			delete m_CurrentSession;
 			m_CurrentSession = nullptr;
 			m_ProfileCount = 0;
+			BufferPointer = 0;
 		}
 
 		void WriteProfile(const ProfileResult& result)
 		{
-			static int Current = 0;
-			F1[Current]->get();
+			prolock.lock();
+			prolist.push_back(result);
+			prolock.unlock();
 
-
-
-
-			delete P1[Current];
-			delete F1[Current];
-
-			P1[Current] = new std::promise<bool>();
-			F1[Current] = new std::future<bool>(P1[Current]->get_future());
-
-			P1[Current]->set_value(true);
-			Current++;
-			Current %= MAXSWAPESIZE;
+			prosize.fetch_add(1);
 		}
 
 		void WriteHeader()
 		{
+			bufferPrintf("{\"otherData\": {},\"traceEvents\":[\n");
 		}
 
 		void WriteFooter()
 		{
+			bufferPrintf("\n]}");
 		}
 
 		static Instrumentor& Get()
@@ -234,10 +210,12 @@ namespace Jasmine {
 			return instance;
 		}
 
+
 	private:
 		void BeginThread() {
 			ThreadContinue = true;
-			theThread = new std::thread(&Instrumentor::BufferThread);
+			prosize.store(0);
+			theThread = new std::thread(&Instrumentor::BufferThread, this);
 		}
 
 		void EndThread() {
@@ -247,23 +225,67 @@ namespace Jasmine {
 		}
 
 		void BufferThread() {
-			int Current = 0;
-			while (ThreadContinue) {
-				F2[Current]->get();
+			static ProfileResult re;
+			int size = 0;
 
+			while (ThreadContinue || prosize.load()) {
+				if (prosize.load()) {
 
-				
-				delete P1[Current];
-				delete F2[Current];
+					prolock.lock();
+					re = prolist.front();
+					prolist.pop_front();
+					prolock.unlock();
 
-				P1[Current] = new std::promise<bool>();
-				F2[Current] = new std::future<bool>(P1[Current]->get_future());
-
-				P2[Current]->set_value(true);
-				Current++;
-				Current %= MAXSWAPESIZE;
+					prosize.fetch_sub(1);
+					writeResult(re);
+				}
+				else {
+					std::this_thread::yield();
+				}
 			}
 		}
+
+	private:
+		inline void FlushBuffer() {
+			fputs(Buffer, fptr);
+			BufferPointer = 0;
+		}
+
+		void bufferPrintf(const char* _Format, ...) {
+			va_list args;
+			va_start(args, _Format);
+			BufferPointer += vsprintf_s(&Buffer[BufferPointer], MAXBUFFER - BufferPointer, _Format, args);
+			va_end(args);
+			if (BufferPointer >= MAXBUFFER * 0.75)
+				FlushBuffer();
+		}
+
+		void writeResult(ProfileResult& result) {
+			const char* name = result.Name;
+			//std::replace(name.begin(), name.end(), '"', '\'');
+
+			if (m_ProfileCount++ > 0)
+				bufferPrintf(",\n");
+
+			bufferPrintf("{\"cat\":\"function\",\"dur\":%lld,\"name\":\"%s\",\"ph\":\"X\",\"pid\":0,\"tid\":%u,\"ts\":%lld}",
+				(result.End - result.Start), name, result.ThreadID, result.Start);
+		}
+
+	private:
+		InstrumentationSession* m_CurrentSession = nullptr;
+		//std::ofstream m_OutputStream;
+		inline static const unsigned MAXBUFFER = 4096;
+		int m_ProfileCount = 0;
+		FILE* fptr;
+		char Buffer[MAXBUFFER];
+		unsigned BufferPointer = 0;
+
+		std::list<ProfileResult> prolist;
+		std::mutex prolock;
+		std::atomic<unsigned> prosize;
+
+		std::thread* theThread;
+		bool ThreadContinue;
 	};
 
 #else
