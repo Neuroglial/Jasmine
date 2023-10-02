@@ -47,7 +47,7 @@ namespace Jasmine {
 	{
 		JM_PROFILE_FUNCTION();
 
-		glDeleteProgram(m_RendererID);
+		//glDeleteProgram(m_RendererID);
 	}
 
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source)

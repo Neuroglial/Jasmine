@@ -251,14 +251,21 @@ namespace Jasmine {
 			BufferPointer = 0;
 		}
 
-		void bufferPrintf(const char* _Format, ...) {
-			va_list args;
-			va_start(args, _Format);
-			BufferPointer += vsprintf_s(&Buffer[BufferPointer], MAXBUFFER - BufferPointer, _Format, args);
-			va_end(args);
+		template<typename ...Args>
+		void bufferPrintf(const char* _Format, Args... args) {
+			BufferPointer += sprintf_s(&Buffer[BufferPointer], MAXBUFFER - BufferPointer, _Format, args...);
 			if (BufferPointer >= MAXBUFFER * 0.75)
 				FlushBuffer();
 		}
+
+		//void bufferPrintf(const char* _Format, ...) {
+		//	va_list args;
+		//	va_start(args, _Format);
+		//	BufferPointer += vsprintf_s(&Buffer[BufferPointer], MAXBUFFER - BufferPointer, _Format, args);
+		//	va_end(args);
+		//	if (BufferPointer >= MAXBUFFER * 0.75)
+		//		FlushBuffer();
+		//}
 
 		void writeResult(ProfileResult& result) {
 			const char* name = result.Name;
