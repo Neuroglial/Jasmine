@@ -17,8 +17,8 @@ void Sandbox2D::OnAttach()
 {
 	JM_PROFILE_FUNCTION();
 
-	//m_CheckerboardTexture = Jasmine::Texture2D::Create("assets/textures/Checkerboard.png");
-	//m_JM_Logo = Jasmine::Texture2D::Create("assets/textures/Jasmine_Engine_Logo_Light.png");
+	m_CheckerboardTexture = Jasmine::Texture2D::Create("assets/textures/Checkerboard.png");
+	m_JM_Logo = Jasmine::Texture2D::Create("assets/textures/Jasmine_Engine_Logo_Light.png");
 }
 
 void Sandbox2D::OnDetach()
@@ -49,6 +49,10 @@ void Sandbox2D::OnUpdate(Jasmine::Timestep ts)
 
 		//Jasmine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 2.0f, 2.0f }, m_CheckerboardTexture);
 		//Jasmine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.05f }, { 2.0f, 2.0f }, m_JM_Logo);
+
+		Jasmine::Renderer2D::DrawQuad({ -5.0f, -5.0f, -0.1f }, { 10.0f, 10.0f }, m_CheckerboardTexture, 10.0f);
+		Jasmine::Renderer2D::DrawQuad({ -0.5f, -0.5f, 0.0f }, { 1.0f, 1.0f }, m_CheckerboardTexture, 20.0f);
+
 		Jasmine::Renderer2D::EndScene();
 	}
 }

@@ -222,6 +222,7 @@ namespace Jasmine {
 			ThreadContinue = false;
 			theThread->join();
 			delete theThread;
+			theThread = nullptr;
 		}
 
 		void BufferThread() {
