@@ -15,11 +15,14 @@ namespace Jasmine {
 		virtual void Unbind() const override;
 
 		virtual void SetData(const void* data, uint32_t size) override;
-		virtual const BufferLayout& GetLayout() const override { return m_Layout; }
-		virtual void SetLayout(const BufferLayout& layout) override { m_Layout = layout; }
+		inline virtual uint32_t GetAtrribDivisorFactor() override { return m_DivisorFactor; }
+		inline virtual void SetAtrribDivisorFactor(uint32_t df) { m_DivisorFactor = df; }
+		inline virtual const BufferLayout& GetLayout() const override { return m_Layout; }
+		inline virtual void SetLayout(const BufferLayout& layout) override { m_Layout = layout; }
 	private:
 		uint32_t m_RendererID;
 		BufferLayout m_Layout;
+		uint32_t m_DivisorFactor = 0;
 	};
 
 	class OpenGLIndexBuffer : public IndexBuffer

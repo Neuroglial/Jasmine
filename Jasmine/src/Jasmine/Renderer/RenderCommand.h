@@ -33,6 +33,10 @@ namespace Jasmine {
 			s_RendererAPI->DrawIndexed(vertexArray, count);
 		}
 
+		inline static void DrawIndexedInstanced(const JM_SP(VertexArray)& vertexArray, uint32_t indexCount = 0, uint32_t instanceCount = 1) 
+		{
+			s_RendererAPI->DrawIndexedInstanced(vertexArray, indexCount, instanceCount);
+		}
 
 	private:
 		inline static RendererAPI* s_RendererAPI = RendererAPI::Create();

@@ -38,22 +38,22 @@ void Sandbox2D::OnUpdate(Jasmine::Timestep ts)
 	}
 
 	{
+		static auto tex1 = Jasmine::Texture2D::Create("assets/textures/Quad.png");
+		static auto tex2 = Jasmine::Texture2D::Create("assets/textures/Ring.png");
+		static auto tex3 = Jasmine::Texture2D::Create("assets/textures/Round.png");
+		
+
 		JM_PROFILE_SCOPE("Renderer Draw");
 		Jasmine::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-		//Jasmine::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-		//Jasmine::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
-
-		//Jasmine::Renderer2D::DrawRotatedQuad({ 0.0f, 0.0f }, { 0.5f, 0.75f }, ts.GetLifeTimeSeconds() * 10.0 , { 0.2f, 0.7f, 0.8f, 1.0f });
-		Jasmine::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-
-		//Jasmine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 2.0f, 2.0f }, m_CheckerboardTexture);
-		//Jasmine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.05f }, { 2.0f, 2.0f }, m_JM_Logo);
-
 		Jasmine::Renderer2D::DrawQuad({ -5.0f, -5.0f, -0.1f }, { 10.0f, 10.0f }, m_CheckerboardTexture, 10.0f);
-		Jasmine::Renderer2D::DrawQuad({ -0.5f, -0.5f, 0.0f }, { 1.0f, 1.0f }, m_CheckerboardTexture, 20.0f);
+		Jasmine::Renderer2D::DrawQuad({ -5.0f, -5.0f, -0.05f }, { 10.0f, 10.0f }, m_JM_Logo, 7.0f);
+		Jasmine::Renderer2D::DrawRotatedQuad({ 0.0f ,0.0f,0.1f }, { 0.5f,0.5f }, -ts.GetLifeTimeSeconds()/15.0f, tex1, 1.0f, {0.8f,0.5f,0.95f,1.0f});
+		Jasmine::Renderer2D::DrawQuad({ -0.15f, -0.15f, 0.15f }, { 0.3f, 0.3f }, tex3, 1.0f, { 0.95f,0.7f,0.25f,1.0f });
+		Jasmine::Renderer2D::DrawQuad({ -0.9f, -0.9f, 0.2f }, { 1.8f, 1.8f }, tex2, 1.0f, { 0.6f,0.7f,0.95f,1.0f });
 
 		Jasmine::Renderer2D::EndScene();
+
 	}
 }
 

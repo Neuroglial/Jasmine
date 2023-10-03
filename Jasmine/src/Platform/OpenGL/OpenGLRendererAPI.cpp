@@ -31,11 +31,11 @@ namespace Jasmine {
 		glViewport(x, y, width, height);
 	}
 
-	void OpenGLRendererAPI::DrawIndexed(const JM_SP(VertexArray)& vertexArray, uint32_t indexCount)
+	void OpenGLRendererAPI::DrawIndexedInstanced(const JM_SP(VertexArray)& vertexArray, uint32_t indexCount, uint32_t instanceCount)
 	{
-		uint32_t count = indexCount ? vertexArray->GetIndexBuffer()->GetCount() : indexCount;
-		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
-		glBindTexture(GL_TEXTURE_2D, 0);
+		uint32_t count = !indexCount ? vertexArray->GetIndexBuffer()->GetCount() : indexCount;
+		//count = 6;
+		glDrawElementsInstanced(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr, instanceCount);
 	}
 
 }
