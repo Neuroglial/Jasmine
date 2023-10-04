@@ -14,6 +14,8 @@ namespace Jasmine {
 		inline static std::pair<float, float> GetMousePosition() { return s_Instance->GetMousePositionImpl(); }
 		inline static float GetMouseX() { return s_Instance->GetMouseXImpl(); }
 		inline static float GetMouseY() { return s_Instance->GetMouseYImpl(); }
+		inline static std::pair<int, int> GetWindowSize() { return s_Instance->GetWindowSizeImpl(); }
+
 	protected:
 		virtual bool IsKeyPressedImpl(int keycode) = 0;
 
@@ -21,6 +23,7 @@ namespace Jasmine {
 		virtual std::pair<float, float> GetMousePositionImpl() = 0;
 		virtual float GetMouseXImpl() = 0;
 		virtual float GetMouseYImpl() = 0;
+		virtual std::pair<int, int> GetWindowSizeImpl() = 0;
 	private:
 		static Input* s_Instance;
 	};

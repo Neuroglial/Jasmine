@@ -41,7 +41,7 @@ namespace Jasmine {
 	};
 
 	struct JM_Renderer2DDate {
-		const static uint32_t MaxSquareSize = 10000;
+		const static uint32_t MaxSquareSize = 1000000;
 		const uint32_t MaxCTTMSize = MaxSquareSize * (4 + 1 + 1 + 16);
 
 		JM_CTTM CTTM[MaxSquareSize];
@@ -148,8 +148,13 @@ namespace Jasmine {
 		RenderCommand::DrawIndexedInstanced(s_Date.m_SquareVA, 0, s_Date.InstanceCount);
 	}
 
-	void Renderer2D::DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, Texture2D* texture, float tilingFactor, const glm::vec4& tintColor)
+	void Renderer2D::DrawTransQuad(const glm::mat4& model, Texture2D* texture, float tilingFactor, const glm::vec4& tintColor)
 	{
+		JM_PROFILE_FUNCTION();
+
+		if (s_Date.InstanceCount >= s_Date.MaxSquareSize)
+			return;
+
 		texture = texture ? texture : s_Date.m_WhiteTex.get();
 
 		float textureIndex = -1.0f;
@@ -173,11 +178,8 @@ namespace Jasmine {
 		s_Date.CTTM[s_Date.InstanceCount].color = tintColor;
 		s_Date.CTTM[s_Date.InstanceCount].texIndex = textureIndex;
 		s_Date.CTTM[s_Date.InstanceCount].tiling = tilingFactor;
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-			* glm::rotate(glm::mat4(1.0f), rotation, { 0.0f, 0.0f, 1.0f })
-			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
-		s_Date.CTTM[s_Date.InstanceCount].model = transform;
+		s_Date.CTTM[s_Date.InstanceCount].model = model;
 
 		s_Date.InstanceCount++;
 	}

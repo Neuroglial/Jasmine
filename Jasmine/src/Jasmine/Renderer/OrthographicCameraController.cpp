@@ -2,6 +2,7 @@
 
 #include "OrthographicCameraController.h"
 
+#include "Jasmine/Core/Window.h"
 #include "Jasmine/Core/Input.h"
 #include "Jasmine/Core/KeyCodes.h"
 
@@ -11,7 +12,7 @@ namespace Jasmine
 
 	OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
 		: m_AspectRatio(aspectRatio), m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio* m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), m_Rotation(rotation)
-	{
+	{;
 	}
 
 	void OrthographicCameraController::OnUpdate(Timestep ts)

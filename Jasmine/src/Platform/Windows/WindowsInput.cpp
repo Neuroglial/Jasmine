@@ -43,4 +43,12 @@ namespace Jasmine {
 		return y;
 	}
 
+	std::pair<int, int> WindowsInput::GetWindowSizeImpl()
+	{
+		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+		int w, h;
+		glfwGetWindowSize(window, &w, &h);
+		return std::pair<int, int>(w, h);
+	}
+
 }

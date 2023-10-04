@@ -40,6 +40,8 @@ namespace Jasmine {
 	{
 		JM_PROFILE_FUNCTION();
 
+		OnEvent(WindowResizeEvent(m_Window->GetWidth(), m_Window->GetHeight()));
+
 		RenderCommand::SetClearColor({ 0.75f, 0.8f, 0.95f, 1.0f });
 
 		while (m_Running) {

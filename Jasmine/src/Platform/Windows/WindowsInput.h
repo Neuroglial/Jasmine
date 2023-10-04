@@ -13,6 +13,7 @@ namespace Jasmine {
 		virtual std::pair<float, float> GetMousePositionImpl() override;
 		virtual float GetMouseXImpl() override;
 		virtual float GetMouseYImpl() override;
+		virtual std::pair<int, int> GetWindowSizeImpl() override;
 	};
 
 }

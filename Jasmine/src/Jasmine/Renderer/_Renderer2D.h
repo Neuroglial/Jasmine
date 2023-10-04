@@ -35,7 +35,7 @@ namespace Jasmine {
 			DrawRotatedQuad(position, size, 0.0f, texture.get(), tilingFactor, tintColor);
 		}
 
-		inline static void DrawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color)
+		inline static void DrawTransQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color)
 		{
 			DrawRotatedQuad({ position.x,position.y,0.0f }, size, rotation, nullptr, 1.0f, color);
 		}
