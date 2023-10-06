@@ -22,14 +22,16 @@ void Sandbox2D::OnAttach()
 	m_CheckerboardTexture = Jasmine::Texture2D::Create("assets/textures/Checkerboard.png");
 	m_JM_Logo = Jasmine::Texture2D::Create("assets/textures/Jasmine_Engine_Logo_Light.png");
 
-	Jasmine::FramebufferSpecification fbSpec;
-	fbSpec.Width = 1280;
-	fbSpec.Height = 720;
-
 	ParticleEmitters.emplace_back(new FlameEmitter(glm::vec3{ 1.25f, -0.75f, 0.1f }));
 	ParticleEmitters.emplace_back(new FlameEmitter(glm::vec3{ -1.25f, -0.75f, 0.1f }));
 
-	m_Framebuffer = Jasmine::Framebuffer::Create(fbSpec);
+	auto vpsize = Jasmine::Renderer::GetViewportSize();
+	Jasmine::FramebufferSpecification fbspc;
+	fbspc.Width = vpsize.first;
+	fbspc.Height = vpsize.second;
+	m_Framebuffer = Jasmine::Framebuffer::Create(fbspc);
+
+
 }
 
 void Sandbox2D::OnDetach()
@@ -50,7 +52,21 @@ void Sandbox2D::OnUpdate(Jasmine::Timestep ts)
 
 	{
 		JM_PROFILE_SCOPE("Renderer Prep");
-		//m_Framebuffer->Bind();
+
+		static auto last_vpsize = Jasmine::Renderer::GetViewportSize();
+		auto vpsize = Jasmine::Renderer::GetViewportSize();
+		if (vpsize != last_vpsize) {
+			Jasmine::FramebufferSpecification fbspc;
+			fbspc.Width = vpsize.first;
+			fbspc.Height = vpsize.second;
+
+			m_Framebuffer = Jasmine::Framebuffer::Create(fbspc);
+			last_vpsize = vpsize;
+
+			Jasmine::WindowResizeEvent e(vpsize.first, vpsize.second);
+			m_CameraController.OnEvent(e);
+		}
+		m_Framebuffer->Bind();
 		Jasmine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Jasmine::RenderCommand::Clear();
 	}
@@ -73,79 +89,88 @@ void Sandbox2D::OnUpdate(Jasmine::Timestep ts)
 		for (auto i : ParticleEmitters)
 			i->OnDraw();
 		Jasmine::Renderer2D::EndScene();
-		//m_Framebuffer->Unbind();
+		m_Framebuffer->Unbind();
 	}
 }
 
 void Sandbox2D::OnImGuiRender()
 {
-	auto viewport = ImGui::GetMainViewport();
-	ImGui::SetNextWindowPos(viewport->WorkPos);
-	ImGui::SetNextWindowSize(viewport->WorkSize);
-
-
-	bool close = true;
-	ImGui::Begin("Test", &close, ImGuiWindowFlags_MenuBar|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoBackground);
-
-	ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
-	ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f),ImGuiDockNodeFlags_AutoHideTabBar|ImGuiDockNodeFlags_PassthruCentralNode| ImGuiDockNodeFlags_NoDockingOverCentralNode);
-
-	if (ImGui::BeginMenuBar())
 	{
-		if (ImGui::BeginMenu("File"))
+		auto viewport = ImGui::GetMainViewport();
+		ImGui::SetNextWindowPos(viewport->WorkPos);
+		ImGui::SetNextWindowSize(viewport->WorkSize);
+		ImGui::SetNextWindowViewport(viewport->ID);
+
+
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 0.0f,0.0f });
+		bool close = true;
+		ImGui::Begin("Test", &close, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoResize);
+		ImGui::PopStyleVar();
+		ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+		ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_AutoHideTabBar | ImGuiDockNodeFlags_PassthruCentralNode);
+
+		if (ImGui::BeginMenuBar())
 		{
-			if (ImGui::MenuItem("Exit")) Jasmine::Application::Get().Close();
-			ImGui::EndMenu();
+			if (ImGui::BeginMenu("File"))
+			{
+				if (ImGui::MenuItem("Exit")) Jasmine::Application::Get().Close();
+				ImGui::EndMenu();
+			}
+			ImGui::EndMenuBar();
 		}
-		ImGui::EndMenuBar();
-	}
 
-	ImGui::End();
-
-
-	ImGui::Begin("Settings");
-
-	auto stats = Jasmine::Renderer2D::GetStats();
-	ImGui::Text("Renderer2D Stats:");
-	ImGui::Text("Draw Calls: %d", stats.DrawCalls);
-	ImGui::Text("Quads: %d", stats.QuadCount);
-	ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
-	ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
-
-	ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
-
-	uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-	ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
-	ImGui::End();
-
-	static auto& io = ImGui::GetIO();
-
-	static char FrameTime[128];
-
-	static float ft = io.DeltaTime;
-	static float sft = 0.0f;
-	static int fc = 0;
-
-	sft += io.DeltaTime;
-	fc++;
-	if (sft >= 0.05f) {
-		ft = sft / fc;
-		sft = 0.0f;
-		fc = 0;
+		ImGui::End();
 	}
 	
-	sprintf_s(FrameTime, 128, "DrawCalls: %5d, Frametime: %5.3f ms", Jasmine::Renderer2D::GetStats().DrawCalls, ft*1000.0f);
+	{
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+		uint32_t textureID = m_CheckerboardTexture->GetRendererID();
+		ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+		ImGui::GetWindowSize();
+		ImGui::End();
+	}
+	
+	{
+		static auto& io = ImGui::GetIO();
+		static char FrameTime[128];
+		static float ft = io.DeltaTime;
+		static float sft = 0.0f;
+		static int fc = 0;
+		sft += io.DeltaTime;
+		fc++;
+		if (sft >= 0.05f) {
+			ft = sft / fc;
+			sft = 0.0f;
+			fc = 0;
+		}
+		sprintf_s(FrameTime, 128, "DrawCalls: %5d, Frametime: %5.3f ms", Jasmine::Renderer2D::GetStats().DrawCalls, ft * 1000.0f);
 
-	ImGui::Begin("FrameInfo");
-	ImGui::Text(FrameTime);
-	ImGui::End();
+		ImGui::Begin("FrameInfomation");
+		ImGui::Text(FrameTime);
+		ImGui::End();
+	}
+
+
+	{
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+		ImGui::Begin("Frame", NULL, ImGuiWindowFlags_NoTitleBar);
+		ImGui::PopStyleVar();
+
+		auto textureID = m_Framebuffer->GetColorAttachmentRendererID();
+		auto vsize = Jasmine::Renderer::GetViewportSize();
+		ImGui::Image((void*)textureID, { (float)vsize.first,(float)vsize.second });
+
+		auto size = ImGui::GetWindowSize();
+		Jasmine::RenderCommand::SetViewport(0, 0, size.x, size.y);
+		ImGui::End();
+	}
 }
 
 void Sandbox2D::OnEvent(Jasmine::Event& e)
 {
-
 	Jasmine::EventDispatcher dispathcher(e);
-	m_CameraController.OnEvent(e);
+	//m_CameraController.OnEvent(e);
 	dispathcher.Dispatch< Jasmine::MouseButtonPressedEvent>(JM_BIND_FN(Sandbox2D::OnMousePressed));
 }
 

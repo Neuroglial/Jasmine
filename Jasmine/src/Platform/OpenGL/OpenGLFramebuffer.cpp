@@ -14,6 +14,9 @@ namespace Jasmine {
 
 	OpenGLFramebuffer::~OpenGLFramebuffer()
 	{
+		glDeleteTextures(1,&m_ColorAttachment);
+		glDeleteTextures(1,&m_DepthAttachment);
+
 		glDeleteFramebuffers(1, &m_RendererID);
 	}
 

@@ -21,7 +21,8 @@ namespace Jasmine {
 
 	void Renderer::OnWindowResize(uint32_t width, uint32_t height)
 	{
-		RenderCommand::SetViewport(0, 0, width, height);
+		if(ResizeViewportWithWindow)
+			RenderCommand::SetViewport(0, 0, width, height);
 	}
 
 	void Renderer::BeginScene(OrthographicCamera& camera)
@@ -31,6 +32,16 @@ namespace Jasmine {
 
 	void Renderer::EndScene()
 	{
+	}
+
+	void Renderer::SetViewportChangeWithWindow(bool enable)
+	{
+		ResizeViewportWithWindow = enable;
+	}
+
+	std::pair<int, int> Renderer::GetViewportSize()
+	{
+		return RenderCommand::GetViewportSize();
 	}
 
 	void Renderer::Submit(const std::shared_ptr<VertexArray>& vertexArray)
