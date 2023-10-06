@@ -85,10 +85,10 @@ void Sandbox2D::OnImGuiRender()
 
 
 	bool close = true;
-	ImGui::Begin("Test", &close, ImGuiWindowFlags_MenuBar|ImGuiWindowFlags_NoTitleBar);
+	ImGui::Begin("Test", &close, ImGuiWindowFlags_MenuBar|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoBackground);
 
 	ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
-	ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f),ImGuiDockNodeFlags_AutoHideTabBar);
+	ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f),ImGuiDockNodeFlags_AutoHideTabBar|ImGuiDockNodeFlags_PassthruCentralNode| ImGuiDockNodeFlags_NoDockingOverCentralNode);
 
 	if (ImGui::BeginMenuBar())
 	{

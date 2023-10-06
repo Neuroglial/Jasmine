@@ -57,6 +57,8 @@ namespace Jasmine {
 				auto p = new T(tpos);
 
 				pts[(ptsTail + ptsCount++) % pts.size()] = p;
+				if (ptsCount == pts.size() - 1)
+					break;
 			}
 			LastPos = position;
 		}
