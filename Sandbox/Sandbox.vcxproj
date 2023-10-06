@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="assets\particle\FlameEmitter.h" />
     <ClInclude Include="src\ExampleLayer.h" />
     <ClInclude Include="src\SandBox2D.h" />
   </ItemGroup>

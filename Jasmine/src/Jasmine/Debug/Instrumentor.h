@@ -10,8 +10,10 @@
 #include <thread>
 
 
+#define JM_PROFILE 0
 #define JM_DEBUG_FSTREAM 0
 #define INSTRUMENTOR_MUTITHRESD 1
+
 
 #if JM_DEBUG_FSTREAM
 namespace Jasmine {
@@ -424,8 +426,6 @@ namespace Jasmine {
 }
 #endif
 
-
-#define JM_PROFILE 1
 #if JM_PROFILE
 	#define JM_PROFILE_BEGIN_SESSION(name, filepath) ::Jasmine::Instrumentor::Get().BeginSession(name, filepath)
 	#define JM_PROFILE_END_SESSION() ::Jasmine::Instrumentor::Get().EndSession()

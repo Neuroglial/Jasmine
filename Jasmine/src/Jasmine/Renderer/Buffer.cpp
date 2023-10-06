@@ -19,12 +19,12 @@ namespace Jasmine {
 		return nullptr;
 	}
 
-	JM_SP(VertexBuffer) VertexBuffer::Create(float* vertices, uint32_t count)
+	JM_SP(VertexBuffer) VertexBuffer::Create(float* vertices, uint32_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:    JM_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return JM_CSP(OpenGLVertexBuffer)(vertices, count);
+		case RendererAPI::API::OpenGL:  return JM_CSP(OpenGLVertexBuffer)(vertices, size);
 		}
 
 		JM_CORE_ASSERT(false, "Unknown RendererAPI!");

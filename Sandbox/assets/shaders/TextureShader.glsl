@@ -4,28 +4,33 @@
 
 #type vertex
 #version 330 core
+layout(location = 0) in vec3 Position;
+layout(location = 1) in vec2 TexCoord;
 
-layout(location = 0) in vec3 a_Position;
-layout(location = 1) in vec4 a_Color;
-layout(location = 2) in vec2 a_TexCoord;
-layout(location = 3) in int a_TexIndex;
-layout(location = 4) in float a_TilingFactor;
+layout(location = 2) in vec3 s_Position;
+layout(location = 3) in vec2 s_Size;
+layout(location = 4) in float s_Rotate;
+layout(location = 5) in vec4 s_Color;
+layout(location = 6) in float s_TexIndex;
+layout(location = 7) in float s_TilingFactor;
 
 uniform mat4 u_ViewProjection;
 
-smooth out vec4 v_Color;
-smooth out vec2 v_TexCoord;
-smooth out float v_TilingFactor;
+out vec4 v_Color;
+out vec2 v_TexCoord;
 flat out int v_TexIndex;
 
 
 void main()
 {
-	v_Color = a_Color;
-	v_TexCoord = a_TexCoord;
-	v_TexIndex = a_TexIndex;
-	v_TilingFactor = a_TilingFactor;
-	gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+	v_Color = s_Color;
+	v_TexCoord = TexCoord * s_TilingFactor;
+	v_TexIndex = int(s_TexIndex);
+	
+	float rotate = s_Rotate/180.0f*3.14159265;
+	vec2 pos = Position.xy * s_Size;
+	pos = vec2(pos.x*cos(rotate)-pos.y*sin(rotate),pos.y*cos(rotate)+pos.x*sin(rotate));
+	gl_Position = u_ViewProjection * vec4(pos + s_Position.xy ,s_Position.z, 1.0);
 }
 
 #type fragment
@@ -33,14 +38,13 @@ void main()
 
 layout(location = 0) out vec4 color;
 
-smooth in vec4 v_Color;
-smooth in vec2 v_TexCoord;
-smooth in float v_TilingFactor;
+in vec4 v_Color;
+in vec2 v_TexCoord;
 flat in int v_TexIndex;
 
 uniform sampler2D u_Textures[32];
 
 void main()
 {
-	color = texture(u_Textures[v_TexIndex], v_TexCoord * v_TilingFactor) * v_Color;
+	color = texture(u_Textures[v_TexIndex], v_TexCoord) * v_Color;
 }

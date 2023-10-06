@@ -31,7 +31,10 @@
 #include "Jasmine/Renderer/Renderer2D.h"
 #include "Jasmine/Renderer/RenderCommand.h"
 
+#include "Jasmine/Renderer/Particle.h"
+
 #include "Jasmine/Renderer/Buffer.h"
+#include "Jasmine/Renderer/Framebuffer.h"
 #include "Jasmine/Renderer/Shader.h"
 #include "Jasmine/Renderer/Texture.h"
 #include "Jasmine/Renderer/VertexArray.h"
