@@ -29,6 +29,7 @@ private:
 	JM_SP(Jasmine::Shader) m_FlatColorShader;
 	JM_SP(Jasmine::Texture2D) m_CheckerboardTexture;
 	JM_SP(Jasmine::Texture2D) m_JM_Logo;
+	JM_SP(Jasmine::Framebuffer) m_Framebuffer;
 
 	glm::vec2 m_Position = { 0.0f,0.0f };
 	glm::vec2 m_Scale = { 1.0f,1.0f };

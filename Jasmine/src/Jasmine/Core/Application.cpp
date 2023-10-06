@@ -102,6 +102,11 @@ namespace Jasmine {
 		layer->OnAttach();
 	}
 
+	void Application::Close()
+	{
+		m_Running = false;
+	}
+
 	bool Application::OnWinodwClose(WindowCloseEvent& e)
 	{
 		m_Running = false;

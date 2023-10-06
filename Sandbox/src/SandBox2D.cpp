@@ -28,6 +28,8 @@ void Sandbox2D::OnAttach()
 
 	ParticleEmitters.emplace_back(new FlameEmitter(glm::vec3{ 1.25f, -0.75f, 0.1f }));
 	ParticleEmitters.emplace_back(new FlameEmitter(glm::vec3{ -1.25f, -0.75f, 0.1f }));
+
+	m_Framebuffer = Jasmine::Framebuffer::Create(fbSpec);
 }
 
 void Sandbox2D::OnDetach()
@@ -48,6 +50,7 @@ void Sandbox2D::OnUpdate(Jasmine::Timestep ts)
 
 	{
 		JM_PROFILE_SCOPE("Renderer Prep");
+		//m_Framebuffer->Bind();
 		Jasmine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Jasmine::RenderCommand::Clear();
 	}
@@ -70,12 +73,51 @@ void Sandbox2D::OnUpdate(Jasmine::Timestep ts)
 		for (auto i : ParticleEmitters)
 			i->OnDraw();
 		Jasmine::Renderer2D::EndScene();
-
+		//m_Framebuffer->Unbind();
 	}
 }
 
 void Sandbox2D::OnImGuiRender()
 {
+	auto viewport = ImGui::GetMainViewport();
+	ImGui::SetNextWindowPos(viewport->WorkPos);
+	ImGui::SetNextWindowSize(viewport->WorkSize);
+
+
+	bool close = true;
+	ImGui::Begin("Test", &close, ImGuiWindowFlags_MenuBar|ImGuiWindowFlags_NoTitleBar);
+
+	ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+	ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f),ImGuiDockNodeFlags_AutoHideTabBar);
+
+	if (ImGui::BeginMenuBar())
+	{
+		if (ImGui::BeginMenu("File"))
+		{
+			if (ImGui::MenuItem("Exit")) Jasmine::Application::Get().Close();
+			ImGui::EndMenu();
+		}
+		ImGui::EndMenuBar();
+	}
+
+	ImGui::End();
+
+
+	ImGui::Begin("Settings");
+
+	auto stats = Jasmine::Renderer2D::GetStats();
+	ImGui::Text("Renderer2D Stats:");
+	ImGui::Text("Draw Calls: %d", stats.DrawCalls);
+	ImGui::Text("Quads: %d", stats.QuadCount);
+	ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
+	ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
+
+	ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+
+	uint32_t textureID = m_CheckerboardTexture->GetRendererID();
+	ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+	ImGui::End();
+
 	static auto& io = ImGui::GetIO();
 
 	static char FrameTime[128];
@@ -94,8 +136,7 @@ void Sandbox2D::OnImGuiRender()
 	
 	sprintf_s(FrameTime, 128, "DrawCalls: %5d, Frametime: %5.3f ms", Jasmine::Renderer2D::GetStats().DrawCalls, ft*1000.0f);
 
-	ImGui::Begin("Settings");
-	ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+	ImGui::Begin("FrameInfo");
 	ImGui::Text(FrameTime);
 	ImGui::End();
 }

@@ -150,23 +150,11 @@
     <ClInclude Include="src\Jasmine\Renderer\VertexArray.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
       <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_glfw.h">
-      <Filter>src\Platform\OpenGL\OpenGLImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3.h">
-      <Filter>src\Platform\OpenGL\OpenGLImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3_loader.h">
-      <Filter>src\Platform\OpenGL\OpenGLImGui</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1496,12 +1484,6 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_glfw.cpp">
-      <Filter>src\Platform\OpenGL\OpenGLImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLImGui\imgui_impl_opengl3.cpp">
-      <Filter>src\Platform\OpenGL\OpenGLImGui</Filter>
-    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
@@ -1525,5 +1507,6 @@
     </ClCompile>
     <ClCompile Include="src\Jasmine\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
+    <ClCompile Include="src\Jasmine\ImGUI\ImGuiBuild.cpp" />
   </ItemGroup>
 </Project>
