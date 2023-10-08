@@ -36,4 +36,5 @@ private:
 	glm::vec4 m_SquareColor = { 0.95f,0.7f,0.25f,1.0f };
 
 	std::vector<Jasmine::Emitter*> ParticleEmitters;
+	bool m_ViewportFocused = false, m_ViewportHovered = false;
 };

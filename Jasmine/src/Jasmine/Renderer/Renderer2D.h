@@ -50,11 +50,6 @@ namespace Jasmine {
 			DrawRotatedQuad(position, size, 0.0f, texture.get(), tilingFactor, tintColor);
 		}
 
-		inline static void DrawTransQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color)
-		{
-			DrawRotatedQuad({ position.x,position.y,0.0f }, size, rotation, nullptr, 1.0f, color);
-		}
-
 		inline static void DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
 		{
 			DrawRotatedQuad(position, size, rotation, nullptr, 1.0f, color);
@@ -70,14 +65,33 @@ namespace Jasmine {
 			DrawRotatedQuad(position, size, rotation, texture.get(), tilingFactor, tintColor);
 		}
 
+		inline static void DrawQuad(const glm::mat4& transform, const glm::vec4& color)
+		{
+			DrawQuad(transform, JM_SP(Texture2D)(nullptr), 1.0f, color);
+		}
+
+		inline static void DrawQuad(const glm::mat4& transform, const JM_SP(Texture2D)& texture, float tilingFactor = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f))
+		{
+			glm::vec4 position = transform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+			glm::vec2 posX = transform * glm::vec4(1.0f, 0.0f, 0.0f, 1.0f) - position;
+			glm::vec2 posY = transform * glm::vec4(0.0f, 1.0f, 0.0f, 1.0f) - position;
+			glm::vec2 size = { glm::length(glm::vec2(posX)),glm::length(glm::vec2(posY)) };
+			float rotation = atan2(posX.y, posX.x) * 180 / 3.14159265f;
+
+			DrawRotatedQuad(position, size, rotation, texture.get(), tilingFactor, tintColor);
+		}
+
 		inline static void DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, Texture2D* texture, float tilingFactor = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f))
 		{
 			if (s_Data.InstanceCount >= JM_Renderer2DData::MaxSquareSize)
 				FlushAndReset();
 
 			float texIndex = SoltTexture(texture);
-			auto& temp = s_Data.PSRCTT[s_Data.InstanceCount++];
-			temp = { position,size,rotation,tintColor,texIndex,tilingFactor };
+			s_Data.InstanceCount++;
+			s_Data.PSRCTT.emplace(position.z, JM_PSRCTT{ position,size,rotation,tintColor,texIndex,tilingFactor });
+			while (s_Data.PSRCTT.size() < s_Data.InstanceCount) {
+				s_Data.PSRCTT.emplace(position.z + ((float)rand() / RAND_MAX)/100000.0f, JM_PSRCTT{position,size,rotation,tintColor,texIndex,tilingFactor});
+			}
 			s_Data.Stats.DrawCalls++;
 		}
 
@@ -91,9 +105,10 @@ namespace Jasmine {
 		};
 		
 		struct JM_Renderer2DData {
-			const static uint32_t MaxSquareSize = 200000;
+			const static uint32_t MaxSquareSize = 10000;
 
-			JM_PSRCTT PSRCTT[MaxSquareSize];
+			std::map<float, JM_PSRCTT> PSRCTT;
+			JM_PSRCTT Buffer[MaxSquareSize];
 			uint32_t InstanceCount;
 
 			JM_SP(Shader) TextureShader;

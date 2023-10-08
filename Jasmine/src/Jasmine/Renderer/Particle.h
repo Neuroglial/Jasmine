@@ -10,18 +10,18 @@ namespace Jasmine {
 	class Particle
 	{
 	protected:
-		glm::vec2 position;
+		glm::vec3 position;
 		bool destory = false;
 
 		inline void Destory() { destory = true; }
 	public:
-		Particle(glm::vec2 position) :position(position) {
+		Particle(glm::vec3 position) :position(position) {
 		};
 
 		inline bool ShouledDestory() { return destory; }
 		virtual float GetLifeTime() = 0;
 		virtual void OnUpdate(Jasmine::Timestep ts) = 0;
-		virtual void Draw(float z) = 0;
+		virtual void Draw() = 0;
 	};
 
 	class Emitter
@@ -101,7 +101,7 @@ namespace Jasmine {
 			float Front = position.z;
 			for (int i = 0; i < ptsCount; i++) {
 				auto j = (i + ptsTail) % pts.size();
-				pts[j]->Draw(Front += 0.0000001f);
+				pts[j]->Draw();
 			}
 		}
 	};

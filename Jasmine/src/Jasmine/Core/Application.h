@@ -24,6 +24,7 @@ namespace Jasmine {
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 
+		ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; } 
 		inline Window& GetWindow() { return *m_Window; }
 
 		void Close();

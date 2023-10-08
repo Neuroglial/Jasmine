@@ -14,15 +14,14 @@ private:
 	inline static float p_gravity = -0.25f;
 private:
 	glm::vec4 color;
-	glm::vec2 speed;
+	glm::vec3 speed;
 	float rotate;
 	float rot_speed;
 	float lifeTime = 0.0f;
 
-	glm::vec2 render_pos;
-
+	glm::vec3 render_pos;
 public:
-	FlameParticle(glm::vec2 position) :Particle(position){
+	FlameParticle(glm::vec3 position) :Particle(position){
 		static const int Max = RAND_MAX;
 		auto rd1 = (double)rand() / (double)Max - 0.5f;
 		auto rd2 = (double)rand() / (double)Max - 0.5f;
@@ -31,7 +30,9 @@ public:
 		rotate = rd3 * 180.0f;
 		rot_speed = 45.0f * rd3;
 
-		speed = { sin(rd1 * 360.0f),cos(rd1 * 360.0f) };
+		this->position.z += rd3 / 10000.0f;
+
+		speed = { sin(rd1 * 360.0f),cos(rd1 * 360.0f),0.0f };
 		speed *= p_size * p_speed * rd2;
 
 		this->position += speed * 1.0f;
@@ -59,11 +60,11 @@ public:
 
 		float halfLength = 0.707107 * p_size;
 		float rot = (rotate + 45.0f) / 180.0f * 3.14159265f;
-		render_pos = { position.x - halfLength * cos(rot), position.y - halfLength * sin(rot) };
+		render_pos = { position.x - halfLength * cos(rot), position.y - halfLength * sin(rot),position.z };
 	}
 
-	void Draw(float z) override {
-		Jasmine::Renderer2D::DrawRotatedQuad({ render_pos.x,render_pos.y,z }, { p_size,p_size }, rotate, color);
+	void Draw() override {
+		Jasmine::Renderer2D::DrawRotatedQuad(render_pos, glm::vec2(p_size), rotate, color);
 	}
 };
 
@@ -71,13 +72,13 @@ public:
 class FlameEmitter :public Jasmine::Emitter
 {
 public:
-	FlameEmitter(glm::vec3 position) :Emitter(position,100) {
+	FlameEmitter(glm::vec3 position) :Emitter(position,100000) {
 
 	}
 
 	void OnUpdate(Jasmine::Timestep ts) override {
 
-		EitterParticles<FlameParticle>(ts, 20.0f);
+		EitterParticles<FlameParticle>(ts, 5000.0f);
 		ParticlesUpdate(ts);
 	}
 

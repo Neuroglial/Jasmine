@@ -19,6 +19,7 @@ IncludeDir["Glad"] 		= 	"Jasmine/vendor/Glad/include"
 IncludeDir["ImGui"] 		= 	"Jasmine/vendor/imgui"
 IncludeDir["glm"] 		=	"Jasmine/vendor/glm"
 IncludeDir["stb_image"] 	= 	"Jasmine/vendor/stb_image"
+IncludeDir["entt"] 		= 	"Jasmine/vendor/entt/include"
 
 
 group "Dependencies"
@@ -67,7 +68,8 @@ project "Jasmine"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.entt}"
 	}
 
 	links 
@@ -124,7 +126,8 @@ project "Sandbox"
 		"Jasmine/vendor/spdlog/include",
 		"Jasmine/src",
 		"Jasmine/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
@@ -176,7 +179,8 @@ project "JasmineInut"
 		"Jasmine/vendor/spdlog/include",
 		"Jasmine/src",
 		"Jasmine/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
