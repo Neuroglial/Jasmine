@@ -8,6 +8,7 @@
 #include "Jasmine/Renderer/Texture.h"
 #include "Shader.h"
 #include "VertexArray.h"
+#include "Jasmine/Renderer/Camera.h"
 
 namespace Jasmine {
 
@@ -26,6 +27,7 @@ namespace Jasmine {
 		static void Init();
 		static void Shutdown();
 
+		static void BeginScene(const Camera& camera, const glm::mat4& transform);
 		static void BeginScene(const OrthographicCamera& camera);
 		static void EndScene();
 		static void Flush();

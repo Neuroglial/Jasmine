@@ -143,6 +143,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Jasmine\Renderer\Camera.h" />
     <ClInclude Include="src\Jasmine\Scene\Components.h" />
     <ClInclude Include="src\Jasmine\Scene\Entity.h" />
     <ClInclude Include="src\Jasmine\Scene\Scene.h" />

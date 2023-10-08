@@ -67,6 +67,21 @@ namespace Jasmine {
 		delete& s_Data;
 	}
 
+	void Renderer2D::BeginScene(const Camera& camera, const glm::mat4& transform)
+	{
+		JM_PROFILE_FUNCTION();
+
+		glm::mat4 viewProj = camera.GetProjection() * glm::inverse(transform);
+
+		JM_PROFILE_FUNCTION();
+
+		s_Data.TextureShader->Bind();
+		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
+		s_Data.InstanceCount = 0;
+		s_Data.TexSlotIndex = 1;
+		ResetStats();
+	}
+
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
 		JM_PROFILE_FUNCTION();
