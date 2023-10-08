@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Jasmine/Core/Core.h"
+#include "Jasmine/Core/Base.h"
 
 namespace Jasmine {
 

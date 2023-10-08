@@ -134,13 +134,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\EditorLayer.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\EditorLayer.cpp" />
-    <ClCompile Include="src\JME_App.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Jasmine\Jasmine.vcxproj">
       <Project>{AC26B82E-1806-37CA-211E-C2A08D7C9D2B}</Project>
     </ProjectReference>

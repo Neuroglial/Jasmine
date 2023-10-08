@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Jasmine/Core/Core.h"
+#include "Jasmine/Core/Base.h"
 #include "Jasmine/Events/Event.h"
 #include "Jasmine/Core/Timestep.h"
 
 namespace Jasmine {
 
-	class JASMINE_API Layer
+	class Layer
 	{
 	public:
 		Layer(const std::string& name = "Layer");

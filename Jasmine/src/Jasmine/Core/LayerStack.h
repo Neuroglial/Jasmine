@@ -2,12 +2,12 @@
 
 #include "JM_PCH.h"
 
-#include "Jasmine/Core/Core.h"
+#include "Jasmine/Core/Base.h"
 #include "Layer.h"
 
 namespace Jasmine {
 
-	class JASMINE_API LayerStack
+	class LayerStack
 	{
 	public:
 		LayerStack();

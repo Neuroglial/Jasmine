@@ -29,7 +29,7 @@ namespace Jasmine {
 
 		auto ws = Input::GetWindowSize();
 
-		mousepos = { mousepos.x / ws.first,1.0f - mousepos.y / ws.second };
+		mousepos = { mousepos.x / ws.x,1.0f - mousepos.y / ws.x };
 		mousepos = mousepos * 2.0f - 1.0f;
 
 		glm::vec4 temp = inv * glm::vec4(mousepos.x, mousepos.y, 0.0f, 1.0f);

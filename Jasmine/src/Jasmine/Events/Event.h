@@ -1,7 +1,8 @@
 #pragma once
 
-#include "JM_PCH.h"
-#include "Jasmine/Core/Core.h"
+#include <iostream>
+#include <functional>
+#include "Jasmine/Core/Base.h"
 
 namespace Jasmine {
 
@@ -35,7 +36,7 @@ namespace Jasmine {
 
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
-	class JASMINE_API Event
+	class Event
 	{
 		friend class EventDispatcher;
 	public:

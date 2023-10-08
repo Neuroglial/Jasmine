@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core.h"
+#include "Base.h"
 #include "Jasmine/Events/Event.h"
 #include "Jasmine/Core/LayerStack.h"
 #include "Jasmine/Events/ApplicationEvent.h"
@@ -11,7 +11,7 @@
 
 namespace Jasmine {
 
-	class JASMINE_API Application
+	class Application
 	{
 	public:
 		Application(const std::string& name = "Jasmine App");

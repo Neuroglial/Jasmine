@@ -1,8 +1,7 @@
 #pragma once
 
-#include "JM_PCH.h"
-
-#include "Jasmine/Core/Core.h"
+#include <sstream>
+#include "Jasmine/Core/Base.h"
 #include "Jasmine/Events/Event.h"
 
 namespace Jasmine {
@@ -18,7 +17,7 @@ namespace Jasmine {
 
 	};
 
-	class JASMINE_API Window 
+	class Window 
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;

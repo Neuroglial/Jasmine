@@ -72,13 +72,13 @@ public:
 class FlameEmitter :public Jasmine::Emitter
 {
 public:
-	FlameEmitter(glm::vec3 position) :Emitter(position,100000) {
+	FlameEmitter(glm::vec3 position) :Emitter(position,100) {
 
 	}
 
 	void OnUpdate(Jasmine::Timestep ts) override {
 
-		EitterParticles<FlameParticle>(ts, 5000.0f);
+		EitterParticles<FlameParticle>(ts, 20.0f);
 		ParticlesUpdate(ts);
 	}
 

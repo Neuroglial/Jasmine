@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Jasmine/Core/Core.h"
+#include "Jasmine/Core/Base.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"
 
 namespace Jasmine {
 
-	class JASMINE_API Log
+	class Log
 	{
 	private:
 		inline static std::shared_ptr<spdlog::logger> s_CoreLogger;

@@ -33,6 +33,8 @@ namespace Jasmine {
 		int w, h;
 		glfwGetWindowSize(m_WindowHandle, &w, &h);
 		glViewport(0, 0, w, h);
+
+		JM_CORE_ASSERT(GLVersion.major > 4 || (GLVersion.major == 4 && GLVersion.minor >= 5), "Hazel requires at least OpenGL version 4.5!");
 	}
 
 	void OpenGLContext::SwapBuffers()
