@@ -1432,6 +1432,7 @@
     <ClInclude Include="src\Jasmine\Scene\Components.h" />
     <ClInclude Include="src\Jasmine\Scene\Entity.h" />
     <ClInclude Include="src\Jasmine\Renderer\Camera.h" />
+    <ClInclude Include="src\Jasmine\Scene\SceneCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JM_PCH.cpp">
@@ -1520,5 +1521,6 @@
     </ClCompile>
     <ClCompile Include="src\Jasmine\Scene\Scene.cpp" />
     <ClCompile Include="src\Jasmine\Scene\Entity.cpp" />
+    <ClCompile Include="src\Jasmine\Scene\SceneCamera.cpp" />
   </ItemGroup>
 </Project>
