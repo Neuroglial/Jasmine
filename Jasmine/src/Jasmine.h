@@ -9,6 +9,7 @@
 #include "Jasmine/ImGui/ImGuiLayer.h"
 
 #include "Jasmine/Scene/Scene.h"
+#include "Jasmine/Scene/Entity.h"
 #include "Jasmine/Scene/Components.h"
 
 #include "Jasmine/Core/Input.h"

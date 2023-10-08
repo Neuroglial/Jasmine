@@ -26,7 +26,7 @@ namespace Jasmine {
 
 		JM_SP(Texture2D) m_CheckerboardTexture;
 		JM_SP(Scene) m_ActiveScene;
-		entt::entity m_SquareEntity;
+		Entity m_SquareEntity;
 
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 

@@ -2,6 +2,9 @@
 
 #include "Scene.h"
 
+
+#include "Entity.h"
+
 #include "Components.h"
 #include "Jasmine/Renderer/Renderer2D.h"
 
@@ -50,9 +53,15 @@ namespace Jasmine {
 	{
 	}
 
-	entt::entity Scene::CreateEntity()
+
+	Entity Scene::CreateEntity(const std::string& name)
 	{
-		return m_Registry.create();
+
+		Entity entity = {m_Registry.create(), this };
+		entity.AddComponent<TransformComponent>();
+		entity.AddComponent<TagComponent>(name);
+
+		return entity;
 	}
 
 	void Scene::OnUpdate(Timestep ts)
@@ -64,8 +73,5 @@ namespace Jasmine {
 
 			Renderer2D::DrawQuad(transform, sprite.Color);
 		}
-
-
 	}
-
 }

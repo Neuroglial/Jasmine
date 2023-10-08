@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Jasmine\Scene\Components.h" />
+    <ClInclude Include="src\Jasmine\Scene\Entity.h" />
     <ClInclude Include="src\Jasmine\Scene\Scene.h" />
     <ClInclude Include="src\JM_PCH.h" />
     <ClInclude Include="src\Jasmine.h" />
@@ -604,6 +605,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Jasmine\Scene\Entity.cpp" />
     <ClCompile Include="src\Jasmine\Scene\Scene.cpp" />
     <ClCompile Include="src\JM_PCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
