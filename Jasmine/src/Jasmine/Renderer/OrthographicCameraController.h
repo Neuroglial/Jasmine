@@ -19,6 +19,7 @@ namespace Jasmine
 
 		inline OrthographicCamera& GetCamera() { return m_Camera; }
 		inline const OrthographicCamera& GetCamera() const { return m_Camera; }
+		void OnResize(float width, float height);
 
 		inline float GetZoomLevel() const { return m_ZoomLevel; }
 		inline void SetZoomLevel(float level) { m_ZoomLevel = level; }

@@ -33,7 +33,7 @@ private:
 
 	glm::vec2 m_Position = { 0.0f,0.0f };
 	glm::vec2 m_Scale = { 1.0f,1.0f };
-	glm::vec4 m_SquareColor = { 1.0f, 0.95f, 0.0f, 1.0f };
+	glm::vec4 m_SquareColor = { 0.95f,0.7f,0.25f,1.0f };
 
 	std::vector<Jasmine::Emitter*> ParticleEmitters;
 };

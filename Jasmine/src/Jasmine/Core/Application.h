@@ -14,7 +14,7 @@ namespace Jasmine {
 	class JASMINE_API Application
 	{
 	public:
-		Application();
+		Application(const std::string& name = "Jasmine App");
 		virtual ~Application();
 
 		void Run();
@@ -35,7 +35,7 @@ namespace Jasmine {
 		bool OnWindowResize(WindowResizeEvent& e);
 
 	private:
-		std::unique_ptr<Window> m_Window;
+		JM_SP(Window) m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
 		bool m_Running = true;

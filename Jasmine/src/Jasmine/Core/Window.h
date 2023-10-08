@@ -35,7 +35,7 @@ namespace Jasmine {
 		virtual bool IsVSync() const = 0;
 		virtual void* GetNativeWindow() const = 0;
 
-		static Window* Create(WindowProps& props = WindowProps());
+		static JM_SP(Window) Create(WindowProps& props = WindowProps());
 	};
 
 }

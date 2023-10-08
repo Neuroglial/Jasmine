@@ -11,18 +11,17 @@
 
 namespace Jasmine {
 
-
-
-	Application::Application()
+	Application::Application(const std::string& name)
 	{
+
 		JM_PROFILE_FUNCTION();
 
 		JM_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
-		m_Window = std::unique_ptr<Window>(Window::Create());
+		m_Window = Window::Create(WindowProps(name));
 		m_Window->SetEventCallback(JM_BIND_FN(Application::OnEvent));
-
+		m_Window->SetVSync(true);
 		Renderer::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();

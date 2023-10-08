@@ -23,6 +23,7 @@ namespace Jasmine {
 		virtual uint32_t GetColorAttachmentRendererID() const = 0;
 
 		virtual const FramebufferSpecification& GetSpecification() const = 0;
+		virtual void Resize(uint32_t width, uint32_t height) = 0;
 
 		static JM_SP(Framebuffer) Create(const FramebufferSpecification& spec);
 	};

@@ -10,7 +10,7 @@
 
 #include "Jasmine/Core/Input.h"
 #include "Jasmine/Core/KeyCodes.h"
-#include "Jasmine/Core/MouseButtonCodes.h"
+#include "Jasmine/Core/MouseCodes.h"
 //--------------------------------------------
 
 

@@ -28,9 +28,6 @@
     <Filter Include="src\Platform\OpenGL">
       <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Platform\OpenGL\OpenGLImGui">
-      <UniqueIdentifier>{0425B8F8-7008-C738-790B-F574E56D8D89}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Platform\Windows">
       <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
     </Filter>
@@ -87,7 +84,7 @@
     <ClInclude Include="src\Jasmine\Core\Log.h">
       <Filter>src\Jasmine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\Core\MouseButtonCodes.h">
+    <ClInclude Include="src\Jasmine\Core\MouseCodes.h">
       <Filter>src\Jasmine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Core\Timestep.h">
@@ -120,6 +117,9 @@
     <ClInclude Include="src\Jasmine\Renderer\Buffer.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Jasmine\Renderer\Framebuffer.h">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\GraphicsContext.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
@@ -127,6 +127,9 @@
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\OrthographicCameraController.h">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jasmine\Renderer\Particle.h">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Jasmine\Renderer\RenderCommand.h">
@@ -156,6 +159,9 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
@@ -167,9 +173,6 @@
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
-      <Filter>src\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>src\Platform\Windows</Filter>
@@ -1425,9 +1428,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\Renderer\Framebuffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
-    <ClInclude Include="src\Jasmine\Renderer\Particle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JM_PCH.cpp">
@@ -1445,10 +1445,16 @@
     <ClCompile Include="src\Jasmine\Core\Log.cpp">
       <Filter>src\Jasmine\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\Jasmine\ImGUI\ImGuiBuild.cpp">
+      <Filter>src\Jasmine\ImGUI</Filter>
+    </ClCompile>
     <ClCompile Include="src\Jasmine\ImGUI\ImGuiLayer.cpp">
       <Filter>src\Jasmine\ImGUI</Filter>
     </ClCompile>
     <ClCompile Include="src\Jasmine\Renderer\Buffer.cpp">
+      <Filter>src\Jasmine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Jasmine\Renderer\Framebuffer.cpp">
       <Filter>src\Jasmine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Jasmine\Renderer\OrthographicCamera.cpp">
@@ -1484,6 +1490,9 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
@@ -1505,8 +1514,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Jasmine\Renderer\Framebuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
-    <ClCompile Include="src\Jasmine\ImGUI\ImGuiBuild.cpp" />
   </ItemGroup>
 </Project>

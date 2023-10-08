@@ -8,10 +8,10 @@
 namespace Jasmine {
 
 	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)
-		: m_ProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), m_ViewMatrix(1.0f)
+		: m_ViewMatrix(1.0f)
 	{
 		JM_PROFILE_FUNCTION();
-
+		SetProjection(left, right, bottom, top);
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 
@@ -19,7 +19,7 @@ namespace Jasmine {
 	{
 		JM_PROFILE_FUNCTION();
 
-		m_ProjectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
+		m_ProjectionMatrix = glm::ortho(left, right, invertY * bottom, invertY * top, -1.0f, 1.0f);
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 
@@ -35,6 +35,14 @@ namespace Jasmine {
 		glm::vec4 temp = inv * glm::vec4(mousepos.x, mousepos.y, 0.0f, 1.0f);
 
 		return { temp.x, temp.y };
+	}
+
+	void OrthographicCamera::SetInvertY(bool enable)
+	{
+		if (enable)
+			invertY = -1.0f;
+		else
+			invertY = 1.0f;
 	}
 
 	void OrthographicCamera::RecalculateViewMatrix()

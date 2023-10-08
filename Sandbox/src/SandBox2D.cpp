@@ -30,8 +30,7 @@ void Sandbox2D::OnAttach()
 	fbspc.Width = vpsize.first;
 	fbspc.Height = vpsize.second;
 	m_Framebuffer = Jasmine::Framebuffer::Create(fbspc);
-
-
+	m_CameraController.GetCamera().SetInvertY(true);
 }
 
 void Sandbox2D::OnDetach()
@@ -84,11 +83,12 @@ void Sandbox2D::OnUpdate(Jasmine::Timestep ts)
 		Jasmine::Renderer2D::DrawQuad({ -5.0f, -5.0f, Front+=0.0001f }, { 10.0f, 10.0f }, m_CheckerboardTexture, 10.0f);
 		Jasmine::Renderer2D::DrawQuad({ -0.7f, -0.7f, Front += 0.0001f }, { 1.4f, 1.4f }, m_JM_Logo, 1.0f);
 		Jasmine::Renderer2D::DrawRotatedQuad({ 0.0f ,0.0f,Front += 0.0001f }, { 0.5f,0.5f }, -ts.GetLifeTimeSeconds()*6.0f, tex1, 1.0f, {0.8f,0.5f,0.95f,1.0f});
-		Jasmine::Renderer2D::DrawQuad({ -0.15f, -0.15f, Front += 0.0001f }, { 0.3f, 0.3f }, tex3, 1.0f, { 0.95f,0.7f,0.25f,1.0f });
+		Jasmine::Renderer2D::DrawQuad({ -0.15f, -0.15f, Front += 0.0001f }, { 0.3f, 0.3f }, tex3, 1.0f, m_SquareColor);
 		Jasmine::Renderer2D::DrawQuad({ -0.9f, -0.9f, Front += 0.0001f }, { 1.8f, 1.8f }, tex2, 1.0f, { 0.6f,0.7f,0.95f,1.0f });
 		for (auto i : ParticleEmitters)
 			i->OnDraw();
 		Jasmine::Renderer2D::EndScene();
+		
 		m_Framebuffer->Unbind();
 	}
 }

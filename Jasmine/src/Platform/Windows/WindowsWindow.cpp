@@ -11,9 +11,9 @@
 namespace Jasmine {
 	static bool GLFWIsInited = false;
 
-	Window* Window::Create(WindowProps& props)
+	JM_SP(Window) Window::Create(WindowProps& props)
 	{
-		return new WindowsWindow(props);
+		return JM_CSP(WindowsWindow)(props);
 	}
 
 	WindowsWindow::WindowsWindow(const WindowProps& props)

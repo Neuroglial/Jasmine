@@ -18,6 +18,7 @@ namespace Jasmine {
 
 		glm::vec2 GetMousePos(glm::vec2 mousepos);
 
+		void SetInvertY(bool enable);
 		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
 		const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
 		const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
@@ -30,6 +31,7 @@ namespace Jasmine {
 
 		glm::vec3 m_Position = { 0.0f, 0.0f, 0.0f };
 		float m_Rotation = 0.0f;
+		float invertY = 1.0f;
 	};
 
 }
