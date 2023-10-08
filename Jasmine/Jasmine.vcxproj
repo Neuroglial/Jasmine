@@ -148,6 +148,7 @@
     <ClInclude Include="src\Jasmine\Scene\Entity.h" />
     <ClInclude Include="src\Jasmine\Scene\Scene.h" />
     <ClInclude Include="src\Jasmine\Scene\SceneCamera.h" />
+    <ClInclude Include="src\Jasmine\Scene\ScriptableEntity.h" />
     <ClInclude Include="src\JM_PCH.h" />
     <ClInclude Include="src\Jasmine.h" />
     <ClInclude Include="src\Jasmine\Core\Application.h" />
