@@ -78,7 +78,7 @@ namespace Jasmine {
 				if (camera.Primary)
 				{
 					mainCamera = &camera.Camera;
-					cameraTransform = &transform.Transform;
+					cameraTransform = &transform.GetTransform();
 					break;
 				}
 			}
@@ -107,14 +107,6 @@ namespace Jasmine {
 							pec.Instance->OnDraw();
 					}
 				);
-
-				//auto group = m_Registry.group<ParticleEmitterComponent>();
-				//for (auto entity : group) {
-				//	auto pec = group.get<ParticleEmitterComponent>(entity);
-				//
-				//	if (pec.Instance)
-				//		pec.Instance->OnDraw();
-				//}
 			}
 
 			Renderer2D::EndScene();

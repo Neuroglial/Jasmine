@@ -18,7 +18,6 @@ namespace Jasmine {
 		virtual void OnImGuiRender() override;
 		void OnEvent(Event& e) override;
 	private:
-		Jasmine::OrthographicCameraController m_CameraController;
 
 		// Temp
 		JM_SP(VertexArray) m_SquareVA;

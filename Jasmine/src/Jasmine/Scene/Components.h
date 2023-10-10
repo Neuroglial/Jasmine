@@ -22,26 +22,22 @@ namespace Jasmine {
 	struct TransformComponent
 	{
 		glm::vec3 Position{ 0.0f };
-		glm::vec3 Rotate{ 0.0f };
+		glm::vec3 Rotation{ 0.0f };
 		glm::vec3 Scale{ 1.0f };
-		glm::mat4 Transform{ 1.0f };
 
 		TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
-		TransformComponent(const glm::mat4& transform)
-			: Transform(transform) {}
 
-		void FlushTransform() {
-			Transform = glm::translate(glm::mat4(1.0f), Position);
-			Transform = glm::rotate(Transform, glm::radians(Rotate.y), {0.0f,1.0f,0.0f});
-			Transform = glm::rotate(Transform, glm::radians(Rotate.x), { 1.0f,0.0f,0.0f });
-			Transform = glm::rotate(Transform, glm::radians(Rotate.z), { 0.0f,0.0f,1.0f });
+		inline glm::mat4 GetTransform() {
+			glm::mat4 Transform = glm::translate(glm::mat4(1.0f), Position);
+			Transform = glm::rotate(Transform, glm::radians(Rotation.y), {0.0f,1.0f,0.0f});
+			Transform = glm::rotate(Transform, glm::radians(Rotation.x), { 1.0f,0.0f,0.0f });
+			Transform = glm::rotate(Transform, glm::radians(Rotation.z), { 0.0f,0.0f,1.0f });
 			Transform = glm::scale(Transform, Scale);
-
+			return Transform;
 		}
 
-		operator glm::mat4& () { return Transform; }
-		operator const glm::mat4& () const { return Transform; }
+		inline operator glm::mat4 () { return GetTransform(); }
 	};
 
 	struct SpriteRendererComponent

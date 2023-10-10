@@ -38,6 +38,8 @@ namespace Jasmine {
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
 
+		io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 22.0f, NULL, io.Fonts->GetGlyphRangesChineseFull());
+
 		// Setup Dear ImGui style
 		ImGui::StyleColorsDark();
 		//ImGui::StyleColorsClassic();
