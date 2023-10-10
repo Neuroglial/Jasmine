@@ -73,8 +73,6 @@ namespace Jasmine {
 
 		glm::mat4 viewProj = camera.GetProjection() * glm::inverse(transform);
 
-		JM_PROFILE_FUNCTION();
-
 		s_Data.TextureShader->Bind();
 		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
 		s_Data.InstanceCount = 0;

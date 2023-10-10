@@ -1,6 +1,7 @@
 #include "EditorLayer.h"
 #include <imgui/imgui.h>
 
+#include "../assets/particle/FlameEmitter.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -27,6 +28,10 @@ namespace Jasmine {
 		// Entity
 		m_SquareEntity = m_ActiveScene->CreateEntity("Green Square");
 		m_SquareEntity.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
+
+		auto redSquare = m_ActiveScene->CreateEntity("Red Square");
+		redSquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 1.0f, 0.0f, 0.0f, 1.0f });
+		redSquare.AddComponent<ParticleEmitterComponent>().Bind<FlameEmitter>();
 
 		m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
 		m_CameraEntity.AddComponent<CameraComponent>();

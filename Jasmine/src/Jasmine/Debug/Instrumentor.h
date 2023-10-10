@@ -6,6 +6,10 @@
 #include <fstream>
 #include <stdarg.h>
 #include <atomic>
+#include <unordered_map>
+#include <vector>
+#include <list>
+#include <mutex>
 
 #include <thread>
 

@@ -48,6 +48,24 @@ namespace Jasmine {
 				});
 		}
 
+		//Update Emitter
+		{
+			auto view = m_Registry.view<TransformComponent, ParticleEmitterComponent>();
+			for (auto entity : view) {
+				auto [trans, pec] = view.get<TransformComponent, ParticleEmitterComponent>(entity);
+
+				if (!pec.Instance) 
+				{
+					pec.Instance = pec.InstaniateEmitter(trans.Position);
+				}
+
+				pec.Instance->SetPosition(trans.Position);
+
+				pec.Instance->OnUpdate(ts);
+
+			}
+		}
+
 		// Render 2D
 		Camera* mainCamera = nullptr;
 		glm::mat4* cameraTransform = nullptr;
@@ -70,12 +88,33 @@ namespace Jasmine {
 		{
 			Renderer2D::BeginScene(mainCamera->GetProjection(), *cameraTransform);
 
-			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-			for (auto entity : group)
+			//Draw Quad
 			{
-				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+				auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+				for (auto entity : group)
+				{
+					auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
-				Renderer2D::DrawQuad(transform, sprite.Color);
+					Renderer2D::DrawQuad(transform, sprite.Color);
+				}
+			}
+
+			//Draw Particles
+			{
+				m_Registry.view<ParticleEmitterComponent>().each([=](auto entity, auto& pec)
+					{
+						if (pec.Instance)
+							pec.Instance->OnDraw();
+					}
+				);
+
+				//auto group = m_Registry.group<ParticleEmitterComponent>();
+				//for (auto entity : group) {
+				//	auto pec = group.get<ParticleEmitterComponent>(entity);
+				//
+				//	if (pec.Instance)
+				//		pec.Instance->OnDraw();
+				//}
 			}
 
 			Renderer2D::EndScene();

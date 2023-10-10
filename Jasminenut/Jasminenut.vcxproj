@@ -134,6 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="assets\particle\FlameEmitter.h" />
     <ClInclude Include="src\panels\SceneHierarchyPanel.h" />
     <ClInclude Include="src\EditorLayer.h" />
   </ItemGroup>

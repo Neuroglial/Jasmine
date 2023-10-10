@@ -45,6 +45,8 @@ namespace Jasmine {
 		operator bool() const { return (uint32_t)m_EntityHandle != 0; }
 
 		bool operator==(const Entity& other) const { return m_EntityHandle == other.m_EntityHandle; }
+
+		inline const entt::entity GetEnity() { return m_EntityHandle; }
 	private:
 		entt::entity m_EntityHandle{ 0 };
 		Scene* m_Scene = nullptr;

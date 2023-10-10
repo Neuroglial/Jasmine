@@ -86,11 +86,20 @@ namespace Jasmine {
 		}
 
 	public:
+
+		~Emitter() {
+			while (pts[ptsTail]) {
+				delete pts[ptsTail];
+				pts[ptsTail++] = nullptr;
+			}
+				
+		}
+
 		uint32_t GetParticlesCount() {
 			return ptsCount;
 		}
 
-		Emitter(glm::vec3 position, uint32_t MaxParticlesSize = 200) :LastPos(position),position(position), MaxParticlesSize(MaxParticlesSize) {
+		Emitter(glm::vec3 position = glm::vec3(0.0f), uint32_t MaxParticlesSize = 200) :LastPos(position), position(position), MaxParticlesSize(MaxParticlesSize) {
 			pts.resize(MaxParticlesSize);
 		};
 
@@ -104,5 +113,8 @@ namespace Jasmine {
 				pts[j]->Draw();
 			}
 		}
+
+		inline void SetPosition(glm::vec3& pos) { position = pos; }
+		inline glm::vec3& GetPos() { return position; }
 	};
 }
