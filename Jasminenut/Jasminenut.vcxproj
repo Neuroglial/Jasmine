@@ -15,10 +15,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CC87AD86-383D-267C-C131-20532DE61C80}</ProjectGuid>
+    <ProjectGuid>{A39AEE68-8F52-30B6-F859-0912E430CBA6}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>JasmineInut</RootNamespace>
+    <RootNamespace>Jasminenut</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -55,23 +55,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\bin\Debug-windows-x86_64\JasmineInut\</OutDir>
-    <IntDir>..\bin-int\Debug-windows-x86_64\JasmineInut\</IntDir>
-    <TargetName>JasmineInut</TargetName>
+    <OutDir>..\bin\Debug-windows-x86_64\Jasminenut\</OutDir>
+    <IntDir>..\bin-int\Debug-windows-x86_64\Jasminenut\</IntDir>
+    <TargetName>Jasminenut</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\bin\Release-windows-x86_64\JasmineInut\</OutDir>
-    <IntDir>..\bin-int\Release-windows-x86_64\JasmineInut\</IntDir>
-    <TargetName>JasmineInut</TargetName>
+    <OutDir>..\bin\Release-windows-x86_64\Jasminenut\</OutDir>
+    <IntDir>..\bin-int\Release-windows-x86_64\Jasminenut\</IntDir>
+    <TargetName>Jasminenut</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\bin\Dist-windows-x86_64\JasmineInut\</OutDir>
-    <IntDir>..\bin-int\Dist-windows-x86_64\JasmineInut\</IntDir>
-    <TargetName>JasmineInut</TargetName>
+    <OutDir>..\bin\Dist-windows-x86_64\Jasminenut\</OutDir>
+    <IntDir>..\bin-int\Dist-windows-x86_64\Jasminenut\</IntDir>
+    <TargetName>Jasminenut</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -133,6 +133,15 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\panels\SceneHierarchyPanel.h" />
+    <ClInclude Include="src\EditorLayer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\panels\SceneHierarchyPanel.cpp" />
+    <ClCompile Include="src\EditorLayer.cpp" />
+    <ClCompile Include="src\JME_App.cpp" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jasmine\Jasmine.vcxproj">
       <Project>{AC26B82E-1806-37CA-211E-C2A08D7C9D2B}</Project>

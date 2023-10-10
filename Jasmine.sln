@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImGui", "Jasmine\vendor\img
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Jasmine", "Jasmine\Jasmine.vcxproj", "{AC26B82E-1806-37CA-211E-C2A08D7C9D2B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JasmineInut", "JasmineInut\JasmineInut.vcxproj", "{CC87AD86-383D-267C-C131-20532DE61C80}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Jasminenut", "Jasminenut\Jasminenut.vcxproj", "{A39AEE68-8F52-30B6-F859-0912E430CBA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,12 +52,12 @@ Global
 		{AC26B82E-1806-37CA-211E-C2A08D7C9D2B}.Dist|x64.Build.0 = Dist|x64
 		{AC26B82E-1806-37CA-211E-C2A08D7C9D2B}.Release|x64.ActiveCfg = Release|x64
 		{AC26B82E-1806-37CA-211E-C2A08D7C9D2B}.Release|x64.Build.0 = Release|x64
-		{CC87AD86-383D-267C-C131-20532DE61C80}.Debug|x64.ActiveCfg = Debug|x64
-		{CC87AD86-383D-267C-C131-20532DE61C80}.Debug|x64.Build.0 = Debug|x64
-		{CC87AD86-383D-267C-C131-20532DE61C80}.Dist|x64.ActiveCfg = Dist|x64
-		{CC87AD86-383D-267C-C131-20532DE61C80}.Dist|x64.Build.0 = Dist|x64
-		{CC87AD86-383D-267C-C131-20532DE61C80}.Release|x64.ActiveCfg = Release|x64
-		{CC87AD86-383D-267C-C131-20532DE61C80}.Release|x64.Build.0 = Release|x64
+		{A39AEE68-8F52-30B6-F859-0912E430CBA6}.Debug|x64.ActiveCfg = Debug|x64
+		{A39AEE68-8F52-30B6-F859-0912E430CBA6}.Debug|x64.Build.0 = Debug|x64
+		{A39AEE68-8F52-30B6-F859-0912E430CBA6}.Dist|x64.ActiveCfg = Dist|x64
+		{A39AEE68-8F52-30B6-F859-0912E430CBA6}.Dist|x64.Build.0 = Dist|x64
+		{A39AEE68-8F52-30B6-F859-0912E430CBA6}.Release|x64.ActiveCfg = Release|x64
+		{A39AEE68-8F52-30B6-F859-0912E430CBA6}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

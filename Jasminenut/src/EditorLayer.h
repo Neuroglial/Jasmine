@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Jasmine.h>
+#include "Panels/SceneHierarchyPanel.h"
 
 namespace Jasmine {
 
@@ -37,6 +38,9 @@ namespace Jasmine {
 		Entity m_SecondCamera;
 
 		bool m_PrimaryCamera = true;
+
+		// Panels
+		SceneHierarchyPanel m_SceneHierarchyPanel;
 	};
 
 }
