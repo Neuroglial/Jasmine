@@ -22,6 +22,8 @@ namespace Jasmine {
 		void Begin();
 		void End();
 
+		void SetDarkThemeColors();
+
 	private:
 		float m_Time = 0.0f;
 		bool m_BlockEvents = true;
