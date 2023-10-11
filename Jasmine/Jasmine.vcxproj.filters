@@ -99,9 +99,6 @@
     <ClInclude Include="src\Jasmine\Core\Window.h">
       <Filter>src\Jasmine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Jasmine\Core\XXX.h">
-      <Filter>src\Jasmine\Core</Filter>
-    </ClInclude>
     <ClInclude Include="src\Jasmine\Core\layer.h">
       <Filter>src\Jasmine\Core</Filter>
     </ClInclude>
@@ -1455,6 +1452,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\Jasmine\Core\Tool.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JM_PCH.cpp">

@@ -31,7 +31,9 @@ namespace Jasmine {
 
 		auto redSquare = m_ActiveScene->CreateEntity("Red Square");
 		redSquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 1.0f, 0.0f, 0.0f, 1.0f });
-		redSquare.AddComponent<ParticleEmitterComponent>().Bind<FlameEmitter>();
+		auto& f1 = redSquare.AddComponent<ParticleEmitterComponent>();
+		f1.Bind<FlameEmitter>();
+		f1.transform.Position = { 0.5f,0.5f,0.0f};
 
 		m_CameraEntity = m_ActiveScene->CreateEntity("Camera A");
 		m_CameraEntity.AddComponent<CameraComponent>();
@@ -109,6 +111,9 @@ namespace Jasmine {
 	void EditorLayer::OnImGuiRender()
 	{
 		JM_PROFILE_FUNCTION();
+		ImGuiIO& io = ImGui::GetIO();
+
+
 
 		// Note: Switch this to true to enable dockspace
 		static bool dockspaceOpen = true;
@@ -148,7 +153,7 @@ namespace Jasmine {
 			ImGui::PopStyleVar(2);
 
 		// DockSpace
-		ImGuiIO& io = ImGui::GetIO();
+		
 		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
 		{
 			ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
@@ -171,6 +176,8 @@ namespace Jasmine {
 		ImGui::Begin("Settings");
 		auto stats = Renderer2D::GetStats();
 		ImGui::Text("Draw Calls: %d", stats.DrawCalls);
+		ImGui::Text("Framerate: %.1f", Tool::Average(io.Framerate, 3, 1));
+		ImGui::Text("DelatTime: %.1f ms", Tool::Average(io.DeltaTime*1000.0f, 3, 2));
 		ImGui::End();
 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });

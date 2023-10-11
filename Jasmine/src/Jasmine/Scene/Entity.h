@@ -15,7 +15,7 @@ namespace Jasmine {
 		template<typename T, typename... Args>
 		T& AddComponent(Args&&... args)
 		{
-			JM_CORE_ASSERT(!HasComponent<T>(), "Entity already has component!");
+			//JM_CORE_ASSERT(!HasComponent<T>(), "Entity already has component!");
 			return m_Scene->m_Registry.emplace<T>(m_EntityHandle, std::forward<Args>(args)...);
 		}
 
@@ -42,9 +42,11 @@ namespace Jasmine {
 
 		inline uint32_t GetID() { return (uint32_t)m_EntityHandle; }
 
-		operator bool() const { return (uint32_t)m_EntityHandle != 0; }
+		operator bool() const { return m_Scene != nullptr; }
 
-		bool operator==(const Entity& other) const { return m_EntityHandle == other.m_EntityHandle; }
+		bool operator==(const Entity& other) const { return m_EntityHandle == other.m_EntityHandle && m_Scene == other.m_Scene; }
+
+		operator entt::entity() const { return m_EntityHandle; }
 
 		inline const entt::entity GetEnity() { return m_EntityHandle; }
 	private:

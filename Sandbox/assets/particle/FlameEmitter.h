@@ -21,7 +21,13 @@ private:
 
 	glm::vec3 render_pos;
 public:
-	FlameParticle(glm::vec3 position) :Particle(position){
+	FlameParticle(glm::vec3 position) :Particle(position) {
+		float SPEED = 5.0f;
+
+		p_liveTime = 3.0f / SPEED;
+		p_gravity = SPEED * -0.25f * 4.0f;
+		p_speed = 1.5f;
+
 		static const int Max = RAND_MAX;
 		auto rd1 = (double)rand() / (double)Max - 0.5f;
 		auto rd2 = (double)rand() / (double)Max - 0.5f;
@@ -48,7 +54,7 @@ public:
 		if (factor > 1.0f)
 			Destory();
 
-		speed.y -= p_gravity * ts.GetSeconds() * (1.0f - pow(factor,0.25));
+		speed.y -= p_gravity * ts.GetSeconds() * (1.0f - pow(factor, 0.25));
 		rotate += (rot_speed * ts.GetSeconds());
 		position += (speed * ts.GetSeconds());
 
@@ -72,13 +78,13 @@ public:
 class FlameEmitter :public Jasmine::Emitter
 {
 public:
-	FlameEmitter() {
+	FlameEmitter(glm::vec3& pos = glm::vec3(0.0f), uint32_t MaxCount = 1500) : Emitter(pos, MaxCount) {
 
 	}
 
 	void OnUpdate(Jasmine::Timestep ts) override {
 
-		EitterParticles<FlameParticle>(ts, 20.0f);
+		EitterParticles<FlameParticle>(ts, 200.0f);
 		ParticlesUpdate(ts);
 	}
 

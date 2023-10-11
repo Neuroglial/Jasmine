@@ -143,6 +143,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Jasmine\Core\Tool.h" />
     <ClInclude Include="src\JM_PCH.h" />
     <ClInclude Include="src\Jasmine.h" />
     <ClInclude Include="src\Jasmine\Core\Application.h" />
@@ -156,7 +157,6 @@
     <ClInclude Include="src\Jasmine\Core\PlatformDetection.h" />
     <ClInclude Include="src\Jasmine\Core\Timestep.h" />
     <ClInclude Include="src\Jasmine\Core\Window.h" />
-    <ClInclude Include="src\Jasmine\Core\XXX.h" />
     <ClInclude Include="src\Jasmine\Core\layer.h" />
     <ClInclude Include="src\Jasmine\Debug\Instrumentor.h" />
     <ClInclude Include="src\Jasmine\Events\ApplicationEvent.h" />

@@ -78,6 +78,7 @@ namespace Jasmine {
 	struct ParticleEmitterComponent
 	{
 		Emitter* Instance = nullptr;
+		TransformComponent transform;
 
 		Emitter* (*InstaniateEmitter)(glm::vec3&);
 		void (*DestroyEmitter)(ParticleEmitterComponent*);

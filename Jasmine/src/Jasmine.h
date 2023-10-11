@@ -6,6 +6,8 @@
 #include "Jasmine/Core/Layer.h"
 #include "Jasmine/Core/Log.h"
 
+#include "Jasmine/Core/Tool.h"
+
 #include "Jasmine/ImGui/ImGuiLayer.h"
 
 #include "Jasmine/Scene/Scene.h"
