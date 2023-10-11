@@ -12,6 +12,7 @@ namespace Jasmine {
 	SceneHierarchyPanel::SceneHierarchyPanel(const JM_SP(Scene)& context)
 	{
 		SetContext(context);
+		m_SelectionContext = {};
 	}
 
 	void SceneHierarchyPanel::SetContext(const JM_SP(Scene)& context)
@@ -248,9 +249,9 @@ namespace Jasmine {
 		DrawComponent<TransformComponent>("Transform", entity, [](auto& component)
 			{
 				DrawVec3Control("Translation", component.Position);
-				glm::vec3 rotation = glm::degrees(component.Rotation);
+				glm::vec3 rotation = component.Rotation;
 				DrawVec3Control("Rotation", rotation);
-				component.Rotation = glm::radians(rotation);
+				component.Rotation = rotation;
 				DrawVec3Control("Scale", component.Scale,0.0001f,1000000.0f,1.0f);
 			});
 		DrawComponent<CameraComponent>("Camera", entity, [](auto& component)

@@ -134,14 +134,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="assets\particle\FlameEmitter.h" />
-    <ClInclude Include="src\panels\SceneHierarchyPanel.h" />
     <ClInclude Include="src\EditorLayer.h" />
+    <ClInclude Include="src\panels\SceneHierarchyPanel.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\panels\SceneHierarchyPanel.cpp" />
     <ClCompile Include="src\EditorLayer.cpp" />
     <ClCompile Include="src\JME_App.cpp" />
+    <ClCompile Include="src\panels\SceneHierarchyPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jasmine\Jasmine.vcxproj">

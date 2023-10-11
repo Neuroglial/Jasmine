@@ -20,12 +20,14 @@ IncludeDir["ImGui"] 		= 	"Jasmine/vendor/imgui"
 IncludeDir["glm"] 		=	"Jasmine/vendor/glm"
 IncludeDir["stb_image"] 	= 	"Jasmine/vendor/stb_image"
 IncludeDir["entt"] 		= 	"Jasmine/vendor/entt/include"
+IncludeDir["yaml_cpp"]     =    "Jasmine/vendor/yaml-cpp/include"
 
 
 group "Dependencies"
 	include "Jasmine/vendor/GLFW"
 	include "Jasmine/vendor/Glad"
 	include "Jasmine/vendor/imgui"
+	include "Jasmine/vendor/yaml-cpp"
 	
 	
 
@@ -69,7 +71,8 @@ project "Jasmine"
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.yaml_cpp}"
 	}
 
 	links 
@@ -77,6 +80,7 @@ project "Jasmine"
 		"GLFW",
 		"Glad",
 		"ImGui",
+		"yaml-cpp",
 		"opengl32.lib"
 	}
 

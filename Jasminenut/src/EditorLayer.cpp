@@ -4,6 +4,8 @@
 #include "../assets/particle/FlameEmitter.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "Jasmine/Scene/SceneSerializer.h"
+#include "Jasmine/Utils/PlatformUtils.h"
 
 namespace Jasmine {
 
@@ -25,55 +27,55 @@ namespace Jasmine {
 
 		m_ActiveScene = JM_CSP(Scene)();
 
-		// Entity
-		m_SquareEntity = m_ActiveScene->CreateEntity("Green Square");
-		m_SquareEntity.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
-
-		auto redSquare = m_ActiveScene->CreateEntity("Red Square");
-		redSquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 1.0f, 0.0f, 0.0f, 1.0f });
-		auto& f1 = redSquare.AddComponent<ParticleEmitterComponent>();
-		f1.Bind<FlameEmitter>();
-		f1.transform.Position = { 0.5f,0.5f,0.0f};
-
-		m_CameraEntity = m_ActiveScene->CreateEntity("Camera A");
-		m_CameraEntity.AddComponent<CameraComponent>();
-
-		m_SecondCamera = m_ActiveScene->CreateEntity("Camera B");
-		auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
-		cc.Primary = false;
-
-		class CameraController : public ScriptableEntity
-		{
-		public:
-			void OnCreate()
-			{
-			}
-
-			void OnDestroy()
-			{
-			}
-
-			void OnUpdate(Timestep ts)
-			{
-				if (GetComponent<CameraComponent>().Primary)
-				{
-					auto& Position = GetComponent<TransformComponent>().Position;
-					float speed = 5.0f;
-
-					if (Input::IsKeyPressed(Key::A))
-						Position.x -= speed * ts;
-					if (Input::IsKeyPressed(Key::D))
-						Position.x += speed * ts;
-					if (Input::IsKeyPressed(Key::W))
-						Position.y += speed * ts;
-					if (Input::IsKeyPressed(Key::S))
-						Position.y -= speed * ts;
-				}
-			}
-		};
-
-		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
-		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+		//// Entity
+		//m_SquareEntity = m_ActiveScene->CreateEntity("Green Square");
+		//m_SquareEntity.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
+		//
+		//auto redSquare = m_ActiveScene->CreateEntity("Red Square");
+		//redSquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 1.0f, 0.0f, 0.0f, 1.0f });
+		//auto& f1 = redSquare.AddComponent<ParticleEmitterComponent>();
+		//f1.Bind<FlameEmitter>();
+		//f1.transform.Position = { 0.5f,0.5f,0.0f};
+		//
+		//m_CameraEntity = m_ActiveScene->CreateEntity("Camera A");
+		//m_CameraEntity.AddComponent<CameraComponent>();
+		//
+		//m_SecondCamera = m_ActiveScene->CreateEntity("Camera B");
+		//auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
+		//cc.Primary = false;
+		//
+		//class CameraController : public ScriptableEntity
+		//{
+		//public:
+		//	void OnCreate()
+		//	{
+		//	}
+		//
+		//	void OnDestroy()
+		//	{
+		//	}
+		//
+		//	void OnUpdate(Timestep ts)
+		//	{
+		//		if (GetComponent<CameraComponent>().Primary)
+		//		{
+		//			auto& Position = GetComponent<TransformComponent>().Position;
+		//			float speed = 5.0f;
+		//
+		//			if (Input::IsKeyPressed(Key::A))
+		//				Position.x -= speed * ts;
+		//			if (Input::IsKeyPressed(Key::D))
+		//				Position.x += speed * ts;
+		//			if (Input::IsKeyPressed(Key::W))
+		//				Position.y += speed * ts;
+		//			if (Input::IsKeyPressed(Key::S))
+		//				Position.y -= speed * ts;
+		//		}
+		//	}
+		//};
+		//
+		//m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+		//m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 	}
@@ -170,7 +172,20 @@ namespace Jasmine {
 		{
 			if (ImGui::BeginMenu("File"))
 			{
-				if (ImGui::MenuItem("Exit")) Application::Get().Close();
+
+				//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);1
+				if (ImGui::MenuItem("New", "Ctrl+N"))
+					NewScene();
+
+				if (ImGui::MenuItem("Open...", "Ctrl+O"))
+					OpenScene();
+
+				if (ImGui::MenuItem("Save As...", "Ctrl+Shift+S"))
+					SaveSceneAs();
+
+				if (ImGui::MenuItem("Exit")) 
+					Application::Get().Close();
+					
 				ImGui::EndMenu();
 			}
 
@@ -210,6 +225,73 @@ namespace Jasmine {
 
 	void EditorLayer::OnEvent(Event& e)
 	{
+
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<KeyPressedEvent>(JM_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
 	}
 
+	bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
+	{
+		// Shortcuts
+		if (e.GetRepeatCount() > 0)
+			return false;
+
+		bool control = Input::IsKeyPressed(Key::LeftControl) || Input::IsKeyPressed(Key::RightControl);
+		bool shift = Input::IsKeyPressed(Key::LeftShift) || Input::IsKeyPressed(Key::RightShift);
+		switch (e.GetKeyCode())
+		{
+		case Key::N:
+		{
+			if (control)
+				NewScene();
+
+			break;
+		}
+		case Key::O:
+		{
+			if (control)
+				OpenScene();
+
+			break;
+		}
+		case Key::S:
+		{
+			if (control && shift)
+				SaveSceneAs();
+
+			break;
+		}
+		}
+	}
+
+	void EditorLayer::NewScene()
+	{
+		m_ActiveScene = CreateRef<Scene>();
+		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+	}
+
+	void EditorLayer::OpenScene()
+	{
+		std::string filepath = FileDialogs::OpenFile("Jasmine Scene (*.jm)\0*.jm\0");
+		if (!filepath.empty())
+		{
+			m_ActiveScene = CreateRef<Scene>();
+			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+
+			SceneSerializer serializer(m_ActiveScene);
+			serializer.Deserialize(filepath);
+		}
+	}
+
+	void EditorLayer::SaveSceneAs()
+	{
+		std::string filepath = FileDialogs::SaveFile("Jasmine Scene (*.jm)\0*.jm\0");
+		if (!filepath.empty())
+		{
+			SceneSerializer serializer(m_ActiveScene);
+			serializer.Serialize(filepath);
+		}
+	}
 }
