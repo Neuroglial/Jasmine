@@ -7,6 +7,9 @@
 #include "ScriptableEntity.h"
 #include "Jasmine/Renderer/Particle.h"
 
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/quaternion.hpp>
+
 namespace Jasmine {
 
 	struct TagComponent
@@ -29,12 +32,10 @@ namespace Jasmine {
 		TransformComponent(const TransformComponent&) = default;
 
 		inline glm::mat4 GetTransform() {
-			glm::mat4 Transform = glm::translate(glm::mat4(1.0f), Position);
-			Transform = glm::rotate(Transform, glm::radians(Rotation.y), {0.0f,1.0f,0.0f});
-			Transform = glm::rotate(Transform, glm::radians(Rotation.x), { 1.0f,0.0f,0.0f });
-			Transform = glm::rotate(Transform, glm::radians(Rotation.z), { 0.0f,0.0f,1.0f });
-			Transform = glm::scale(Transform, Scale);
-			return Transform;
+			glm::mat4 transform = glm::translate(glm::mat4(1.0f), Position);
+			glm::mat4 rotation = glm::toMat4(glm::quat(glm::radians(Rotation)));
+			glm::mat4 scale = glm::scale(glm::mat4(1.0f), Scale);
+			return transform * rotation * scale;
 		}
 
 		inline operator glm::mat4 () { return GetTransform(); }

@@ -43,6 +43,8 @@ namespace Jasmine {
 
 		RenderCommand::SetClearColor({ 0.75f, 0.8f, 0.95f, 1.0f });
 
+		
+
 		while (m_Running) {
 			JM_PROFILE_SCOPE("RunLoop");
 

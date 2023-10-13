@@ -8,9 +8,10 @@
 
 #include "Jasmine/Core/Application.h"
 
-
 // TEMPORARY
 #include <GLFW/glfw3.h>
+
+#include "ImGuizmo.h"
 
 
 namespace Jasmine {
@@ -30,7 +31,7 @@ namespace Jasmine {
 
 		// Setup Dear ImGui context
 		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO();
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
 		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
@@ -39,6 +40,7 @@ namespace Jasmine {
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
 
 		io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 22.0f, NULL, io.Fonts->GetGlyphRangesChineseFull());
+
 
 		// Setup Dear ImGui style
 		SetDarkThemeColors();
@@ -55,7 +57,8 @@ namespace Jasmine {
 
 		// Setup Platform/Renderer bindings
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
-		ImGui_ImplOpenGL3_Init("#version 410");
+		//ImGui_ImplGlfw_InstallCallbacks(window);
+		ImGui_ImplOpenGL3_Init("#version 460");
 	}
 
 	void ImGuiLayer::OnDetach()
@@ -84,6 +87,7 @@ namespace Jasmine {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
+		ImGuizmo::BeginFrame();
 	}
 
 	void ImGuiLayer::End()

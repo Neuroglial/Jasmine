@@ -20,7 +20,7 @@ namespace Jasmine {
 
 		virtual void DrawIndexed(const JM_SP(VertexArray)& vertexArray, uint32_t indexCount = 0) = 0;
 		virtual void DrawIndexedInstanced(const JM_SP(VertexArray)& vertexArray, uint32_t indexCount = 0, uint32_t instanceCount = 1) = 0;
-		virtual std::pair<int, int> GetViewportSize() = 0;
+		virtual glm::ivec2 GetViewportSize() = 0;
 
 		virtual void Init() = 0;
 

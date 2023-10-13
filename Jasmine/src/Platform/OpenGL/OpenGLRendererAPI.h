@@ -14,6 +14,6 @@ namespace Jasmine {
 		virtual void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) override;
 		inline virtual void DrawIndexed(const JM_SP(VertexArray)& vertexArray, uint32_t indexCount = 0) override { DrawIndexedInstanced(vertexArray, indexCount, 1); }
 		virtual void DrawIndexedInstanced(const JM_SP(VertexArray)& vertexArray, uint32_t indexCount = 0,uint32_t instanceCount = 1) override;
-		virtual std::pair<int, int> GetViewportSize() override;
+		virtual glm::ivec2 GetViewportSize() override;
 	};
 }

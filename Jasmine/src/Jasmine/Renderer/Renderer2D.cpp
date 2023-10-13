@@ -35,9 +35,11 @@ namespace Jasmine {
 		
 		s_Data.m_JM_SquareVB_PSRCTT = VertexBuffer::Create(sizeof(s_Data.Buffer));
 		s_Data.m_JM_SquareVB_PSRCTT->SetLayout(
-			{ {ShaderDataType::Float3, "s_Position"},
-			  {ShaderDataType::Float2, "s_Size"},
-			  {ShaderDataType::Float,  "s_Rotate"},
+			{ {ShaderDataType::Float4, "s_MatV1"},
+			  {ShaderDataType::Float4, "s_MatV2"},
+			  {ShaderDataType::Float4, "s_MatV3"},
+			  {ShaderDataType::Float4, "s_MatV4"},
+
 			  {ShaderDataType::Float4, "s_Color"},
 			  {ShaderDataType::Float,  "s_TexIndex"} ,
 			  {ShaderDataType::Float,  "s_TilingFactor"} });
@@ -95,13 +97,8 @@ namespace Jasmine {
 	{
 		JM_PROFILE_FUNCTION();
 
-		int index = 0;
-		for (auto& i : s_Data.PSRCTT) {
-			s_Data.Buffer[index++] = i.second;
-		}
-		s_Data.PSRCTT.clear();
 		s_Data.m_JM_SquareVB_PSRCTT->SetData((void*)&s_Data.Buffer, sizeof(JM_PSRCTT) * s_Data.InstanceCount);
-		
+
 		Flush();
 	}
 

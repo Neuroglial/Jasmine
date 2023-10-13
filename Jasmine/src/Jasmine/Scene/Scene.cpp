@@ -95,13 +95,20 @@ namespace Jasmine {
 
 			//Draw Quad
 			{
-				auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-				for (auto entity : group)
-				{
-					auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
-					Renderer2D::DrawQuad(transform, sprite.Color);
+				auto view = m_Registry.view<TransformComponent, SpriteRendererComponent>();
+				for (auto entity : view) {
+					auto [transform, sprite] = view.get<TransformComponent, SpriteRendererComponent>(entity);
+
+					Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
 				}
+				//auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+				//for (auto entity : group)
+				//{
+				//	auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+				//
+				//	Renderer2D::DrawQuad(transform, sprite.Color);
+				//}
 			}
 
 			//Draw Particles
@@ -130,6 +137,18 @@ namespace Jasmine {
 			if (!cameraComponent.FixedAspectRatio)
 				cameraComponent.Camera.SetViewportSize(width, height);
 		}
+	}
+
+	Entity Scene::GetPrimaryCameraEntity()
+	{
+		auto view = m_Registry.view<CameraComponent>();
+		for (auto entity : view)
+		{
+			const auto& camera = view.get<CameraComponent>(entity);
+			if (camera.Primary)
+				return Entity{ entity, this };
+		}
+		return {};
 	}
 
 	template<typename T>

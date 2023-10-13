@@ -38,7 +38,7 @@ namespace Jasmine {
 			s_RendererAPI->DrawIndexedInstanced(vertexArray, indexCount, instanceCount);
 		}
 
-		inline static std::pair<int,int> GetViewportSize() {
+		inline static glm::ivec2 GetViewportSize() {
 			return s_RendererAPI->GetViewportSize();
 		}
 

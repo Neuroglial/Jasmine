@@ -7,6 +7,9 @@
 #include "Jasmine/Scene/SceneSerializer.h"
 #include "Jasmine/Utils/PlatformUtils.h"
 
+#include "ImGuizmo.h"
+#include "Jasmine/Math/Math.h"
+
 namespace Jasmine {
 
 	EditorLayer::EditorLayer()
@@ -25,7 +28,11 @@ namespace Jasmine {
 		fbSpec.Height = 720;
 		m_Framebuffer = Framebuffer::Create(fbSpec);
 
+		m_ViewportSize = {0.0f,0.0f};
+
 		m_ActiveScene = JM_CSP(Scene)();
+
+		{
 
 		//// Entity
 		//m_SquareEntity = m_ActiveScene->CreateEntity("Green Square");
@@ -76,6 +83,7 @@ namespace Jasmine {
 		//
 		//m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 		//m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+		}
 
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 	}
@@ -90,13 +98,27 @@ namespace Jasmine {
 		JM_PROFILE_FUNCTION();
 
 		// Resize
-		if (Jasmine::FramebufferSpecification spec = m_Framebuffer->GetSpecification();
-			m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f && // zero sized framebuffer is invalid
-			(spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
 		{
-			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			if (m_ViewportSize.x != 0.0f && m_ViewportSize.y != 0.0f) {
+				bool changePro = false;
+
+				if (m_Framebuffer->GetBufferSize() != m_ViewportSize) {
+					m_Framebuffer->Resize(m_ViewportSize.x, m_ViewportSize.y);
+					changePro = true;
+				}
+
+				if ((glm::vec2)RenderCommand::GetViewportSize() != m_ViewportSize) {
+					RenderCommand::SetViewport(0.0f, 0.0f, m_ViewportSize.x, m_ViewportSize.y);
+					changePro = true;
+				}
+
+				if (changePro) {
+					m_ActiveScene->OnViewportResize(m_ViewportSize.x, m_ViewportSize.y);
+				}
+			}
+
 		}
+
 
 		// Render
 		Renderer2D::ResetStats();
@@ -193,6 +215,8 @@ namespace Jasmine {
 		}
 
 		m_SceneHierarchyPanel.OnImGuiRender();
+		
+
 
 		ImGui::Begin("Settings");
 		auto stats = Renderer2D::GetStats();
@@ -206,17 +230,65 @@ namespace Jasmine {
 
 		m_ViewportFocused = ImGui::IsWindowFocused();
 		m_ViewportHovered = ImGui::IsWindowHovered();
-		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
+		bool block = !m_ViewportFocused && !m_ViewportHovered;
+		Application::Get().GetImGuiLayer()->BlockEvents(block);
+
 
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-		if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize) && viewportPanelSize.x > 0 && viewportPanelSize.y > 0)
-		{
-			m_Framebuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
-			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
-
-		}
 		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
 		ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+		m_ViewportSize = { viewportPanelSize.x,viewportPanelSize.y };
+
+
+		// Gizmos
+		Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
+		if (selectedEntity && m_GizmoType != -1)
+		{
+			//ImGuizmo::SetGizmoSizeClipSpace(1.0f);
+			ImGuizmo::SetOrthographic(false);
+			ImGuizmo::SetDrawlist();
+
+			float windowWidth = m_ViewportSize.x;
+			float windowHeight = m_ViewportSize.y;
+			ImVec2 windowPos = ImGui::GetWindowPos();
+
+			ImGuizmo::SetRect(windowPos.x, windowPos.y, windowWidth, windowHeight);
+
+
+			// Camera
+			auto cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
+			const auto& camera = cameraEntity.GetComponent<CameraComponent>().Camera;
+			const glm::mat4& cameraProjection = camera.GetProjection();
+			glm::mat4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
+
+			// Entity transform
+			auto& tc = selectedEntity.GetComponent<TransformComponent>();
+			glm::mat4 transform = tc.GetTransform();
+
+			// Snapping
+			bool snap = Input::IsKeyPressed(Key::LeftControl);
+			float snapValue = 0.5f; // Snap to 0.5m for translation/scale
+			// Snap to 45 degrees for rotation
+			if (m_GizmoType == ImGuizmo::OPERATION::ROTATE)
+				snapValue = 45.0f;
+
+			float snapValues[3] = { snapValue, snapValue, snapValue };
+
+			ImGuizmo::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection),
+				(ImGuizmo::OPERATION)m_GizmoType, ImGuizmo::LOCAL, glm::value_ptr(transform),
+				nullptr, snap ? snapValues : nullptr);
+
+			if (ImGuizmo::IsUsing())
+			{
+				glm::vec3 translation, rotation, scale;
+				Math::DecomposeTransform(transform, translation, rotation, scale);
+
+				tc.Position = translation;
+				tc.Rotation = glm::degrees(rotation);
+				tc.Scale = scale;
+			}
+		}
+
 		ImGui::End();
 		ImGui::PopStyleVar();
 
@@ -261,6 +333,19 @@ namespace Jasmine {
 
 			break;
 		}
+		// Gizmos
+		case Key::Q:
+			m_GizmoType = -1;
+			break;
+		case Key::W:
+			m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
+			break;
+		case Key::E:
+			m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+			break;
+		case Key::R:
+			m_GizmoType = ImGuizmo::OPERATION::SCALE;
+			break;
 		}
 	}
 

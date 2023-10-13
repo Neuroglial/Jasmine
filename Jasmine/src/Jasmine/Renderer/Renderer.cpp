@@ -39,7 +39,7 @@ namespace Jasmine {
 		ResizeViewportWithWindow = enable;
 	}
 
-	std::pair<int, int> Renderer::GetViewportSize()
+	glm::ivec2 Renderer::GetViewportSize()
 	{
 		return RenderCommand::GetViewportSize();
 	}

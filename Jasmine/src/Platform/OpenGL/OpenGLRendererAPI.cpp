@@ -38,11 +38,11 @@ namespace Jasmine {
 		glDrawElementsInstanced(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr, instanceCount);
 	}
 
-	std::pair<int, int> OpenGLRendererAPI::GetViewportSize()
+	glm::ivec2 OpenGLRendererAPI::GetViewportSize()
 	{
 		int info[4];
 		glGetIntegerv(GL_VIEWPORT, info);
-		return std::pair<int, int>(info[2], info[3]);
+		return { info[2], info[3] };
 	}
 
 }

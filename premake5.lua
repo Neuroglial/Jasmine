@@ -20,7 +20,8 @@ IncludeDir["ImGui"] 		= 	"Jasmine/vendor/imgui"
 IncludeDir["glm"] 		=	"Jasmine/vendor/glm"
 IncludeDir["stb_image"] 	= 	"Jasmine/vendor/stb_image"
 IncludeDir["entt"] 		= 	"Jasmine/vendor/entt/include"
-IncludeDir["yaml_cpp"]     =    "Jasmine/vendor/yaml-cpp/include"
+IncludeDir["yaml_cpp"]     	=    "Jasmine/vendor/yaml-cpp/include"
+IncludeDir["ImGuizmo"] 	= 	"Jasmine/vendor/ImGuizmo"
 
 
 group "Dependencies"
@@ -55,6 +56,9 @@ project "Jasmine"
 		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/vendor/ImGuizmo/ImGuizmo.h",
+		"%{prj.name}/vendor/ImGuizmo/ImGuizmo.cpp",
+		
 	}
 	
 	defines
@@ -72,7 +76,8 @@ project "Jasmine"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
-		"%{IncludeDir.yaml_cpp}"
+		"%{IncludeDir.yaml_cpp}",
+		"%{IncludeDir.ImGuizmo}"
 	}
 
 	links 
@@ -83,6 +88,9 @@ project "Jasmine"
 		"yaml-cpp",
 		"opengl32.lib"
 	}
+	
+	filter "files:vendor/ImGuizmo/**.cpp"
+	flags { "NoPCH" }
 
 	filter "system:windows"
 		systemversion "latest"
@@ -184,7 +192,8 @@ project "Jasminenut"
 		"Jasmine/src",
 		"Jasmine/vendor",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.ImGuizmo}"
 	}
 
 	links

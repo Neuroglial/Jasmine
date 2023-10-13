@@ -2,40 +2,13 @@ Scene: Untitled
 Entities:
   - Entity: 12837192831273
     TagComponent:
-      Tag: 小紫
+      Tag: 小蓝
     TransformComponent:
-      Position: [1.70000005, 1.20000005, 0]
+      Position: [0.5, 1.20000005, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     SpriteRendererComponent:
-      Color: [0.654941261, 0.402139246, 0.858085811, 1]
-  - Entity: 12837192831273
-    TagComponent:
-      Tag: 小绿
-    TransformComponent:
-      Position: [0, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    SpriteRendererComponent:
-      Color: [0.469051719, 0.775577545, 0.250846863, 1]
-  - Entity: 12837192831273
-    TagComponent:
-      Tag: 摄像机
-    TransformComponent:
-      Position: [2.5999999, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    CameraComponent:
-      Camera:
-        ProjectionType: 1
-        PerspectiveFOV: 0.785398185
-        PerspectiveNear: 0.00999999978
-        PerspectiveFar: 1000
-        OrthographicSize: 10
-        OrthographicNear: -1
-        OrthographicFar: 1
-      Primary: true
-      FixedAspectRatio: false
+      Color: [0.102440946, 0.522667646, 0.544554472, 1]
   - Entity: 12837192831273
     TagComponent:
       Tag: 小红
@@ -47,10 +20,37 @@ Entities:
       Color: [1, 0, 0, 1]
   - Entity: 12837192831273
     TagComponent:
-      Tag: 小蓝
+      Tag: 摄像机
     TransformComponent:
-      Position: [0.5, 1.20000005, 0]
+      Position: [2.5999999, 0, 10.5]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 0.785398185
+        PerspectiveNear: 0.00999999978
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
+  - Entity: 12837192831273
+    TagComponent:
+      Tag: 小绿
+    TransformComponent:
+      Position: [0, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     SpriteRendererComponent:
-      Color: [0.102440946, 0.522667646, 0.544554472, 1]
+      Color: [0.469051719, 0.775577545, 0.250846863, 1]
+  - Entity: 12837192831273
+    TagComponent:
+      Tag: 小紫
+    TransformComponent:
+      Position: [1.70000005, 1.20000005, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    SpriteRendererComponent:
+      Color: [0.654941261, 0.402139246, 0.858085811, 1]

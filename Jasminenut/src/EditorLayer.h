@@ -45,6 +45,7 @@ namespace Jasmine {
 		Entity m_SecondCamera;
 
 		bool m_PrimaryCamera = true;
+		int m_GizmoType = -1;
 
 		// Panels
 		SceneHierarchyPanel m_SceneHierarchyPanel;

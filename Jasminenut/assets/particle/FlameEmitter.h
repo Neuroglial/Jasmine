@@ -19,7 +19,7 @@ private:
 	float rot_speed;
 	float lifeTime = 0.0f;
 
-	glm::vec3 render_pos;
+	glm::mat4 model;
 public:
 	FlameParticle(glm::vec3 position) :Particle(position){
 		float SPEED = 5.0f;
@@ -64,13 +64,11 @@ public:
 		tmp = blend(tmp, p_color3, pow(factor, 0.75f));
 		color = glm::vec4(tmp, 1.0f - pow(factor, 1.5f));
 
-		float halfLength = 0.707107 * p_size;
-		float rot = (rotate + 45.0f) / 180.0f * 3.14159265f;
-		render_pos = { position.x - halfLength * cos(rot), position.y - halfLength * sin(rot),position.z };
+		model = glm::translate(glm::mat4(1.0f), position) * glm::rotate(glm::mat4(1.0f), rotate, glm::vec3{ 0.0f,0.0f,1.0f }) * glm::scale(glm::mat4(1.0f), glm::vec3(p_size));
 	}
 
 	void Draw() override {
-		Jasmine::Renderer2D::DrawRotatedQuad(render_pos, glm::vec2(p_size), rotate, color);
+		Jasmine::Renderer2D::DrawQuad(model, color);
 	}
 };
 
